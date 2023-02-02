@@ -1,0 +1,58 @@
+.headerBody {
+    align-items: center;
+    display: flex;
+    
+    background-color: var(--primary-color);
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.headerIcon {
+    margin: 0px 10px;
+    height: 45px;
+    width: 50px;
+}
+
+.headerButton {
+    border: none;
+    border-radius: 20px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    font-size: var(--header-font-size);
+    padding: 10px 15px;
+}
+
+.headerButton:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    animation: Light 0.2s;
+}
+
+@keyframes Light {
+    0% {
+        color: var(--secondary-color);
+        background-color: var(--primary-color);
+    }
+    100% {
+        color: var(--primary-color);
+        background-color: var(--secondary-color);
+    }
+}
+
+.buttonPanel {
+    margin-left: 20px;
+    flex: 6;
+}
+
+.buttonPanel > .headerButton {
+    margin-right: 20px;
+}
+
+.buttonPanel:last-of-type {
+    margin-right: 20px;
+}
+
+.userProfile {
+    display: flex;
+    flex: 1;
+}

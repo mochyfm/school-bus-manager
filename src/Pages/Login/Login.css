@@ -1,0 +1,90 @@
+
+  .loginBackground {
+
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+  
+      background-attachment: fixed;
+      background-image: url('./assets/backgroundImage.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      background-color: white;
+      font-family: var(--general-font-family);
+      
+      height: 100vh;
+      width: 100vw;
+
+  }
+
+  .loginWebpage {
+    display: flex;
+    flex-direction: column;
+    justify-items: flex-end;
+    position: absolute;
+    bottom: 25%;
+    right: 0;
+  }
+
+  .loginBlock {
+    align-self: flex-end;
+    border-radius: 20px;
+    flex: 1;
+    margin-right: 5.375rem;
+    background-color: var(--secondary-color);
+    padding: 30px;
+  }
+
+  .logo {
+    height: 200px;
+    width: 450px;
+  }
+
+  .loginForm {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .textInput, .logInButton {
+    border: none;
+    border-radius: 10px;
+    font-size: var(--form-font-size);
+    height: 50px;
+  }
+
+  .textInput {
+    border: 1px solid var(--border-color);
+    background-color: transparent;
+    color: var(--ternary-color);
+    font-size: var(--form-font-size);
+    margin: 10px 0px;
+    padding-left: 15px;
+  }
+
+  .textInput:focus {
+    outline: 0 !important;
+    border-color: var(--focus-color);
+    box-shadow: 0 0 0 0.2rem var(--shadow-color);
+  }
+
+  .logInButton {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 10px 0px;
+  }
+
+  .logInButton:hover {
+    cursor: pointer;
+  }
+
+  p {
+    cursor: inherit;
+    text-align: center;
+    width: 100%;
+  }
+  
+
+  
