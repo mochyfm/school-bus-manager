@@ -2,19 +2,37 @@
     align-self: flex-end;
     align-items: center;
     bottom: 0;
+    border-top: 2px solid var(--primary-color);
     display: flex;
     flex-direction: row;
-    margin-left: 0.8rem;
+    padding-left: 0.8rem;
+    padding-top: 0.9rem;
+    padding-bottom: 0.8rem;
+    width: 100%;
     position: absolute;
 }
 
-.footerBlock > span {
-    font-weight: bold;
-    margin-top: 0.8rem;
-    margin-right: 0.20rem;
+.companyBlock, .developerBlock {
+    display: flex;
+    align-self: flex-end;
+    align-items: flex-end;
 }
 
-.footerBlock > img.companyLogo {
-    width: 155px;
+.developerBlock {
+    margin-left: 20px;
+}
+
+.companyBlock > img.companyLogo {
     height: 60px;
+}
+
+.developerBlock > span {
+    font-size: 0.7rem;
+    margin-bottom: 0.330rem;
+    margin-right: 0.2rem;
+}
+
+
+.developerBlock > img.developerLogo {
+    height: 30px;
 }

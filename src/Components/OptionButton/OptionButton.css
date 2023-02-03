@@ -1,0 +1,10 @@
+.optionBackground, .optionButton {
+    background-color: var(--primary-color);
+}
+
+.optionButton {
+    align-items: center;
+    border: none;
+    display: flex;
+    flex-direction: column;
+}

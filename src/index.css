@@ -28,3 +28,14 @@ html {
     font-size: var(--main-font-size);
     text-decoration: none;
 }
+
+@keyframes Light {
+    0% {
+        color: var(--secondary-color);
+        background-color: var(--primary-color);
+    }
+    100% {
+        color: var(--primary-color);
+        background-color: var(--secondary-color);
+    }
+}

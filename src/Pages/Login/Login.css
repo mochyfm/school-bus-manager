@@ -1,6 +1,10 @@
 
   .loginBackground {
 
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
@@ -21,14 +25,11 @@
   .loginWebpage {
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-items: flex-end;
-    position: absolute;
-    bottom: 25%;
-    right: 0;
   }
 
   .loginBlock {
-    align-self: flex-end;
     border-radius: 20px;
     flex: 1;
     margin-right: 5.375rem;

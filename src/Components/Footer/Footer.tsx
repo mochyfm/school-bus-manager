@@ -1,18 +1,26 @@
-import companyLogo from "./assets/companyLogo.png";
-import './Footer.css'
+import developerLogo from "./assets/developerLogo.png";
+import companyLogo from "./assets/Salesianos La Cuesta.jpg";
+import "./Footer.css";
 
 const Footer = () => {
   return (
-    <>
-      <footer className="footerBlock">
-        <span>Powered By</span>
+    <footer className="footerBlock">
+      <div className="companyBlock">
         <img
           className="companyLogo"
           src={companyLogo}
-          alt="Oceanida S.L Logo"
+          alt="Logo Salesianos La Cuesta"
         />
-      </footer>
-    </>
+      </div>
+      <div className="developerBlock">
+        <span>Powered By</span>
+        <img
+          className="developerLogo"
+          src={developerLogo}
+          alt="Logo Oceanida S.L"
+        />
+      </div>
+    </footer>
   );
 };
 

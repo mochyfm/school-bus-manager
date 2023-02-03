@@ -1,0 +1,4 @@
+.optionsPanel {
+    display: flex;
+    flex-direction: row;
+}

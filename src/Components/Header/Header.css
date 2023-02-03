@@ -28,17 +28,6 @@
     animation: Light 0.2s;
 }
 
-@keyframes Light {
-    0% {
-        color: var(--secondary-color);
-        background-color: var(--primary-color);
-    }
-    100% {
-        color: var(--primary-color);
-        background-color: var(--secondary-color);
-    }
-}
-
 .buttonPanel {
     margin-left: 20px;
     flex: 6;
