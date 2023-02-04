@@ -4,6 +4,11 @@
     margin: 0;
 }
 
+body {
+    height: 100%;
+    width: 100%;
+}
+
 :root {
     --primary-color: #DB2600;
     --secondary-color: #FFF;
@@ -12,14 +17,21 @@
     --hover-dark: #000;
     --focus-color: #FF785C;
     --shadow-color: #DB2600BF;
+    --background-noLoad-color: #CD3A3A;
+
     --general-font-family: 'Roboto', sans-serif;
-    --button-font-size: 2.5rem;  
-    --button-font-style: 'Roboto', sans-serif;        
+    --button-font-style: 'Roboto', sans-serif;   
+
+    --button-font-size: 2.5rem; 
+    --icon-font-size: 2rem;      
     --header-font-size: 1.10rem;
     --normal-font-size: 0.9rem;
     --main-font-size: 1rem;
     --form-font-size: 1.25rem;
     --secondary-font-size: 0.850rem;
+
+    --header-height: 5vh;
+    --body-height: 95vh
 }
 
 html {
@@ -67,13 +79,24 @@ html {
     }
 }
 
-@keyframes Dark {
+@keyframes Regular {
     0% {
-        color: var(--primary-color);
-        border-color: var(--secondary-color);
+        background-color: var(--secondary-color);
+        color: var(--primary-color);     
     }
     100% {
-        color: var(--hover-dark);
-        border-color: var(--hover-dark);
+        background-color: var(--primary-color);     
+        color: var(--secondary-color);
+    }
+}
+
+@keyframes Reverse-Regular {
+    0% {
+        background-color: var(--primary-color);     
+        color: var(--secondary-color);
+    }
+    100% {
+        background-color: var(--secondary-color);
+        color: var(--primary-color);
     }
 }

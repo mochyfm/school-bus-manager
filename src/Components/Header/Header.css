@@ -5,6 +5,7 @@
     background-color: var(--primary-color);
     padding-top: 5px;
     padding-bottom: 5px;
+    height: var(--header-height);
 }
 
 .headerIcon {
@@ -67,4 +68,8 @@
     font-size: 0.7rem;
     margin-bottom: 0.330rem;
     margin-right: 0.2rem;
+}
+
+@media screen and (max-width: 1000px) {
+
 }
