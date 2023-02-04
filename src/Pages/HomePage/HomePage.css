@@ -1,4 +1,7 @@
 .optionsPanel {
+    align-content: space-between;
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
+    justify-items: stretch;
+    margin-top: 50px;
 }

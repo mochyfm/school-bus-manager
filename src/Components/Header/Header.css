@@ -28,6 +28,17 @@
     animation: Light 0.2s;
 }
 
+.headerButton.current {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+.headerButton.current:hover {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    animation: Reverse-Light 0.2s;
+}
+
 .buttonPanel {
     margin-left: 20px;
     flex: 6;
@@ -41,7 +52,19 @@
     margin-right: 20px;
 }
 
-.userProfile {
+ .developerBlock {
+    align-self: flex-end;
+    align-items: flex-end;
     display: flex;
-    flex: 1;
+    margin-left: 20px;
+}
+
+.developerLogo {
+    width: 100px;
+}
+
+.developerBlock > span {
+    font-size: 0.7rem;
+    margin-bottom: 0.330rem;
+    margin-right: 0.2rem;
 }

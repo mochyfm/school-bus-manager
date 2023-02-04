@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import "./Login.css";
+import "./LoginPage.css";
 import loginLogo from "./assets/loginLogo.png";
 import { useState } from "react";
 
@@ -10,7 +10,7 @@ const pattern = {
 
 type User = typeof pattern;
 
-const Login = () => {
+const LoginPage = () => {
   
   const navigate = useNavigate();
 
@@ -70,4 +70,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;

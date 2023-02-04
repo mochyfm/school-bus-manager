@@ -24,38 +24,32 @@ const OptionButton = (props: ButtonProps) => {
   const { text, to, icon, style } = props;
 
   const navigate = useNavigate();
+  const ICON_SIZE = 100;
 
   function iconRenderer( icon: Icons | undefined ): ReactElement {
     switch (icon) {
         case 'Mapa':
-            return <BsMap/>;
+            return <BsMap size={ICON_SIZE}/>;
         case 'Usuarios':
-            return <BsFillPersonFill/>
+            return <BsFillPersonFill size={ICON_SIZE}/>
         case 'Servicios':
-            return <BsCoin/>;
+            return <BsCoin size={ICON_SIZE}/>;
         case 'Rutas':
-            return <GiPathDistance/>;
+            return <GiPathDistance size={ICON_SIZE}/>;
         case 'Guía':
-            return <AiOutlinePaperClip/>;
+            return <AiOutlinePaperClip size={ICON_SIZE}/>;
         case 'Ajustes':
-            return <IoSettingsSharp/>;
+            return <IoSettingsSharp size={ICON_SIZE}/>;
         default:
-            return <BsFillBugFill/>;
+            return <BsFillBugFill size={ICON_SIZE}/>;
     }
   }
 
   return (
-    <div className="optionBackground">
-        <button
-        style={style}
-        className="optionButton"
-        onClick={() => navigate(to || "./map")}
-        >
+    <button className="optionButtonStyle" style={style} onClick={() => navigate(to || "./")}>
         {iconRenderer(icon)}
-        
-        <span style={style}>{text}</span>
-        </button>
-    </div>
+        <span>{text}</span>
+    </button>
     
   );
 };

@@ -9,15 +9,18 @@
     --secondary-color: #FFF;
     --ternary-color: #495057;
     --border-color: #787878;
+    --hover-dark: #000;
     --focus-color: #FF785C;
     --shadow-color: #DB2600BF;
     --general-font-family: 'Roboto', sans-serif;
+    --button-font-size: 2.5rem;  
+    --button-font-style: 'Roboto', sans-serif;        
     --header-font-size: 1.10rem;
     --normal-font-size: 0.9rem;
     --main-font-size: 1rem;
     --form-font-size: 1.25rem;
     --secondary-font-size: 0.850rem;
-  }
+}
 
 html {
     font-family: var(--general-font-family);
@@ -37,5 +40,40 @@ html {
     100% {
         color: var(--primary-color);
         background-color: var(--secondary-color);
+    }
+}
+
+@keyframes Border-Light {
+    0% {
+        color: var(--secondary-color);
+        background-color: var(--primary-color);
+        border: 2px solid var(--secondary-color);
+    }
+    100% {
+        color: var(--primary-color);
+        background-color: var(--secondary-color);
+        border: 2px solid var(--primary-color);
+    }
+}
+
+@keyframes Reverse-Light {
+    0% {
+        color: var(--primary-color);     
+        background-color: var(--secondary-color);
+    }
+    100% {
+        color: var(--secondary-color);
+        background-color: var(--primary-color);
+    }
+}
+
+@keyframes Dark {
+    0% {
+        color: var(--primary-color);
+        border-color: var(--secondary-color);
+    }
+    100% {
+        color: var(--hover-dark);
+        border-color: var(--hover-dark);
     }
 }

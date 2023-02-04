@@ -1,10 +1,26 @@
-.optionBackground, .optionButton {
-    background-color: var(--primary-color);
-}
-
-.optionButton {
+.optionButtonStyle {
     align-items: center;
+    justify-content: center;
     border: none;
+    border-radius: 40px;
+    background-color: var(--primary-color);
     display: flex;
     flex-direction: column;
+    flex: 1 0 30%;
+    margin: 30px;
+    height: 350px;
+}   
+
+.optionButtonStyle:hover {
+    animation: Border-Light 0.4s;
+    background-color: var(--secondary-color);
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+.optionButtonStyle > span {
+    font-size: var(--button-font-size);
+    font-weight: light;
+    margin-top: 30px;
 }

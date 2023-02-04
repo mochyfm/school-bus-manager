@@ -4,16 +4,16 @@ import "./HomePage.css";
 const HomePage = () => {
 
   return (
-    <>
+    <div className="homePage">
       <div className="optionsPanel">
-        <OptionButton text="Mapa" icon="Mapa"/>
-        <OptionButton text="Usuarios" icon="Usuarios"/>
-        <OptionButton text="Servicios" icon="Servicios"/>
-        <OptionButton text="Rutas" icon="Rutas" />
-        <OptionButton text="Guía" icon="Guía"/>
-        <OptionButton text="Ajustes" icon="Ajustes"/>
+        <OptionButton text="Mapa" icon="Mapa" to="./map"/>
+        <OptionButton text="Usuarios" icon="Usuarios" to="./users"/>
+        <OptionButton text="Servicios" icon="Servicios" to="./services"/>
+        <OptionButton text="Rutas" icon="Rutas" to="./routes"/>
+        <OptionButton text="Guía" icon="Guía" to="./help"/>
+        <OptionButton text="Ajustes" icon="Ajustes" to="./settings"/>
       </div>
-    </>
+    </div>
   );
 };
 
