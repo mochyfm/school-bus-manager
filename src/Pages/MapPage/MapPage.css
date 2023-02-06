@@ -5,6 +5,7 @@
 
 .mapZone {
     height: var(--body-height);
+    width: 100%;
 }
 
 .markMenu {

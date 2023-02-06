@@ -1,0 +1,7 @@
+.cardBody {
+    border: 1px solid var(--border-color);
+}
+
+.cardTitle {
+    background-color: var(--primary-color);
+}

@@ -6,7 +6,6 @@ import ClientsPage from "../Pages/ClientsPage";
 import ServicesPage from "../Pages/ServicesPage";
 import RoutesPage from "../Pages/RoutesPage";
 import GuidePage from "../Pages/GuidePage";
-import SettingsPage from "../Pages/SettingsPage";
 
 function App() {
   return (
@@ -19,7 +18,6 @@ function App() {
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/routes" element={<RoutesPage />} />
           <Route path="/help" element={<GuidePage />} />
-          <Route path="/settings" element={<SettingsPage />} />
         </Route>
         <Route path="*" element={<p>NO EXISTE ESTA PÁGINA</p>} />
       </Routes>

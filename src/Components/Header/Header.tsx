@@ -30,9 +30,6 @@ const Header = () => {
         <Link to="./help" className={`headerButton link ${pathname === '/help' ? 'current' : ''}`}>
           Guía
         </Link>
-        <Link to="./settings" className={`headerButton link ${pathname === '/settings' ? 'current' : ''}`}>
-          Ajustes
-        </Link>
       </div>
       <div className="developerBlock">
         <span>Powered By</span>
@@ -41,6 +38,9 @@ const Header = () => {
           src={developerLogo}
           alt="Logo Oceanida S.L"
         />
+      </div>
+      <div>
+        
       </div>
     </div>
   );

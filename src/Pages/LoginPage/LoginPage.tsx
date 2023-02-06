@@ -24,7 +24,7 @@ const LoginPage = () => {
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (userData.username.trim() !== "" && userData.password.trim() !== "") {
-      navigate("/home");
+      navigate("/");
       setUserData(pattern);
     }
   };
