@@ -1,7 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "../Pages/HomePage";
-import InnerLayout from "../Pages/Layouts/InnerLayout";
+import InnerLayout from "../Layouts/InnerLayout";
 import MapPage from "../Pages/MapPage";
+import ClientsPage from "../Pages/ClientsPage";
+import ServicesPage from "../Pages/ServicesPage";
+import RoutesPage from "../Pages/RoutesPage";
+import GuidePage from "../Pages/GuidePage";
+import SettingsPage from "../Pages/SettingsPage";
 
 function App() {
   return (
@@ -10,7 +15,13 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route element={<InnerLayout />}>
           <Route path="/map" element={<MapPage />} />
+          <Route path="/clients" element={<ClientsPage />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/routes" element={<RoutesPage />} />
+          <Route path="/help" element={<GuidePage />} />
+          <Route path="/settings" element={<SettingsPage />} />
         </Route>
+        <Route path="*" element={<p>NO EXISTE ESTA PÁGINA</p>} />
       </Routes>
     </BrowserRouter>
   );

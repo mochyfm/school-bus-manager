@@ -3,8 +3,7 @@
     display: flex;
     
     background-color: var(--primary-color);
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding: 5px 0px;
     height: var(--header-height);
 }
 
@@ -32,12 +31,7 @@
 .headerButton.current {
     background-color: var(--secondary-color);
     color: var(--primary-color);
-}
-
-.headerButton.current:hover {
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-    animation: Reverse-Light 0.2s;
+    animation: none ;
 }
 
 .buttonPanel {
@@ -57,7 +51,7 @@
     align-self: flex-end;
     align-items: flex-end;
     display: flex;
-    margin-left: 20px;
+    margin: 0px 20px;
 }
 
 .developerLogo {
@@ -70,6 +64,8 @@
     margin-right: 0.2rem;
 }
 
-@media screen and (max-width: 1000px) {
-
+@media screen and (max-width: 1740px) {
+    .headerBody {
+        height: 7vh;
+    }
 }

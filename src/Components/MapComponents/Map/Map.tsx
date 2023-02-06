@@ -5,13 +5,13 @@ import "./Map.css";
 
 import { LatLngLiteral, MapOptions, MapParameters } from "../../../Types/Types";
 
-const Map = ({ mode, positions = [] }: MapParameters) => {
+const Map = ({ mode }: MapParameters) => {
 
   const center = useMemo<LatLngLiteral>(
     () => ({ lat: 28.470925650919988, lng: -16.282707833890054 }), []
   );
 
-  const [locations, setLocations] = useState<LatLngLiteral[]>([center, ...positions]);
+  const [locations, setLocations] = useState<LatLngLiteral[]>([center]);
 
   // const [locationsArray, setLocationsArray] = useState<Array<LatLngLiteral>>(locations)
 

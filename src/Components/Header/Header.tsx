@@ -18,8 +18,8 @@ const Header = () => {
         <Link to='./map' className={`headerButton link ${pathname === '/map' ? 'current' : ''}`}>
           Mapa
         </Link>
-        <Link to='./users' className={`headerButton link ${pathname === '/users' ? 'current' : ''}`}>
-          Usuarios
+        <Link to='./clients' className={`headerButton link ${pathname === '/clients' ? 'current' : ''}`}>
+          Clientes
         </Link>
         <Link to='./services' className={`headerButton link ${pathname === '/services' ? 'current' : ''}`}>
           Servicios
