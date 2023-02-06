@@ -10,15 +10,7 @@ import { AiOutlinePaperClip } from 'react-icons/ai';
 import { IoSettingsSharp } from 'react-icons/io5';
 
 import { BsFillBugFill } from 'react-icons/bs';
-
-type ButtonProps = {
-  text: string;
-  to?: string;
-  icon?: Icons;
-  style?: React.CSSProperties;
-};
-
-type Icons = "Mapa" | "Usuarios" | "Servicios" | "Rutas" | "Guía" | "Ajustes";
+import { ButtonProps, Icons } from "../../Types/Types";
 
 const OptionButton = (props: ButtonProps) => {
   const { text, to, icon, style } = props;
@@ -26,7 +18,7 @@ const OptionButton = (props: ButtonProps) => {
   const navigate = useNavigate();
   const ICON_SIZE = 100;
 
-  function iconRenderer( icon: Icons | undefined ): ReactElement {
+  function iconRenderer( icon: Icons = "Ajustes" ): ReactElement {
     switch (icon) {
         case 'Mapa':
             return <BsMap size={ICON_SIZE}/>;

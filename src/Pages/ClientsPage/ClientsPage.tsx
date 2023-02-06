@@ -1,4 +1,5 @@
 import ClientCard from "../../Components/ClientCard"
+import './ClientsPage.css';
 
 const UsersPage = () => {
   return (
