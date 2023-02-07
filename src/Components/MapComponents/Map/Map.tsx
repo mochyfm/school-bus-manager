@@ -1,9 +1,9 @@
-import { useMemo, useCallback, useRef, useState } from "react";
+import { useMemo, useCallback, useRef, useState, useEffect } from "react";
 import { GoogleMap, MarkerF, /* DirectionsRenderer */ } from "@react-google-maps/api";
 import headerLogo from "./icons/school.png";
 import "./Map.css";
 
-import { LatLngLiteral, MapOptions, MapParameters } from "../../../Types/Types";
+import { BusStop, LatLngLiteral, MapOptions, MapParameters } from "../../../Types/Types";
 
 const Map = ({ mode }: MapParameters) => {
 
@@ -11,7 +11,11 @@ const Map = ({ mode }: MapParameters) => {
     () => ({ lat: 28.470925650919988, lng: -16.282707833890054 }), []
   );
 
-  const [locations, setLocations] = useState<LatLngLiteral[]>([center]);
+  const [locations, setLocations] = useState<BusStop[]>([{ latLng: center }]);
+
+  useEffect(() => {
+    
+  }, [locations])
 
   // const [locationsArray, setLocationsArray] = useState<Array<LatLngLiteral>>(locations)
 
@@ -33,23 +37,23 @@ const Map = ({ mode }: MapParameters) => {
     }),
     []
   );
-
+  
   const onLoad = useCallback((map: any) => (mapRef.current = map), []);
 
   const addNewMarker = (position: LatLngLiteral) => {
     if (mode === "add") {
-      setLocations([...locations, position]);
+      console.log(position);
+      setLocations([...locations, { latLng: position }]);
     }
   };
 
   const deleteMarker = (position: LatLngLiteral) => {
-    console.log(position);
     if (mode === "delete") {
       if (position.lat !== center.lat && position.lng !== center.lng) {
         setLocations(
           locations.filter(
-            (element) =>
-              element.lat !== position.lat && element.lng !== position.lng
+            ({ latLng }) =>
+              latLng.lat !== position.lat && latLng.lng !== position.lng
           )
         );
       }
@@ -72,8 +76,8 @@ const Map = ({ mode }: MapParameters) => {
               <MarkerF
                 icon={index === 0 ? headerLogo : ""}
                 key={index}
-                label={index === 0 ? "" : index.toString()}
-                position={element}
+                label={element.routeLabel ? element.routeLabel : (index === 0 ? "" : "?")}
+                position={element.latLng}
                 onClick={(e) => deleteMarker(e.latLng?.toJSON()!)}
               />
             );

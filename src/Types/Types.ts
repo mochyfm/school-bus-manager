@@ -6,11 +6,6 @@ export type DirectionsResult = google.maps.DirectionsResult;
 export type MapOptions = google.maps.MapOptions;
 export type MouseEvent = google.maps.MapMouseEvent;
 
-export type MapParameters = {
-  mode?: ModeOptions;
-  positions?: BusRoute;
-};
-
 export type ButtonProps = {
   text: string;
   to?: string;
@@ -26,40 +21,40 @@ export type Icons =
   | "Guía"
   | "Ajustes";
 
-// Types Created for the Entire App //
+// Types Declared for the DB Map
 
-export type BusRoute = LatLngLiteral[];
+export type MapParameters = {
+  mode?: ModeOptions;
+  busStops?: BusStop[];
+  routes?: BusRoute;
+};
 
 export type BusStop = {
-  id: number;
-  name: string;
   latLng: LatLngLiteral;
-  totalUsers: number;
+  totalUsers?: number;
+  routeLabel?: string;
+};
+
+export type BusRoute = {
+  stops: BusStop[];
+  busesAmount: number;
+  totalUsers?: number;
 };
 
 export type Service = {
-  name: string;
+  type: "Madrugada" | "Tarde";
   route: BusRoute;
-  amountOfStops: number;
 };
 
-export type UserData = {
-  id: number;
-  studentsAssigned: Student[] | Student;
-  services: Service[];
+// Types Declared for the DB Clients
+
+export type ClientData = {
+  name: string;
+  studentsAssigned: Student[];
+  service?: Service;
 };
 
 export type Student = {
   name: string;
-  assignedRoute: BusRoute;
-  lastStopTaken?: LatLngLiteral;
-};
-
-// Types for the Displaying Card for the Clients
-
-export type ClientCardProperties = {
-  title: string;
-  subtitle?: string;
-  name: string;
-  surname?: string;
+  service: Service;
 };

@@ -11,7 +11,6 @@ const HomePage = () => {
         <OptionButton text="Servicios" icon="Servicios" to="./services"/>
         <OptionButton text="Rutas" icon="Rutas" to="./routes"/>
         <OptionButton text="Guía" icon="Guía" to="./help"/>
-        <OptionButton text="Ajustes" icon="Ajustes" to="./settings"/>
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import ClientsPage from "../Pages/ClientsPage";
 import ServicesPage from "../Pages/ServicesPage";
 import RoutesPage from "../Pages/RoutesPage";
 import GuidePage from "../Pages/GuidePage";
+import ClientForm from "./ClientForm/ClientForm";
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
         <Route element={<InnerLayout />}>
           <Route path="/map" element={<MapPage />} />
           <Route path="/clients" element={<ClientsPage />} />
+          <Route path="/newClient" element={<ClientForm/>} />
+          <Route path="/editClient/:id" element={<ClientForm/>} />         
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/routes" element={<RoutesPage />} />
           <Route path="/help" element={<GuidePage />} />
