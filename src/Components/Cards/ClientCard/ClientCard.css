@@ -1,7 +1,58 @@
-.cardBody {
-    border: 1px solid var(--border-color);
+.clientCard {
+    border-radius: 15px 15px 15px 15px;
+    box-shadow: 10px 1px 20px var(--border-color);
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+    width: 45%;
 }
 
-.cardTitle {
+.clientDescription {
+    display: flex;
+    flex-direction: column;
+}
+
+.clientInfoTag {
+    font-weight: bold;
+}
+
+.clientInfo {
+    font-weight: normal;
+}
+
+.client.cardTitle {
     background-color: var(--primary-color);
+    border-bottom: 5px solid var(--primary-color);
+    border-radius: 15px 15px 0px 0px;
+    color: var(--secondary-color);
+    font-size: var(--form-title);
+    font-weight: bold;
+    padding: 1.2rem 4rem;
+}
+
+.client.cardBody {
+    font-size: var(--form-font-size);
+    padding: 20px;
+}
+
+.client.buttonPanel {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 10px;
+}
+
+.client.button {
+    border: none;
+    border-radius: 20px;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    padding: 10px 15px;
+}
+
+.client.button:hover {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    animation: Reverse-Light 0.2s;
 }

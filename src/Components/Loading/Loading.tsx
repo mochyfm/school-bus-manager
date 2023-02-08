@@ -1,6 +1,15 @@
+import './Loading.css'
+
 const Loading = () => {
   return (
-    <div>Loading</div>
+    <div className='container text-center'>
+      <div className='lds-ring'>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
   )
 }
 

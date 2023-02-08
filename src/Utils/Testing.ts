@@ -17,17 +17,31 @@ const serviceExample: Service = {
 };
 
 const student1 : Student = {
+    id: 1,
     name: 'Jose Luis Benitze',
     service: serviceExample
 }
 
 const student2 : Student = {
+    id: 2,
     name: 'Marcos Luis Benitze',
     service: serviceExample,
 }
 
 export const example: ClientData = {
+  id: 1,
   name: "Jose Benítez",
   studentsAssigned: [student1, student2],
-  service: serviceExample,
+};
+
+export const example2: ClientData = {
+  id: 2,
+  name: "Marcos Benítez",
+  studentsAssigned: [student1, student2],
+};
+
+export const example3: ClientData = {
+  id: 3,
+  name: "María Benítez",
+  studentsAssigned: [student1, student2],
 };

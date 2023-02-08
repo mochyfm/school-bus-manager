@@ -49,12 +49,13 @@ export type Service = {
 // Types Declared for the DB Clients
 
 export type ClientData = {
+  id: number;
   name: string;
   studentsAssigned: Student[];
-  service?: Service;
 };
 
 export type Student = {
+  id: number,
   name: string;
   service: Service;
 };

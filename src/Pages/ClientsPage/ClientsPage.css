@@ -1,4 +1,7 @@
 .usersBlock {
     display: flex;
-    margin: 1.1rem 0px 1.1rem 1.9rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 10px;
+    width: 100%;
 }

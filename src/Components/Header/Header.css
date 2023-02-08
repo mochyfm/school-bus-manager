@@ -69,3 +69,10 @@
         height: 7vh;
     }
 }
+
+@media screen and (max-height: 645px) {
+    .headerBody {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+}
