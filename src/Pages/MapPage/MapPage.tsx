@@ -39,7 +39,7 @@ const MapPage = () => {
           onClick={(e) => handleOption(e)}
           name="add"
         >
-          <RiMapPinAddLine size={MARKERS_SIZE} />
+          <RiMapPinAddLine className="addIcon"/>
         </button>
         <button
           className={`deleteMarkerButton ${
@@ -48,7 +48,7 @@ const MapPage = () => {
           onClick={(e) => handleOption(e)}
           name="delete"
         >
-          <TbMapPinOff size={MARKERS_SIZE} />
+          <TbMapPinOff className="deleteIcon" />
         </button>
       </div>
     </div>

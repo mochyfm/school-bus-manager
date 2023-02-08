@@ -18,21 +18,28 @@ const ClientCard = (props: ClientData) => {
           <span className="clientInfoTag">
             Nombre: <span className="clientInfo">{name}</span>{" "}
           </span>
-          <span className="clientInfoTag center"> · Estudiantes a cargo ·</span>
-          <>
+          <span className="clientInfoTag center clientListTag">
+            {" "}
+            · Estudiantes a cargo ·{" "}
+          </span>
+          <div className="client studentsList">
             {studentsAssigned &&
               studentsAssigned.map((element, index) => {
                 return (
-                  <p>
-                    Alumno {index + 1}:{" "}
-                    <Link to={`/studentInfo/${element.id}`}>
+                  <div className="client studentListCard">
+                    <div className="client studentListCard_Header">
                       {element.name}
-                    </Link>
-                  </p>
+                      <Link className="" to={`/studentInfo/${element.id}`}>
+                        
+                      </Link>
+                    </div>
+                    <p>
+                      <span>- Servicio Asignado: </span>
+                    </p>
+                  </div>
                 );
               })}
-          </>
-          <span className="clientInfoTag">Servicios Contratados:</span>
+          </div>
         </div>
       </div>
       <div className="client buttonPanel">

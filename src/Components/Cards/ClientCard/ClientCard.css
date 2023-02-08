@@ -14,6 +14,7 @@
 
 .clientInfoTag {
     font-weight: bold;
+    margin: 5px;
 }
 
 .clientInfo {
@@ -28,6 +29,10 @@
     font-size: var(--form-title);
     font-weight: bold;
     padding: 1.2rem 4rem;
+}
+
+.clientListTag {
+    margin-bottom: 10px;
 }
 
 .client.cardBody {
@@ -55,4 +60,18 @@
     background-color: var(--primary-color);
     color: var(--secondary-color);
     animation: Reverse-Light 0.2s;
+}
+
+.client.studentsList {
+    display: flex;
+    justify-content: center;
+}
+
+.client.studentListCard {
+    margin: 10px 20px;
+    justify-content: center;
+}
+
+.client.studentListCard_Header {
+    
 }

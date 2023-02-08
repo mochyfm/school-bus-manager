@@ -13,13 +13,13 @@
     background-color: var(--primary-color);
     border-bottom-left-radius: 20px;
     display: flex;
-    padding: 50px 50px;
+    padding: 30px 50px;
     position: absolute;
     right: 0;
 }
 
-.addIcon, .editIcon {
-    height: 70px;
+.addIcon, .deleteIcon {
+    font-size: 50px;
 }
 
 .selectedButton:hover, .addMarkerButton, .deleteMarkerButton {
@@ -50,18 +50,29 @@
     animation: none;
 }
 
-@media screen and (max-width: 1740px) {
+@media screen and (max-width: 900px) {
     .mapBlock {
-        flex-direction: column-reverse;
+        flex-direction: column;
     }
 
     .markMenu {
+        padding-top: 15px;
+        padding-bottom: 15px;
         border-radius: 0px;
         position: static;
     }
 
     .markerListButton, .addMarkerButton {
-        margin-left: 20px;
-        margin-right: 20px;
+        margin-left: 10px;
+        margin-right: 10px;
     }
+
+    .addMarkerButton, .deleteMarkerButton {
+        padding: 10px;
+    }
+
+    .addIcon, .deleteIcon {
+        font-size: 35px;
+    }
+
 }

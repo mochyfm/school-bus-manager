@@ -15,6 +15,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route element={<InnerLayout />}>
           <Route path="/map" element={<MapPage />} />
+          <Route path="/map/:latLng" element={<MapPage />} />
           <Route path="/clients" element={<ClientsPage />} />
           <Route path="/newClient" element={<ClientForm/>} />
           <Route path="/editClient/:id" element={<ClientForm/>} />
