@@ -12,20 +12,21 @@ const busRouteExample: BusRoute = {
 };
 
 const serviceExample: Service = {
+  id: 1,
   type: "Madrugada",
   route: busRouteExample,
 };
 
 const student1 : Student = {
-    id: 1,
-    name: 'Jose Luis Benitze',
-    service: serviceExample
+  id: 1,
+  name: 'Jose Luis Benitze',
+  service: serviceExample
 }
 
 const student2 : Student = {
-    id: 2,
-    name: 'Marcos Luis Benitze',
-    service: serviceExample,
+  id: 2,
+  name: 'Marcos Luis Benitze',
+  service: serviceExample,
 }
 
 export const example: ClientData = {

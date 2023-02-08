@@ -27,7 +27,6 @@
     border: 2px solid var(--secondary-color);
     background-color: var(--primary-color);
     border-radius: 50%;
-     
     padding: 25px;
 }
 
@@ -73,6 +72,10 @@
 
     .addIcon, .deleteIcon {
         font-size: 35px;
+    }
+
+    .selectedButton:hover, .addMarkerButton, .deleteMarkerButton {
+        padding: 10px;
     }
 
 }

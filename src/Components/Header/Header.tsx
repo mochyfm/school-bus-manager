@@ -5,29 +5,52 @@ import developerLogo from "./assets/developerLogo.png";
 import "./Header.css";
 
 const Header = () => {
-
   const { pathname } = useLocation();
 
   return (
     <div className="headerBody">
-      <img src={headerLogo} className="headerIcon" alt="Logo Salesianos" />
+      <Link to="./" className="leftIcon">
+        <img src={headerLogo} className="headerIcon" alt="Logo Salesianos" />
+      </Link>
       <div className="buttonPanel">
-        <Link to="./" className={`headerButton link`}>
-          Inicio
-        </Link>
-        <Link to='./map' className={`headerButton link ${pathname === '/map' ? 'current' : ''}`}>
+        <Link
+          to="./map"
+          className={`headerButton link ${
+            pathname === "/map" ? "current" : ""
+          }`}
+        >
           Mapa
         </Link>
-        <Link to='./clients' className={`headerButton link ${pathname === '/clients' ? 'current' : ''}`}>
+        <Link
+          to="./clients"
+          className={`headerButton link ${
+            pathname === "/clients" ? "current" : ""
+          }`}
+        >
           Clientes
         </Link>
-        <Link to='./services' className={`headerButton link ${pathname === '/services' ? 'current' : ''}`}>
+        <Link
+          to="./services"
+          className={`headerButton link ${
+            pathname === "/services" ? "current" : ""
+          }`}
+        >
           Servicios
         </Link>
-        <Link to="./routes" className={`headerButton link ${pathname === '/routes' ? 'current' : ''}`}>
+        <Link
+          to="./routes"
+          className={`headerButton link ${
+            pathname === "/routes" ? "current" : ""
+          }`}
+        >
           Rutas
         </Link>
-        <Link to="./help" className={`headerButton link ${pathname === '/help' ? 'current' : ''}`}>
+        <Link
+          to="./help"
+          className={`headerButton link ${
+            pathname === "/help" ? "current" : ""
+          }`}
+        >
           Guía
         </Link>
       </div>
@@ -39,9 +62,7 @@ const Header = () => {
           alt="Logo Oceanida S.L"
         />
       </div>
-      <div>
-        
-      </div>
+      <div></div>
     </div>
   );
 };

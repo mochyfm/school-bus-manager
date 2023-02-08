@@ -22,6 +22,7 @@ function App() {
           <Route path="/studentInfo/:id" element={<p>INFORMACIÓN DE ESTUDIANTE </p>} />     
           <Route path="/message/:id" element={<p>MENSAJE A </p>} />    
           <Route path="/services" element={<ServicesPage />} />
+          <Route path="/service/:id" element={<p>INFORMACION DE SERVICIO</p>} />
           <Route path="/routes" element={<RoutesPage />} />
           <Route path="/help" element={<GuidePage />} />
         </Route>

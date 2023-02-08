@@ -42,6 +42,7 @@ export type BusRoute = {
 };
 
 export type Service = {
+  id: number;
   type: "Madrugada" | "Tarde";
   route: BusRoute;
 };

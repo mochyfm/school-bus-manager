@@ -1,43 +1,51 @@
 .clientCard {
+    border: 1px solid var(--primary-color);
     border-radius: 15px 15px 15px 15px;
     box-shadow: 10px 1px 20px var(--border-color);
     display: flex;
     flex-direction: column;
     margin: 30px;
-    width: 45%;
-}
-
-.clientDescription {
-    display: flex;
-    flex-direction: column;
-}
-
-.clientInfoTag {
-    font-weight: bold;
-    margin: 5px;
-}
-
-.clientInfo {
-    font-weight: normal;
+    padding-bottom: 30px;
+    width: 100%;
 }
 
 .client.cardTitle {
+    align-items: center;
     background-color: var(--primary-color);
     border-bottom: 5px solid var(--primary-color);
     border-radius: 15px 15px 0px 0px;
     color: var(--secondary-color);
+    display: flex;
     font-size: var(--form-title);
+    flex-direction: row;
     font-weight: bold;
     padding: 1.2rem 4rem;
 }
 
-.clientListTag {
-    margin-bottom: 10px;
+.clientInfoTag {
+    background-color: var(--secondary-color);
+    border-radius: 20px;
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin: 0px 30px 0px 0px;
+    padding: 20px;
 }
+
 
 .client.cardBody {
     font-size: var(--form-font-size);
-    padding: 20px;
+}
+
+.studentGroup {
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.studentsList {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
 }
 
 .client.buttonPanel {
@@ -46,32 +54,39 @@
     flex-direction: row;
     justify-content: space-evenly;
     padding: 10px;
+    padding-top: 30px;
 }
 
 .client.button {
     border: none;
     border-radius: 20px;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    font-size: 1.9rem;
     padding: 10px 15px;
 }
 
-.client.button:hover {
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-    animation: Reverse-Light 0.2s;
+.client.button:hover  {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    animation: Light 0.2s;
 }
 
-.client.studentsList {
-    display: flex;
-    justify-content: center;
-}
-
-.client.studentListCard {
-    margin: 10px 20px;
-    justify-content: center;
-}
-
-.client.studentListCard_Header {
-    
+@media screen and (max-width: 900px) {
+    .clientDescription {
+        flex-direction: column;
+    }
+    .clientInfoTag{
+        display: flex;
+        flex-direction: row;
+    }
+    .client.buttonPanel {
+        flex-direction: column;
+    }
+    .client.button {
+        margin: 10px 0px;
+    }
+    .studentsList {
+        justify-content: center;
+    }
 }

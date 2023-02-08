@@ -1,7 +1,42 @@
+.usersPage {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 100%;
+}
+
 .usersBlock {
+    align-content: space-between;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     padding-top: 10px;
     width: 100%;
+}   
+
+.addClient_ButtonPanel {
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 20px 0px 0px 20px;
+    color: var(--secondary-color);
+    font-size: 4rem;
+    position: fixed;
+    padding: 20px;
+    padding-bottom: 10px;
+    top: 30%;
+}
+
+.addClient_ButtonPanel:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+@media screen and (max-width: 900px) {
+    .addClient_ButtonPanel {
+        border-radius: 20px 20px 0px 0px;
+        bottom: 0;
+        right: 20px;
+        position: fixed;
+        top: unset;
+    }
 }

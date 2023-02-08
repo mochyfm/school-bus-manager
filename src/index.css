@@ -45,6 +45,10 @@ html {
     text-decoration: none;
 }
 
+.center {
+    text-align: center;
+}
+
 @keyframes Light {
     0% {
         color: var(--secondary-color);
