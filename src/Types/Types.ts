@@ -27,6 +27,7 @@ export type MapParameters = {
   mode?: ModeOptions;
   busStops?: BusStop[];
   routes?: BusRoute;
+  customCenter?: LatLngLiteral;
 };
 
 export type BusStop = {

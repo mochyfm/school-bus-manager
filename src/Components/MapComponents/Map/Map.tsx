@@ -4,11 +4,15 @@ import headerLogo from "./icons/school.png";
 import "./Map.css";
 
 import { BusStop, LatLngLiteral, MapOptions, MapParameters } from "../../../Types/Types";
+import { useParams } from "react-router-dom";
 
-const Map = ({ mode }: MapParameters) => {
+const Map = ({ mode, customCenter }: MapParameters) => {
+
+  const params = undefined;
+  console.log(useParams());
 
   const center = useMemo<LatLngLiteral>(
-    () => ({ lat: 28.470925650919988, lng: -16.282707833890054 }), []
+    () => (params ? params : customCenter ? customCenter : { lat: 28.470925650919988, lng: -16.282707833890054 }), [customCenter, params]
   );
 
   const [locations, setLocations] = useState<BusStop[]>([{ latLng: center }]);

@@ -17,13 +17,13 @@
 .addClient_ButtonPanel {
     background-color: var(--primary-color);
     border: 1px solid var(--primary-color);
-    border-radius: 20px 0px 0px 20px;
+    border-radius: 20px 0px 0px 0px;
     color: var(--secondary-color);
     font-size: 4rem;
     position: fixed;
     padding: 20px;
     padding-bottom: 10px;
-    top: 30%;
+    bottom: 0;
 }
 
 .addClient_ButtonPanel:hover {
@@ -33,9 +33,8 @@
 
 @media screen and (max-width: 900px) {
     .addClient_ButtonPanel {
-        border-radius: 20px 20px 0px 0px;
+        border-radius: 20px 0px 0px 0px;
         bottom: 0;
-        right: 20px;
         position: fixed;
         top: unset;
     }

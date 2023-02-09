@@ -8,8 +8,6 @@ import Map from "../../Components/MapComponents/Map";
 import Loading from "../../Components/Loading";
 import { ModeOptions } from "../../Types/Types";
 
-const MARKERS_SIZE = 50;
-
 const MapPage = () => {
 
   const [mode, setMode] = useState<ModeOptions>();

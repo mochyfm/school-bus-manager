@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { IoPersonAddSharp } from "react-icons/io5";
 
 const UsersPage = () => {
+  
   const [clients, setClients] = useState<ClientData[]>([
     example,
     example2,
