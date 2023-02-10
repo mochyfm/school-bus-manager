@@ -4,7 +4,7 @@ import './StudentInfo.css';
 
 const StudentInfo = (props: Student) => {
 
-    const { id, name, service } = props;
+    const { id, name } = props;
 
   return (
     <div className="student">
@@ -12,7 +12,7 @@ const StudentInfo = (props: Student) => {
       <div className="studentInfoGroup">
         <div className="studentInfo">
             <span className="studentDataLabel"><span className="studentLabel">Nombre:</span> {name}</span>
-            <span className="studentDataLabel"><span className="studentLabel">Ruta asignada:</span> {service.type}</span>
+            <span className="studentDataLabel"><span className="studentLabel">Ruta asignada:</span> RUTA DE EJEMPLO </span>
         </div>
         <Link to={`/studentInfo/${id}`} className="link viewButton">Ver Estudiante</Link>
         <div className="studentFooter"/>

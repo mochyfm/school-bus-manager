@@ -13,6 +13,8 @@ export type ButtonProps = {
   style?: React.CSSProperties;
 };
 
+export type MapLibraries = "drawing" | "geometry" | "localContext" | "places" | "visualization"
+
 export type Icons =
   | "Mapa"
   | "Usuarios"
@@ -21,13 +23,19 @@ export type Icons =
   | "Guía"
   | "Ajustes";
 
-// Types Declared for the DB Map
+/**
+ * TYPES PREPARED FOR THE MAP COMPONENT
+ */
 
+/* This type is made for the Map component, it has all its 
+  attributes optional, since its made for modifying the existing options */
 export type MapParameters = {
-  mode?: ModeOptions;
-  busStops?: BusStop[];
-  routes?: BusRoute;
-  customCenter?: LatLngLiteral;
+  mode?: ModeOptions; // For changing the mode between Add and Remove (For the markers)
+  busStops?: BusStop[]; // For showing the Bus stops (in case there are not asigned stops)
+  routes?: BusRoute;  // For showing the routes and their correspondent BusStop[]
+  customCenter?: LatLngLiteral; // For selecting a custom center for the map
+  mapTopLefMenu?: boolean;  // For removing the geographic relief and satelite menu (on the top left) 
+  streetViewOption?: boolean; // For the Street View on the right
 };
 
 export type BusStop = {
@@ -42,12 +50,6 @@ export type BusRoute = {
   totalUsers?: number;
 };
 
-export type Service = {
-  id: number;
-  type: "Madrugada" | "Tarde";
-  route: BusRoute;
-};
-
 // Types Declared for the DB Clients
 
 export type ClientData = {
@@ -59,5 +61,4 @@ export type ClientData = {
 export type Student = {
   id: number,
   name: string;
-  service: Service;
 };

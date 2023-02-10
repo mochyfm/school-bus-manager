@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { getAddressFrom } from "../../../Services/Services";
+import { getAddressFrom } from "../../../Services/main.services";
 import { BusRoute, LatLngLiteral } from "../../../Types/Types";
 
 const RouteCard = (props : BusRoute) => {

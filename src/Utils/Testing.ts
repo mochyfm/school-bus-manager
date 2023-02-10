@@ -1,32 +1,24 @@
-import { BusRoute, BusStop, ClientData, Service, Student } from "../Types/Types";
+import { ClientData, Student } from "../Types/Types";
 
-const busStopExample: BusStop = {
-  latLng: {lat: 28.47169779741369, lng: -16.283069932107065}, 
-  routeLabel: 'M', 
-  totalUsers: 10
-};
+// const busStopExample: BusStop = {
+//   latLng: {lat: 28.47169779741369, lng: -16.283069932107065}, 
+//   routeLabel: 'M', 
+//   totalUsers: 10
+// };
 
-const busRouteExample: BusRoute = {
-  stops: [busStopExample],
-  busesAmount: 0,
-};
-
-const serviceExample: Service = {
-  id: 1,
-  type: "Madrugada",
-  route: busRouteExample,
-};
+// const busRouteExample: BusRoute = {
+//   stops: [busStopExample],
+//   busesAmount: 0,
+// };
 
 const student1 : Student = {
   id: 1,
   name: 'Jose Luis Benitze',
-  service: serviceExample
 }
 
 const student2 : Student = {
   id: 2,
   name: 'Marcos Luis Benitze',
-  service: serviceExample,
 }
 
 export const example: ClientData = {

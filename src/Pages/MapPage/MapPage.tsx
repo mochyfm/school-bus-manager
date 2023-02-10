@@ -1,15 +1,15 @@
 import "./MapPage.css";
 
 import { useState } from "react";
-import { useLoadScript } from "@react-google-maps/api";
 import { RiMapPinAddLine } from "react-icons/ri";
 import { TbMapPinOff } from "react-icons/tb";
 import Map from "../../Components/MapComponents/Map";
 import Loading from "../../Components/Loading";
 import { ModeOptions } from "../../Types/Types";
 
-const MapPage = () => {
+const MapPage = (props : { isLoaded : Boolean }) => {
 
+  const { isLoaded } = props;
   const [mode, setMode] = useState<ModeOptions>();
   
   const handleOption = (
@@ -20,11 +20,6 @@ const MapPage = () => {
       currentTarget.name !== mode ? (currentTarget.name as ModeOptions) : "none"
     );
   };
-
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyDDv8vYP-lVOCw68b4SEqTGsJb7u0iQCFI",
-    libraries: ["places"],
-  });
 
   return (
     <div className="mapBlock">

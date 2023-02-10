@@ -6,7 +6,7 @@ import "./Map.css";
 import { BusStop, LatLngLiteral, MapOptions, MapParameters } from "../../../Types/Types";
 import { useParams } from "react-router-dom";
 
-const Map = ({ mode, customCenter }: MapParameters) => {
+const Map = ({ mode, customCenter, mapTopLefMenu = true, streetViewOption = true }: MapParameters) => {
 
   const params = undefined;
   console.log(useParams());
@@ -38,8 +38,10 @@ const Map = ({ mode, customCenter }: MapParameters) => {
       maxZoom: MAX_ZOOM_VALUE,
       minZoom: MIN_ZOOM_VALUE,
       rotateControl: false,
+      mapTypeControl: mapTopLefMenu,
+      streetViewControl: streetViewOption,
     }),
-    []
+    [mapTopLefMenu, streetViewOption]
   );
   
   const onLoad = useCallback((map: any) => (mapRef.current = map), []);

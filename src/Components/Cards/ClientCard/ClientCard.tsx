@@ -18,13 +18,12 @@ const ClientCard = (props: ClientData) => {
       <div className="studentGroup">
         <div className="studentsList">
           {studentsAssigned &&
-            studentsAssigned.map(({ name, id, service }, index) => {
+            studentsAssigned.map(({ name, id }, index) => {
               return (
                 <StudentInfo
                   key={index}
                   name={name}
                   id={id}
-                  service={service}
                 />
               );
             })}

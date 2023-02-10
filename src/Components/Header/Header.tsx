@@ -30,14 +30,6 @@ const Header = () => {
           Clientes
         </Link>
         <Link
-          to="./services"
-          className={`headerButton link ${
-            pathname === "/services" ? "current" : ""
-          }`}
-        >
-          Servicios
-        </Link>
-        <Link
           to="./routes"
           className={`headerButton link ${
             pathname === "/routes" ? "current" : ""

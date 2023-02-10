@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LatLngLiteral } from "../Types/Types";
+import { LatLngLiteral, MapLibraries } from "../Types/Types";
 
 export const getAddressFrom = async (position: LatLngLiteral)  => {
     return await axios
@@ -17,3 +17,5 @@ export const getAddressFrom = async (position: LatLngLiteral)  => {
       console.log(error);
     });
 };
+
+export const mapLibraries : MapLibraries[] = ["places"];
