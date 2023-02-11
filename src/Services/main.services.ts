@@ -1,5 +1,10 @@
 import axios from "axios";
-import { LatLngLiteral, MapLibraries } from "../Types/Types";
+import { BusRoute, BusStop, LatLngLiteral, MapLibraries } from "../Types/Types";
+
+export const getAllAddress = async (stopsList : BusStop[]) => {
+  
+}
+
 
 export const getAddressFrom = async (position: LatLngLiteral)  => {
     return await axios

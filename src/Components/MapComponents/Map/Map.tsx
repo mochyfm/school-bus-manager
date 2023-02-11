@@ -1,25 +1,49 @@
 import { useMemo, useCallback, useRef, useState, useEffect } from "react";
-import { GoogleMap, MarkerF, /* DirectionsRenderer */ } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  MarkerF /* DirectionsRenderer */,
+} from "@react-google-maps/api";
 import headerLogo from "./icons/school.png";
 import "./Map.css";
 
-import { BusStop, LatLngLiteral, MapOptions, MapParameters } from "../../../Types/Types";
-import { useParams } from "react-router-dom";
+import {
+  BusStop,
+  LatLngLiteral,
+  MapOptions,
+  MapParameters,
+} from "../../../Types/Types";
 
-const Map = ({ mode, customCenter, mapTopLefMenu = true, streetViewOption = true }: MapParameters) => {
-
-  const params = undefined;
-  console.log(useParams());
-
-  const center = useMemo<LatLngLiteral>(
-    () => (params ? params : customCenter ? customCenter : { lat: 28.470925650919988, lng: -16.282707833890054 }), [customCenter, params]
+const Map = ({
+  busStops,
+  mode,
+  customCenter,
+  mapTopLefMenu = true,
+  streetViewOption = true,
+}: MapParameters) => {
+  const schoolLocation = useMemo<BusStop>(
+    () => ({
+      id: 0,
+      latLng: { lat: 28.471000822173202, lng: -16.282717711548084 },
+    }),
+    []
   );
 
-  const [locations, setLocations] = useState<BusStop[]>([{ latLng: center }]);
+  const centerCords = useMemo<LatLngLiteral>(
+    () => (customCenter ? customCenter : schoolLocation.latLng),
+    [customCenter, schoolLocation]
+  );
+
+  const [locations, setLocations] = useState<BusStop[]>([schoolLocation]);
 
   useEffect(() => {
-    
-  }, [locations])
+    const appendLocations = (busStops: BusStop[]) => {
+      setLocations([...locations, ...busStops]);
+    };
+
+    busStops && appendLocations(busStops);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [busStops]);
 
   // const [locationsArray, setLocationsArray] = useState<Array<LatLngLiteral>>(locations)
 
@@ -43,48 +67,38 @@ const Map = ({ mode, customCenter, mapTopLefMenu = true, streetViewOption = true
     }),
     [mapTopLefMenu, streetViewOption]
   );
-  
+
   const onLoad = useCallback((map: any) => (mapRef.current = map), []);
-
-  const addNewMarker = (position: LatLngLiteral) => {
-    if (mode === "add") {
-      console.log(position);
-      setLocations([...locations, { latLng: position }]);
-    }
-  };
-
-  const deleteMarker = (position: LatLngLiteral) => {
-    if (mode === "delete") {
-      if (position.lat !== center.lat && position.lng !== center.lng) {
-        setLocations(
-          locations.filter(
-            ({ latLng }) =>
-              latLng.lat !== position.lat && latLng.lng !== position.lng
-          )
-        );
-      }
-    }
-  };
 
   return (
     <>
       <GoogleMap
-        center={center}
+        center={centerCords}
         mapContainerClassName="mapContainer"
         onLoad={onLoad}
         options={options}
         zoom={ZOOM}
-        onClick={(e) => addNewMarker(e.latLng?.toJSON()!)}
+        onClick={(e) => mode === 'add' && console.log('AÑADOOO:',e.latLng?.toJSON())}
       >
         <>
-          {locations.map((element, index) => {
+          {locations.map(({ id, latLng, routeLabel }, index) => {
             return (
               <MarkerF
-                icon={index === 0 ? headerLogo : ""}
+                icon={id === 0 ? headerLogo : ""}
                 key={index}
-                label={element.routeLabel ? element.routeLabel : (index === 0 ? "" : "?")}
-                position={element.latLng}
-                onClick={(e) => deleteMarker(e.latLng?.toJSON()!)}
+                label={
+                  routeLabel && id !== 0 ? routeLabel : index === 0 ? "" : "?"
+                }
+                position={latLng}
+                onClick={(e) => mode === 'delete' && console.log('BORROOO:', e.latLng?.toJSON())}
+                onDblClick={() =>
+                  console.log(
+                    "SOY EL MARCADOR DE { lat:",
+                    latLng.lat,
+                    "lng:",
+                    latLng.lng
+                  )
+                }
               />
             );
           })}

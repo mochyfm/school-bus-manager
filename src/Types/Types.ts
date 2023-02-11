@@ -38,21 +38,31 @@ export type MapParameters = {
   streetViewOption?: boolean; // For the Street View on the right
 };
 
+/**
+ * TYPES PREPARED FOR THE ROUTESPANEL COMPONENT
+ */
+
+export type SetMapCenterHook = React.Dispatch<React.SetStateAction<LatLngLiteral>>
+
+/**
+ * TYPES PREPARED FOR THE DATA BASE
+ */
+
 export type BusStop = {
+  id: number,
+  direction?: string;
   latLng: LatLngLiteral;
   totalUsers?: number;
   routeLabel?: string;
 };
 
 export type BusRoute = {
+  id: number;
   stops: BusStop[];
-  busesAmount: number;
   totalUsers?: number;
 };
 
-// Types Declared for the DB Clients
-
-export type ClientData = {
+export type Client = {
   id: number;
   name: string;
   studentsAssigned: Student[];

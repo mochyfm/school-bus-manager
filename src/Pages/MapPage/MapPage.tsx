@@ -5,7 +5,7 @@ import { RiMapPinAddLine } from "react-icons/ri";
 import { TbMapPinOff } from "react-icons/tb";
 import Map from "../../Components/MapComponents/Map";
 import Loading from "../../Components/Loading";
-import { ModeOptions } from "../../Types/Types";
+import { BusStop, ModeOptions } from "../../Types/Types";
 
 const MapPage = (props : { isLoaded : Boolean }) => {
 

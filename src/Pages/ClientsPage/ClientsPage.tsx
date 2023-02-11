@@ -2,18 +2,13 @@ import { useState } from "react";
 
 import ClientCard from "../../Components/Cards/ClientCard";
 import "./ClientsPage.css";
-import { ClientData } from "../../Types/Types";
-import { example, example2, example3 } from "../../Utils/Testing";
+import { Client } from "../../Types/Types";
 import { Link } from "react-router-dom";
 import { IoPersonAddSharp } from "react-icons/io5";
 
 const UsersPage = () => {
-  
-  const [clients, setClients] = useState<ClientData[]>([
-    example,
-    example2,
-    example3,
-  ]);
+
+  const [clients, setClients] = useState<Client[]>();
 
   return (
     <div className="usersPage">

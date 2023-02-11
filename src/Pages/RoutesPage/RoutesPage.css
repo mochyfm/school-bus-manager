@@ -1,0 +1,88 @@
+.routesContainer {
+    display: flex;
+    height: var(--body-height);
+    width: 100%;
+}
+
+.routesInfoDisplay {
+    align-items: center;
+    align-content: space-around;
+    display: flex;
+    flex: 8;
+    width: 100%;
+}
+
+.routesBlock {
+    align-items: flex-start;
+    flex-direction: column;
+    display: flex;
+    padding: 30px;
+}
+
+.routesButtonPanel {
+    border-radius: 50px;
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: space-evenly;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.routesButton {
+    display: flex;
+    align-self: center;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border: none;
+    font-size: 50px;
+    padding: 20px;
+}
+
+.routesButton:hover {
+    animation: Light 0.3s;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+.routesInfoDisplay {
+    overflow-x: scroll;
+    overflow-x: hidden;
+    
+}
+
+.routesInfoDisplay::-webkit-scrollbar {
+    width: 10px;
+}
+
+.routesInfoDisplay::-webkit-scrollbar-track {
+    background: var(--secondary-color);
+    border-radius: 10px;
+    box-shadow: inset 0 0 2px var(--hover-dark); 
+}
+
+.routesInfoDisplay::-webkit-scrollbar-thumb {
+    background: var(--focus-color);
+    border-radius: 10px;    
+}
+
+.routesInfoDisplay::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
+
+.routesBlock {
+    width: 100%;
+}
+
+.mapBlock {
+    height: 100%;
+    width: 100%;
+}
+
+@media screen and (max-width: 900px) {
+    .routesContainer {
+        flex-direction: column-reverse;
+    }
+}

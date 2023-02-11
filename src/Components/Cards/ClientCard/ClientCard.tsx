@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { ClientData } from "../../../Types/Types";
+import { Client } from "../../../Types/Types";
 import "./ClientCard.css";
 import StudentInfo from "../../Info/StudentInfo";
 
-const ClientCard = (props: ClientData) => {
+const ClientCard = (props: Client) => {
   const { id, name, studentsAssigned } = props;
 
   return (

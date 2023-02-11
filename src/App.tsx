@@ -29,7 +29,8 @@ function App() {
           <Route path="/studentInfo/:id" element={<p>INFORMACIÓN DE ESTUDIANTE </p>} />     
           <Route path="/message/:id" element={<p>MENSAJE A </p>} />    
           <Route path="/routes" element={<RoutesPage isLoaded={isLoaded}/>} />
-          <Route path="/routes/:id" element={<RouteForm />} />
+          <Route path="/routes/:id" element={<RoutesPage isLoaded={isLoaded}/>} />
+          <Route path="/routes/newRoute" element={<RouteForm isLoaded={isLoaded}/>} />
           <Route path="/help" element={<GuidePage />} />
         </Route>
         <Route path="*" element={<p>NO EXISTE ESTA PÁGINA</p>} />
