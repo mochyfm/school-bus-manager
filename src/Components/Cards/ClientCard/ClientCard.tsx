@@ -4,36 +4,37 @@ import "./ClientCard.css";
 import StudentInfo from "../../Info/StudentInfo";
 
 const ClientCard = (props: Client) => {
-  const { id, name, studentsAssigned } = props;
+  const { client_id, client_name, students } = props;
 
   return (
     <div className="clientCard">
       <div className="client cardTitle">
         <span className="clientInfoTag">
-          ID: <span className="clientInfo">{id}</span>
+          ID: <span className="clientInfo">{client_id}</span>
         </span>
-        {name}
+        {client_name}
       </div>
       <div className="client cardBody"></div>
       <div className="studentGroup">
         <div className="studentsList">
-          {studentsAssigned &&
-            studentsAssigned.map(({ name, id }, index) => {
+          {students &&
+            students.map(({ student_name, student_id, messages }, index) => {
               return (
                 <StudentInfo
                   key={index}
-                  name={name}
-                  id={id}
+                  student_name={student_name}
+                  student_id={student_id}
+                  messages={messages}
                 />
               );
             })}
         </div>
       </div>
       <div className="client buttonPanel">
-        <Link to={`/message/${id}`} className="link client button">
+        <Link to={`/message/${client_id}`} className="link client button">
           Enviar Mensaje
         </Link>
-        <Link to={`/editClient/${id}`} className="link client button">
+        <Link to={`/editClient/${client_id}`} className="link client button">
           Editar Usuario
         </Link>
       </div>

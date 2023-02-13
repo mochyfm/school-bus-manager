@@ -9,20 +9,21 @@
 }
 
 .markMenu {
-    justify-content: center;
     background-color: var(--primary-color);
     border-bottom-left-radius: 20px;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     padding: 30px 50px;
     position: absolute;
     right: 0;
 }
 
-.addIcon, .deleteIcon {
+.addIcon, .deleteIcon, .saveIcon {
     font-size: 50px;
 }
 
-.selectedButton:hover, .addMarkerButton, .deleteMarkerButton {
+.selectedButton:hover, .addMarkerButton, .deleteMarkerButton, .saveButton {
     color: var(--secondary-color);
     border: 2px solid var(--secondary-color);
     background-color: var(--primary-color);
@@ -34,11 +35,25 @@
     margin-left: 20px;
 }
 
-.selectedButton, .addMarkerButton:hover, .deleteMarkerButton:hover  {
+.selectedButton, .addMarkerButton:hover, .deleteMarkerButton:hover, .saveButton:hover  {
     background-color: var(--secondary-color);
     border: 2px solid var(--primary-color);
     cursor: pointer;
     color: var(--primary-color);  
+}
+
+.saveButton {
+    border-radius: 10px;
+    margin-top: 20px;
+    padding: 3px;
+    width: 100%;
+}
+
+.disabled, .disabled:hover {
+    border: 2px solid var(--border-color);
+    background-color: var(--border-color);
+    color: var(--secondary-color);
+    cursor: not-allowed;
 }
 
 .addMarkerButton:hover, .deleteMarkerButton:hover {
@@ -61,7 +76,14 @@
         position: static;
     }
 
-    .markerListButton, .addMarkerButton {
+    .addDeleteSection {
+        align-self: center;
+        justify-items: center;
+        display: flex;
+        flex-wrap: wrap;
+    }   
+
+    .markerListButton, .addMarkerButton, .deleteMarkerButton {
         margin-left: 10px;
         margin-right: 10px;
     }
@@ -70,7 +92,11 @@
         padding: 10px;
     }
 
-    .addIcon, .deleteIcon {
+    .saveButton {
+        padding: 5px;
+     }
+
+    .addIcon, .deleteIcon, .saveIcon {
         font-size: 35px;
     }
 

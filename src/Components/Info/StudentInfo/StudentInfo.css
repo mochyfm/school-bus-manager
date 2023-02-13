@@ -1,10 +1,12 @@
 .student {
+    align-self: center;
     background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
     border-radius: 10px 10px 10px 10px;
     box-shadow: 0px 10px 10px var(--border-color);
     display: flex;
     flex-direction: column;
-    border: 1px solid var(--primary-color);
+    height: 100%;
     margin: 10px 10px;
     width: 100%;
 }
@@ -30,16 +32,15 @@
 .studentInfo {
     display: flex;
     flex-direction: column;
-    margin: 10px;
-    padding: 5px;
+    margin-left: 10px;
 }
 
-.studentDataLabel {
-    margin-bottom: 20px;
+.studentDataLabel:first-of-type {
+    margin-top: 10px;
 }
 
 .studentDataLabel:last-of-type {
-    margin-bottom: 0px;
+    margin-bottom: 10px;
 }
 
 .studentLabel {

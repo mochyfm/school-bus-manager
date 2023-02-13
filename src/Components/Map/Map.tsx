@@ -11,7 +11,7 @@ import {
   LatLngLiteral,
   MapOptions,
   MapParameters,
-} from "../../../Types/Types";
+} from "../../Types/Types";
 
 const Map = ({
   busStops,

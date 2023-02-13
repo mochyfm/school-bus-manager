@@ -2,7 +2,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect } from 'react';
 import Loading from "../../Components/Loading";
-import Map from "../../Components/MapComponents/Map";
+import Map from "../../Components/Map";
 import { useState } from "react";
 import { BusRoute, BusStop } from "../../Types/Types";
 import "./RoutesPage.css";

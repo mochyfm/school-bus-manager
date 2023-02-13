@@ -62,13 +62,21 @@ export type BusRoute = {
   totalUsers?: number;
 };
 
+export type Message = {
+  message_id: number,
+  message: string,
+  message_type: string,
+}
+
 export type Client = {
-  id: number;
-  name: string;
-  studentsAssigned: Student[];
+  client_id: number;
+  client_name: string;
+  students: Student[];
 };
 
 export type Student = {
-  id: number,
-  name: string;
+  student_id: number,
+  student_name: string;
+  messages?: Message[];
 };
+
