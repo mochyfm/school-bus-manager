@@ -34,6 +34,9 @@ const ClientCard = (props: Client) => {
         <Link to={`/message/${client_id}`} className="link client button">
           Enviar Mensaje
         </Link>
+        <Link to={`/newStudent/${client_id}`} className="link client button">
+          Añadir Usuario
+        </Link>
         <Link to={`/editClient/${client_id}`} className="link client button">
           Editar Usuario
         </Link>

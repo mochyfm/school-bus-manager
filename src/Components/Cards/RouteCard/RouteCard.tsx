@@ -37,7 +37,7 @@ const RouteCard = ({
         <div>
           <div className="routeInfo">
             <span>Etiqueta empleada:</span>
-            {routeInfo.stops && routeInfo.stops[0].routeLabel}
+            {routeInfo.stops && routeInfo.routeLabel}
           </div>
           <div className="routeInfo">
             <span>Número de Paradas:</  span> {routeInfo.stops.length}

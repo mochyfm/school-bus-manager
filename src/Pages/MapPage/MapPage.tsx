@@ -1,20 +1,30 @@
 import "./MapPage.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RiMapPinAddLine } from "react-icons/ri";
 import { TbMapPinOff } from "react-icons/tb";
 import Map from "../../Components/Map";
 import Loading from "../../Components/Loading";
-import { BusStop, ModeOptions } from "../../Types/Types";
+import { BusStop, LatLngLiteral, ModeOptions } from "../../Types/Types";
 import { FaRegSave } from "react-icons/fa";
+import { getAllStops, sendStops } from "../../Services/main.services";
 
 const MapPage = (props: { isLoaded: Boolean }) => {
-  
   const { isLoaded } = props;
-  
-  const [busStops, setBusStops] = useState<BusStop[]>([]);
 
-  const [mode, setMode] = useState<ModeOptions>('none');
+  const [originalList, setOriginalList] = useState<BusStop[]>([]);
+  const [busStops, setBusStops] = useState<BusStop[]>([]);
+  const [mode, setMode] = useState<ModeOptions>("none");
+
+  useEffect(() => {
+    const getStops = async () => {
+      const stops = await getAllStops();
+      setBusStops(stops);
+      setOriginalList(stops);
+    };
+
+    getStops();
+  }, []);
 
   const handleOption = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -25,10 +35,50 @@ const MapPage = (props: { isLoaded: Boolean }) => {
     );
   };
 
+  const appendStop = (position: LatLngLiteral) => {
+    setBusStops([...busStops, position]);
+  };
+
+  const removeStop = (position : LatLngLiteral) => {
+    console.log(position);
+    setBusStops(busStops.filter(
+      (element) =>
+        element.lat !== position.lat &&
+        element.lng !== position.lng &&
+        position.lat !== 28.471000822173202 &&
+        position.lng !== -16.282717711548084
+    ))
+  };
+
+  const handleSave = () => {
+    if (originalList.length !== busStops.length) {
+      alert("Lista Actualizada");
+
+      const submitList = async (busStops: BusStop[]) => {
+        try {
+          await sendStops(busStops);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+
+      submitList(busStops);
+    }
+  };
+
   return (
     <div className="mapBlock">
       <div className="mapZone">
-        {isLoaded ? <Map mode={mode} /> : <Loading />}
+        {isLoaded ? (
+          <Map
+            mode={mode}
+            busStops={busStops}
+            appendStop={appendStop}
+            removeStop={removeStop}
+          />
+        ) : (
+          <Loading />
+        )}
       </div>
       <div className="markMenu">
         <div className="addDeleteSection">
@@ -50,8 +100,13 @@ const MapPage = (props: { isLoaded: Boolean }) => {
           </button>
         </div>
         <div>
-          <button className={`saveButton ${((mode !== 'none') && busStops) && 'disabled'}`}>
-            <FaRegSave className="saveIcon"/>
+          <button
+            onClick={handleSave}
+            className={`saveButton ${
+              originalList.length === busStops.length && "disabled"
+            }`}
+          >
+            <FaRegSave className="saveIcon" />
           </button>
         </div>
       </div>

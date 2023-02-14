@@ -1,4 +1,4 @@
-import { useMemo, useCallback, useRef, useState, useEffect } from "react";
+import { useMemo, useCallback, useRef } from "react";
 import {
   GoogleMap,
   MarkerF /* DirectionsRenderer */,
@@ -9,12 +9,15 @@ import "./Map.css";
 import {
   BusStop,
   LatLngLiteral,
+  MapMouseEvent,
   MapOptions,
   MapParameters,
 } from "../../Types/Types";
 
 const Map = ({
   busStops,
+  appendStop,
+  removeStop,
   mode,
   customCenter,
   mapTopLefMenu = true,
@@ -22,28 +25,35 @@ const Map = ({
 }: MapParameters) => {
   const schoolLocation = useMemo<BusStop>(
     () => ({
-      id: 0,
-      latLng: { lat: 28.471000822173202, lng: -16.282717711548084 },
+      stop_id: 0,
+      lat: 28.471000822173202,
+      lng: -16.282717711548084,
     }),
     []
   );
-
+ 
   const centerCords = useMemo<LatLngLiteral>(
-    () => (customCenter ? customCenter : schoolLocation.latLng),
+    () =>
+      customCenter
+        ? customCenter
+        : { lat: schoolLocation.lat, lng: schoolLocation.lng },
     [customCenter, schoolLocation]
   );
 
-  const [locations, setLocations] = useState<BusStop[]>([schoolLocation]);
+  const handleAdd = (e: MapMouseEvent) => {
+    const position = e.latLng?.toJSON();
+    if (mode === "add") {
+      position && appendStop && appendStop(position);
+    }
+  };
 
-  useEffect(() => {
-    const appendLocations = (busStops: BusStop[]) => {
-      setLocations([...locations, ...busStops]);
-    };
-
-    busStops && appendLocations(busStops);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [busStops]);
+  const handleRemove = (e: MapMouseEvent) => {
+    const position = e.latLng?.toJSON();
+    if (mode === "delete") {
+      console.log(position);
+      position && removeStop && removeStop(position)
+    }
+  };
 
   // const [locationsArray, setLocationsArray] = useState<Array<LatLngLiteral>>(locations)
 
@@ -78,26 +88,25 @@ const Map = ({
         onLoad={onLoad}
         options={options}
         zoom={ZOOM}
-        onClick={(e) => mode === 'add' && console.log('AÑADOOO:',e.latLng?.toJSON())}
+        onClick={handleAdd}
       >
         <>
-          {locations.map(({ id, latLng, routeLabel }, index) => {
+          <MarkerF
+                icon={headerLogo}
+                key={0}
+                label={""}
+                position={schoolLocation}
+                onDblClick={() => console.log('Salesianos La Cuesta')}
+              />
+          {busStops && busStops.map(({ stop_id, lat, lng }, index) => {
             return (
               <MarkerF
-                icon={id === 0 ? headerLogo : ""}
-                key={index}
-                label={
-                  routeLabel && id !== 0 ? routeLabel : index === 0 ? "" : "?"
-                }
-                position={latLng}
-                onClick={(e) => mode === 'delete' && console.log('BORROOO:', e.latLng?.toJSON())}
+                key={index + 1}
+                label={stop_id === 0 ? "" : "?"}
+                position={{ lat, lng }}
+                onClick={handleRemove}
                 onDblClick={() =>
-                  console.log(
-                    "SOY EL MARCADOR DE { lat:",
-                    latLng.lat,
-                    "lng:",
-                    latLng.lng
-                  )
+                  console.log("SOY EL MARCADOR DE { lat:", lat, "lng:", lng)
                 }
               />
             );

@@ -4,7 +4,7 @@ export type ModeOptions = "delete" | "add" | "none";
 export type LatLngLiteral = google.maps.LatLngLiteral;
 export type DirectionsResult = google.maps.DirectionsResult;
 export type MapOptions = google.maps.MapOptions;
-export type MouseEvent = google.maps.MapMouseEvent;
+export type MapMouseEvent = google.maps.MapMouseEvent;
 
 export type ButtonProps = {
   text: string;
@@ -32,10 +32,14 @@ export type Icons =
 export type MapParameters = {
   mode?: ModeOptions; // For changing the mode between Add and Remove (For the markers)
   busStops?: BusStop[]; // For showing the Bus stops (in case there are not asigned stops)
+  appendStop ?: Function;
+  removeStop ?: any;
   routes?: BusRoute;  // For showing the routes and their correspondent BusStop[]
   customCenter?: LatLngLiteral; // For selecting a custom center for the map
   mapTopLefMenu?: boolean;  // For removing the geographic relief and satelite menu (on the top left) 
   streetViewOption?: boolean; // For the Street View on the right
+  updatedStops?: number
+  setUpdatedStops ?: React.Dispatch<React.SetStateAction<number>>
 };
 
 /**
@@ -49,17 +53,17 @@ export type SetMapCenterHook = React.Dispatch<React.SetStateAction<LatLngLiteral
  */
 
 export type BusStop = {
-  id: number,
+  stop_id ?: number,
   direction?: string;
-  latLng: LatLngLiteral;
-  totalUsers?: number;
-  routeLabel?: string;
+  lat : number;
+  lng : number
 };
 
 export type BusRoute = {
   id: number;
   stops: BusStop[];
   totalUsers?: number;
+  routeLabel?: string;
 };
 
 export type Message = {
@@ -69,9 +73,9 @@ export type Message = {
 }
 
 export type Client = {
-  client_id: number;
+  client_id?: number;
   client_name: string;
-  students: Student[];
+  students?: Student[];
 };
 
 export type Student = {

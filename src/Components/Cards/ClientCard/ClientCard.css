@@ -38,9 +38,10 @@
 
 
 .studentsList {
-    display: flex;
-    justify-content: space-around;
     align-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
     padding: 0px 25px;
     margin-bottom: 20px;
     width: 100%;
