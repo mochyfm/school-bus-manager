@@ -1,7 +1,7 @@
 .usersPage {
+    align-items: flex-end;
     display: flex;
     justify-content: flex-end;
-    align-items: flex-end;
     width: 100%;
 }
 
@@ -10,7 +10,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding-top: 10px;
+    padding: 30px;
+    padding-top: 20px;
     width: 100%;
 }   
 

@@ -17,6 +17,8 @@ body {
     --hover-dark: #000;
     --focus-color: #FF785C;
     --shadow-color: #DB2600BF;
+    --company-color: #39C3fE;
+    --company-dark-color: #2049ff;
     --background-noLoad-color: #CD3A3A;
 
     --general-font-family: 'Roboto', sans-serif;
@@ -37,6 +39,24 @@ body {
 
 html {
     font-family: var(--general-font-family);
+}
+
+body::-webkit-scrollbar {
+    width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+    background: var(--secondary-color);
+    box-shadow: inset 0 0 2px var(--hover-dark); 
+}
+
+body::-webkit-scrollbar-thumb {
+    background: var(--focus-color);
+    border-radius: 10px;    
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: var(--company-color);
 }
 
 .link {
@@ -114,5 +134,16 @@ html {
     100% {
         background-color: var(--secondary-color);
         color: var(--primary-color);
+    }
+}
+
+@keyframes Light_Blue {
+    0% {
+        background-color: var(--company-dark-color);
+        color: var(--secondary-color);
+    }
+    100% {
+        background-color: var(--secondary-color);
+        color: var(--company-dark-color);
     }
 }

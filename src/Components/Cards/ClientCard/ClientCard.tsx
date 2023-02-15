@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { Client } from "../../../Types/Types";
+import { ClientCardType } from "../../../Types/Types";
 import "./ClientCard.css";
 import StudentInfo from "../../Info/StudentInfo";
 
-const ClientCard = (props: Client) => {
-  const { client_id, client_name, students } = props;
+const ClientCard = (props: ClientCardType) => {
+  const { client_id, client_name, students, editButton = true, createStudentsButton = true } = props;
 
   return (
     <div className="clientCard">
@@ -15,10 +15,9 @@ const ClientCard = (props: Client) => {
         {client_name}
       </div>
       <div className="client cardBody"></div>
-      <div className="studentGroup">
-        <div className="studentsList">
-          {students &&
-            students.map(({ student_name, student_id, messages }, index) => {
+      <div className={`${students && students.length !== 0 ? 'studentGroup' : "createStudentGroup"}`}>
+        {((students && students.length) !== 0) ? <div className="studentsList">
+            {students && students.map(({ student_name, student_id, messages }, index) => {
               return (
                 <StudentInfo
                   key={index}
@@ -28,17 +27,19 @@ const ClientCard = (props: Client) => {
                 />
               );
             })}
-        </div>
+        </div> : createStudentsButton && <Link to={`/newStudent/${client_id}`} className="link client createStudentButton">Crear Estudiantes</Link>}
       </div>
       <div className="client buttonPanel">
         <Link to={`/message/${client_id}`} className="link client button">
           Enviar Mensaje
         </Link>
+        {editButton && (
+          <Link to={`/editClient/${client_id}`} className="link client button">
+            Editar Usuario
+          </Link>
+        )}
         <Link to={`/newStudent/${client_id}`} className="link client button">
-          Añadir Usuario
-        </Link>
-        <Link to={`/editClient/${client_id}`} className="link client button">
-          Editar Usuario
+          Añadir Estudiante
         </Link>
       </div>
     </div>

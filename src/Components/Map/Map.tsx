@@ -1,4 +1,4 @@
-import { useMemo, useCallback, useRef } from "react";
+import { useEffect, useMemo, useCallback, useRef, useState } from "react";
 import {
   GoogleMap,
   MarkerF /* DirectionsRenderer */,
@@ -6,13 +6,18 @@ import {
 import headerLogo from "./icons/school.png";
 import "./Map.css";
 
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
+
 import {
   BusStop,
   LatLngLiteral,
   MapMouseEvent,
   MapOptions,
   MapParameters,
+  Student,
 } from "../../Types/Types";
+import { getAddressFrom } from "../../Services/main.services";
 
 const Map = ({
   busStops,
@@ -22,7 +27,42 @@ const Map = ({
   mapTopLefMenu = true,
   streetViewOption = true,
 }: MapParameters) => {
-  
+  const displayInfo = ({ stop_id, lat, lng }: BusStop): void => {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div className="custom-ui">
+            <div style={{ borderColor: '#000', borderWidth: 1, borderRadius: 10 }}>
+              <h2 style={{ marginBottom: 10, marginTop: 10 }}>Modo debug</h2>
+              <p>
+                <span style={{ fontWeight: "bold" }}>stop_id:</span> {stop_id}
+              </p>
+              <p>
+                <span style={{ fontWeight: "bold" }}>lat:</span> {lat}
+              </p>
+              <p>
+                <span style={{ fontWeight: "bold" }}>lng:</span> {lng}
+              </p>
+              <button
+                style={{
+                  marginTop: 10,
+                  padding: 3,
+                  paddingLeft: 10,
+                  paddingRight: 10,
+                }}
+                onClick={() => {
+                  onClose();
+                }}
+              >
+                Ok
+              </button>
+            </div>
+          </div>
+        );
+      },
+    });
+  };
+
   const schoolLocation = useMemo<BusStop>(
     () => ({
       stop_id: 0,
@@ -31,7 +71,7 @@ const Map = ({
     }),
     []
   );
- 
+
   const centerCords = useMemo<LatLngLiteral>(
     () => ({ lat: schoolLocation.lat, lng: schoolLocation.lng }),
     [schoolLocation]
@@ -48,7 +88,7 @@ const Map = ({
     const position = e.latLng?.toJSON();
     if (mode === "delete") {
       console.log(position);
-      position && removeStop && removeStop(position)
+      position && removeStop && removeStop(position);
     }
   };
 
@@ -89,25 +129,28 @@ const Map = ({
       >
         <>
           <MarkerF
-                icon={headerLogo}
-                key={0}
-                label={""}
-                position={schoolLocation}
-                onDblClick={() => console.log('Salesianos La Cuesta')}
-              />
-          {busStops && busStops.map(({ stop_id, lat, lng }, index) => {
-            return (
-              <MarkerF
-                key={index + 1}
-                label={stop_id === 0 ? "" : "?"}
-                position={{ lat, lng }}
-                onClick={handleRemove}
-                onDblClick={() =>
-                  console.log("SOY EL MARCADOR DE { lat:", lat, "lng:", lng)
-                }
-              />
-            );
-          })}
+            icon={headerLogo}
+            key={0}
+            label={""}
+            position={schoolLocation}
+            onDblClick={() => console.log("Salesianos La Cuesta")}
+          />
+          {busStops &&
+            busStops.map(({ stop_id, lat, lng }, index) => {
+              return (
+                <MarkerF
+                  key={index + 1}
+                  label={
+                    stop_id === 0 ? "" : stop_id ? stop_id.toString() : "?"
+                  }
+                  position={{ lat, lng }}
+                  onClick={handleRemove}
+                  onDblClick={() => {
+                    displayInfo({ stop_id, lat, lng });
+                  }}
+                />
+              );
+            })}
           {}
         </>
       </GoogleMap>

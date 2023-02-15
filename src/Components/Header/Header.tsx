@@ -9,8 +9,9 @@ const Header = () => {
 
   return (
     <div className="headerBody">
-      <Link to="./" className="leftIcon">
+      <Link to="./" className="leftIcon link">
         <img src={headerLogo} className="headerIcon" alt="Logo Salesianos" />
+        <span className="headerIconText">Volver al inicio</span>
       </Link>
       <div className="buttonPanel">
         <Link

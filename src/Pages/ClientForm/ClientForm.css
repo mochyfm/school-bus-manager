@@ -1,0 +1,13 @@
+.formBody {
+    height: 100%;
+    width: 100%;
+}
+
+.formClientCard, .formEditClient {
+    display: flex;
+    padding: 25px;
+}
+
+.formEditClient {
+    justify-content: center;
+}

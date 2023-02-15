@@ -7,10 +7,19 @@
     height: var(--header-height);
 }
 
+.leftIcon {
+    display: flex;
+    align-items: center;
+}
+
 .headerIcon {
     margin: 0px 10px;
     height: 45px;
     width: 50px;
+}
+
+.headerIconText {
+    display: none;
 }
 
 .headerButton {
@@ -67,6 +76,17 @@
 @media screen and (max-width: 900px) {
     .headerBody .buttonPanel {
         display: none;
+    }
+    .headerIconText {
+        color: var(--secondary-color);
+        display: inline;
+        font-weight: bold;
+        justify-self: center;
+        text-decoration: none;
+    }
+    .developerBlock {
+        position: absolute;
+        right: 0;
     }
 }
 

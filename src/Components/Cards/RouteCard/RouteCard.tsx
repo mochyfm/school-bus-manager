@@ -16,7 +16,6 @@ const RouteCard = ({
   showDelete?: boolean;
 }) => {
 
-
   return (
     <div className="routeCard">
       <div className="routeInfoBlock">

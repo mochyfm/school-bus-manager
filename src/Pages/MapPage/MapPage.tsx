@@ -1,5 +1,7 @@
 import "./MapPage.css";
 
+import { Store } from "react-notifications-component";
+
 import { useEffect, useState } from "react";
 import { RiMapPinAddLine } from "react-icons/ri";
 import { TbMapPinOff } from "react-icons/tb";
@@ -12,20 +14,16 @@ import { getAllStops, sendStops } from "../../Services/main.services";
 const MapPage = (props: { isLoaded: Boolean }) => {
   const { isLoaded } = props;
 
-  const [originalLnght, setOriginalLnght] = useState<number>(0);
   const [busStops, setBusStops] = useState<BusStop[]>([]);
   const [mode, setMode] = useState<ModeOptions>("none");
 
   useEffect(() => {
-    
     const getStops = async () => {
       const stops = await getAllStops();
       setBusStops(stops);
-      stops && setOriginalLnght(stops.length);
     };
 
     getStops();
-
   }, []);
 
   const handleOption = (
@@ -54,10 +52,17 @@ const MapPage = (props: { isLoaded: Boolean }) => {
     );
   };
 
-  const handleSave = () => {
-    if (originalLnght !== busStops.length) {
-      alert("Lista Actualizada");
+  const currentMode = () => {
+    switch (mode) {
+      case "add":
+        return "añadir";
+      case "delete":
+        return "borrar";
+    }
+  };
 
+  const handleSave = () => {
+    if (mode === "none") {
       const submitList = async (busStops: BusStop[]) => {
         try {
           await sendStops(busStops);
@@ -67,6 +72,35 @@ const MapPage = (props: { isLoaded: Boolean }) => {
       };
 
       submitList(busStops);
+      Store.addNotification({
+        title: "¡Hecho!",
+        message: "Las Rutas han sido actualizadas correctamente",
+        type: "success",
+        insert: "top",
+        container: "top-center",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 0,
+          onScreen: true,
+        },
+      });
+      setTimeout(() => window.location.reload(), 1000);
+    } else {
+      Store.addNotification({
+        title: `AVISO: Menú de ${currentMode()} seleccionado.`,
+        message:
+          "Debe desmarcar el menu actual para poder guardar.",
+        type: "default",
+        insert: "top",
+        container: "top-center",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+        },
+      });
     }
   };
 
@@ -106,9 +140,7 @@ const MapPage = (props: { isLoaded: Boolean }) => {
         <div>
           <button
             onClick={handleSave}
-            className={`saveButton ${
-              originalLnght === busStops.length && "disabled"
-            }`}
+            className={`saveButton ${mode !== "none" && "disabled"}`}
           >
             <FaRegSave className="saveIcon" />
           </button>

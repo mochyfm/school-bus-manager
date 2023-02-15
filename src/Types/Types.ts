@@ -23,6 +23,14 @@ export type Icons =
   | "Guía"
   | "Ajustes";
 
+export type ClientCardType = {
+  client_id?: number;
+  client_name: string;
+  students?: Student[];
+  editButton ?: boolean;
+  createStudentsButton ?: boolean;
+}
+
 /**
  * TYPES PREPARED FOR THE MAP COMPONENT
  */
