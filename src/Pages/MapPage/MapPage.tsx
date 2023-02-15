@@ -12,18 +12,20 @@ import { getAllStops, sendStops } from "../../Services/main.services";
 const MapPage = (props: { isLoaded: Boolean }) => {
   const { isLoaded } = props;
 
-  const [originalList, setOriginalList] = useState<BusStop[]>([]);
+  const [originalLnght, setOriginalLnght] = useState<number>(0);
   const [busStops, setBusStops] = useState<BusStop[]>([]);
   const [mode, setMode] = useState<ModeOptions>("none");
 
   useEffect(() => {
+    
     const getStops = async () => {
       const stops = await getAllStops();
       setBusStops(stops);
-      setOriginalList(stops);
+      stops && setOriginalLnght(stops.length);
     };
 
     getStops();
+
   }, []);
 
   const handleOption = (
@@ -39,19 +41,21 @@ const MapPage = (props: { isLoaded: Boolean }) => {
     setBusStops([...busStops, position]);
   };
 
-  const removeStop = (position : LatLngLiteral) => {
+  const removeStop = (position: LatLngLiteral) => {
     console.log(position);
-    setBusStops(busStops.filter(
-      (element) =>
-        element.lat !== position.lat &&
-        element.lng !== position.lng &&
-        position.lat !== 28.471000822173202 &&
-        position.lng !== -16.282717711548084
-    ))
+    setBusStops(
+      busStops.filter(
+        (element) =>
+          element.lat !== position.lat &&
+          element.lng !== position.lng &&
+          position.lat !== 28.471000822173202 &&
+          position.lng !== -16.282717711548084
+      )
+    );
   };
 
   const handleSave = () => {
-    if (originalList.length !== busStops.length) {
+    if (originalLnght !== busStops.length) {
       alert("Lista Actualizada");
 
       const submitList = async (busStops: BusStop[]) => {
@@ -103,7 +107,7 @@ const MapPage = (props: { isLoaded: Boolean }) => {
           <button
             onClick={handleSave}
             className={`saveButton ${
-              originalList.length === busStops.length && "disabled"
+              originalLnght === busStops.length && "disabled"
             }`}
           >
             <FaRegSave className="saveIcon" />

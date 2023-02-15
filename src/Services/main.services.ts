@@ -13,7 +13,7 @@ export const getAllClients = async () => {
     });
 } 
 
-export const getAllStops = async () => {
+export const getAllStops = async () : Promise<BusStop[]> =>  {
     return await axios.get(`${API_MAIN_URL}/stops`)
     .then((response) => {
       if (response.data.error_message) console.log(response.data.error_message)
@@ -24,7 +24,7 @@ export const getAllStops = async () => {
 }
 
 export const sendStops = async (stopsList : BusStop[]) => {
-    await axios.post(`${API_MAIN_URL}/stops`, [...stopsList])
+    await axios.post(`${API_MAIN_URL}/stops`, stopsList)
     .then((response) => {
       console.log(response.data)
     }).catch((error) => {

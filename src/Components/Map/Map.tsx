@@ -19,10 +19,10 @@ const Map = ({
   appendStop,
   removeStop,
   mode,
-  customCenter,
   mapTopLefMenu = true,
   streetViewOption = true,
 }: MapParameters) => {
+  
   const schoolLocation = useMemo<BusStop>(
     () => ({
       stop_id: 0,
@@ -33,11 +33,8 @@ const Map = ({
   );
  
   const centerCords = useMemo<LatLngLiteral>(
-    () =>
-      customCenter
-        ? customCenter
-        : { lat: schoolLocation.lat, lng: schoolLocation.lng },
-    [customCenter, schoolLocation]
+    () => ({ lat: schoolLocation.lat, lng: schoolLocation.lng }),
+    [schoolLocation]
   );
 
   const handleAdd = (e: MapMouseEvent) => {

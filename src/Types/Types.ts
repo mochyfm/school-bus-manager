@@ -35,7 +35,7 @@ export type MapParameters = {
   appendStop ?: Function;
   removeStop ?: any;
   routes?: BusRoute;  // For showing the routes and their correspondent BusStop[]
-  customCenter?: LatLngLiteral; // For selecting a custom center for the map
+  mainMarker?: LatLngLiteral; // For selecting a custom center for the map
   mapTopLefMenu?: boolean;  // For removing the geographic relief and satelite menu (on the top left) 
   streetViewOption?: boolean; // For the Street View on the right
   updatedStops?: number
