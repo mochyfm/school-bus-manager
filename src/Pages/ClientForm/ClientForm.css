@@ -1,4 +1,8 @@
 .formBody {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
     height: 100%;
     width: 100%;
 }
@@ -8,32 +12,48 @@
     padding: 25px;
 }
 
-.formEditClient {
+.formClient {
     align-items: center;
     justify-content: center;
 }   
 
-.formEditClientCard {
+.formEdit {
+    align-content: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.formCreateClient {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
     height: 90vh
 }
 
-.formEdit {
-    display: flex;
-    align-items: center;
+.formCreateClient button {
+    margin-top: 20px;
 }
+    
 
 .formClientNameInput {
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
     margin-right: 20px;
-    padding: 5px;
+    font-size: 3rem;
+    padding: 10px;
 }
 
 .formButton {
+    align-self: center;
     border: none;
     border-radius: 20px;
     background-color: var(--primary-color);
     color: var(--secondary-color);
-    font-size: 1.4rem;
+    font-size: 3rem;
     padding: 5px 10px;
+    margin: 0px;
 }
 
 .formButton:hover {
@@ -41,4 +61,16 @@
     background-color: var(--secondary-color);
     color: var(--primary-color);
     cursor: pointer;
+}
+
+@media screen and (max-width: 900px) {
+    .formEdit {
+        flex-direction: column;
+    }
+    .formClientNameInput {
+        font-size: 2rem;
+    }
+    .formButton {
+        margin-top: 20px;
+    }
 }

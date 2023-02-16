@@ -20,6 +20,7 @@ const ClientForm = () => {
   }, [id]);
 
   const [client, setClient] = useState<Client>({
+    client_id: 0,
     client_name: "",
   });
   const [oldClientName, setOldClientName] = useState<string>("");
@@ -38,58 +39,72 @@ const ClientForm = () => {
     const createClient = async (client: Client) => {
       try {
         await createNewClient(client);
+        setClient({
+          client_id: 0,
+          client_name: "",
+        });
         Store.addNotification({
-          title: `Cliente ${id ? "editado" : "creado"} exitosamente`,
-          message: `Se ha ${
-            id ? `editado` : "creado"
-          } el cliente correctamente`,
+          title: "¡Hecho!",
+          message: "Creado al cliente \"" + client.client_name + "\"",
           type: "success",
           insert: "top",
-          container: "bottom-center",
+          container: "top-center",
           animationIn: ["animate__animated", "animate__fadeIn"],
           animationOut: ["animate__animated", "animate__fadeOut"],
           dismiss: {
-            duration: 3000,
+            duration: 0,
             onScreen: true,
           },
         });
-        setClient({
-          client_name: "",
+        setTimeout(() => window.location.reload(), 3000);
+      } catch (err) {
+        Store.addNotification({
+          title: "ERROR",
+          message: "No se ha podido crear al cliente \"" + client.client_name + "\"",
+          type: "danger",
+          insert: "top",
+          container: "top-center",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: {
+            duration: 0,
+            onScreen: true,
+          },
+        });
+        console.log(err);
+      }
+    };
+
+    const editClient = (client: Client) => {
+      try {
+        // await editExistingClient(client);
+        console.log(client);
+        Store.addNotification({
+          title: "¡Hecho!",
+          message: "Se ha modificado el nombre del cliente \"" + oldClientName + "\" ahora se llama \"" + client.client_name + "\"",
+          type: "success",
+          insert: "top",
+          container: "top-center",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: {
+            duration: 0,
+            onScreen: true,
+          },
         });
         setTimeout(() => window.location.reload(), 3000);
       } catch (err) {
         console.log(err);
-        Store.addNotification({
-          title: "ERROR AL CREAR EL CLIENTE",
-          message: `No se ha podido crear el cliente ${client.client_name}`,
-          type: "success",
-          insert: "top",
-          container: "top-center",
-          animationIn: ["animate__animated", "animate__fadeIn"],
-          animationOut: ["animate__animated", "animate__fadeOut"],
-          dismiss: {
-            duration: 0,
-            onScreen: true,
-          },
-        });
       }
     };
 
-    (client.client_name.trim() !== "")
-      ? createClient(client)
-      : Store.addNotification({
-          title: "ERROR AL CREAR EL CLIENTE",
-          message: `No se ha podido crear el cliente ${client.client_name}`,
-          type: "success",
-          insert: "top",
-          container: "top-center",
-          animationIn: ["animate__animated", "animate__fadeIn"],
-          animationOut: ["animate__animated", "animate__fadeOut"],
-          dismiss: {
-            duration: 0,
-            onScreen: true,
-          },
-        });
+    if (
+      client.client_name !== oldClientName &&
+      client.client_name.trim().length !== 0
+    ) {
+      id && editClient(client);
+      !id && createClient(client);
+    }
   };
 
   return (
@@ -98,24 +113,24 @@ const ClientForm = () => {
         <div className="formClientCard">
           <ClientCard
             client_id={client.client_id}
-            client_name={client.client_name}
+            client_name={oldClientName}
             students={client.students}
             editButton={false}
             createStudentsButton={true}
           />
         </div>
       )}
-      <div className={`formEditClient ${!id && "formEditClientCard"}`}>
-        <form className="formEdit" onSubmit={handleSubmit}>
+      <div className={`formClient`}>
+        <form className={`formEdit ${!id && "formCreateClient"}`} onSubmit={handleSubmit}>
           <input
             required
-            className="formClientNameInput"
+            className='formClientNameInput'
             placeholder="Nombre del cliente"
             onChange={handleInput}
             name="client_name"
             value={client.client_name}
           />
-          <button className="formButton">
+          <button type="submit" className='formButton'>
             {id ? "Editar" : "Crear"} Cliente
           </button>
         </form>

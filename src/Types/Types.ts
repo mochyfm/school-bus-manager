@@ -1,5 +1,7 @@
 // Types created for the Map insider //
 
+import { IconType } from "react-icons/lib";
+
 export type ModeOptions = "delete" | "add" | "none";
 export type LatLngLiteral = google.maps.LatLngLiteral;
 export type DirectionsResult = google.maps.DirectionsResult;
@@ -75,13 +77,26 @@ export type BusRoute = {
 };
 
 export type Message = {
-  message_id: number,
+  message_id?: number,
   message: string,
-  message_type: string,
+  message_type: 'serious' | 'warning' | 'confirm',
+  student_id: number,
+  client_id: number,
+}
+
+export type MessageOption = {
+  value: string,
+  label: string
+}
+
+export type PredefinedMessage = {
+  value: string
+  type: string,
+  label: string
 }
 
 export type Client = {
-  client_id?: number;
+  client_id: number;
   client_name: string;
   students?: Student[];
 };
@@ -89,6 +104,7 @@ export type Client = {
 export type Student = {
   student_id: number,
   student_name: string;
+  client_id?: number;
   messages?: Message[];
 };
 

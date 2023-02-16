@@ -21,18 +21,16 @@ const ClientCard = (props: ClientCardType) => {
               return (
                 <StudentInfo
                   key={index}
+                  client_id={client_id}
                   student_name={student_name}
                   student_id={student_id}
                   messages={messages}
                 />
               );
             })}
-        </div> : createStudentsButton && <Link to={`/newStudent/${client_id}`} className="link client createStudentButton">Crear Estudiantes</Link>}
+        </div> : createStudentsButton && <Link to={`/newStudent/${client_id}`} className="link client createStudentButton">Añadir Estudiantes</Link>}
       </div>
       <div className="client buttonPanel">
-        <Link to={`/message/${client_id}`} className="link client button">
-          Enviar Mensaje
-        </Link>
         {editButton && (
           <Link to={`/editClient/${client_id}`} className="link client button">
             Editar Usuario
