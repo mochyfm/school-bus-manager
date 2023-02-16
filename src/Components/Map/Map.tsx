@@ -135,13 +135,13 @@ const Map = ({
             onDblClick={() => console.log("Salesianos La Cuesta")}
           />
           {busStops &&
-            busStops.map(({ stop_id, lat, lng }, index) => {
+            busStops.map(({ stop_id, lat, lng, label }, index) => {
               return (
                 <MarkerF
                   key={index + 1}
-                  label={stop_id === 0 ? "" : stop_id ? stop_id.toString() : "?"}
+                  label={!label ? (stop_id === 0) ? "" : stop_id ? stop_id.toString() : "?" : label}
                   position={{ lat, lng }}
-                  onClick={handleRemove}
+                  onClick={handleRemove}  
                   onDblClick={() => {
                     displayInfo({ stop_id, lat, lng });
                   }}

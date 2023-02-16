@@ -65,6 +65,7 @@ export type SetMapCenterHook = React.Dispatch<React.SetStateAction<LatLngLiteral
 export type BusStop = {
   stop_id ?: number,
   direction?: string;
+  label ?: string;
   lat : number;
   lng : number
 };
@@ -79,7 +80,7 @@ export type BusRoute = {
 export type Message = {
   message_id?: number,
   message: string,
-  message_type: 'serious' | 'warning' | 'confirm',
+  message_type: MessageType,
   student_id: number,
   client_id: number,
 }
@@ -88,6 +89,8 @@ export type MessageOption = {
   value: string,
   label: string
 }
+
+export type MessageType = "serious" | "warning" | "confirm" | "info";
 
 export type PredefinedMessage = {
   value: string
@@ -106,5 +109,6 @@ export type Student = {
   student_name: string;
   client_id?: number;
   messages?: Message[];
+  route?: BusRoute;
 };
 

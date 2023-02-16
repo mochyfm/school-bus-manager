@@ -1,0 +1,29 @@
+.sutdentProfile {
+    background-color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.studentNameTitle {
+    align-items: center;
+    color: black;
+    display: flex;
+    margin: 20px;
+}
+
+.routeSection {
+    background-color: var(--secondary-color);
+    height: 320px;
+    width: 100%;
+}
+
+.studentInfoData {
+    justify-content: center;
+}
+
+.studentMessageList {   
+    display: flex;
+    flex-direction: row;
+}

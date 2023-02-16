@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./MessageForm.css";
-import { Message, PredefinedMessage, Student } from "../../Types/Types";
+import { Message, MessageType, PredefinedMessage, Student } from "../../Types/Types";
 import { getStudentById, sendMessage } from "../../Services/main.services";
 
 import Select, { SingleValue } from "react-select";
@@ -21,12 +21,12 @@ const DEFAULT_MESSAGES: PredefinedMessage[] = [
   { value: "msg_3", type: "serious", label: "Ha llegado tarde" },
   {
     value: "msg_4",
-    type: "warning",
+    type: "serious",
     label: "No se ha presentado con el uniforme",
   },
   {
     value: "msg_5",
-    type: "warning",
+    type: "serious",
     label: "Ha retrasado el horario previsto de la ruta a propósito",
   },
   {
@@ -67,7 +67,7 @@ const MessageForm = () => {
     newValue &&
       student &&
       setMessage({
-        message_type: newValue.type as 'serious' | 'warning' | 'confirm',
+        message_type: newValue.type as MessageType,
         message: newValue.label,
         client_id: student?.client_id ? student?.client_id : 0,
         student_id: student?.student_id,
