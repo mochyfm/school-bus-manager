@@ -65,9 +65,9 @@
 }
 
 .createStudentButton {
-    background-color: var(--company-dark-color);
+    background-color: var(--focus-color);
     border-radius: 20px;
-    border: 0px solid var(--company-dark-color);
+    border: 0px solid var(--focus-color);
     color: var(--secondary-color);
     font-weight: bold;
     font-size: 30px;
@@ -78,6 +78,13 @@
     width: 50%;
 }
 
+.createStudentButton:hover  {
+    color: var(--focus-color);
+    background-color: var(--secondary-color);
+    animation: Light_Focus 0.2s;
+    
+}
+
 .client.button {
     border: none;
     border-radius: 20px;
@@ -85,13 +92,6 @@
     color: var(--secondary-color);
     font-size: 1.9rem;
     padding: 10px 15px;
-}
-
-.createStudentButton:hover  {
-    color: var(--company-dark-color);
-    background-color: var(--secondary-color);
-    animation: Light_Blue 0.2s;
-
 }
 
 .client.button:hover {

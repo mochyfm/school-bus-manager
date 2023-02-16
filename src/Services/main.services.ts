@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BusStop, LatLngLiteral, MapLibraries } from "../Types/Types";
+import { BusStop, Client, LatLngLiteral, MapLibraries } from "../Types/Types";
 
 const API_MAIN_URL = 'http://localhost:7500/tslc'
 
@@ -12,6 +12,10 @@ export const getAllClients = async () => {
       console.log(error);
     });
 } 
+
+export const createNewClient = async (client : Client) => {
+  return await axios.post(`${API_MAIN_URL}/client`, client);
+}
 
 export const getClientById = async (client_id : number) => {
   return await axios.get(`${API_MAIN_URL}/client?id=${client_id}`)

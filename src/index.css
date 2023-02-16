@@ -137,6 +137,17 @@ body::-webkit-scrollbar-thumb:hover {
     }
 }
 
+@keyframes Light_Focus {
+    0% {
+        background-color: var(--focus-color);
+        color: var(--secondary-color);
+    }
+    100% {
+        background-color: var(--secondary-color);
+        color: var(--focus-color);
+    }
+}
+
 @keyframes Light_Blue {
     0% {
         background-color: var(--company-dark-color);

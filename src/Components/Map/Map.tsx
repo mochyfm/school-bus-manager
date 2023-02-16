@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useCallback, useRef, useState } from "react";
+import { useMemo, useCallback, useRef } from "react";
 import {
   GoogleMap,
   MarkerF /* DirectionsRenderer */,
@@ -15,9 +15,7 @@ import {
   MapMouseEvent,
   MapOptions,
   MapParameters,
-  Student,
 } from "../../Types/Types";
-import { getAddressFrom } from "../../Services/main.services";
 
 const Map = ({
   busStops,
@@ -27,13 +25,14 @@ const Map = ({
   mapTopLefMenu = true,
   streetViewOption = true,
 }: MapParameters) => {
+
   const displayInfo = ({ stop_id, lat, lng }: BusStop): void => {
     confirmAlert({
       customUI: ({ onClose }) => {
         return (
           <div className="custom-ui">
             <div style={{ borderColor: '#000', borderWidth: 1, borderRadius: 10 }}>
-              <h2 style={{ marginBottom: 10, marginTop: 10 }}>Modo debug</h2>
+              <h2 style={{ marginBottom: 10, marginTop: 10 }}>Info Parada</h2>
               <p>
                 <span style={{ fontWeight: "bold" }}>stop_id:</span> {stop_id}
               </p>
@@ -140,9 +139,7 @@ const Map = ({
               return (
                 <MarkerF
                   key={index + 1}
-                  label={
-                    stop_id === 0 ? "" : stop_id ? stop_id.toString() : "?"
-                  }
+                  label={stop_id === 0 ? "" : stop_id ? stop_id.toString() : "?"}
                   position={{ lat, lng }}
                   onClick={handleRemove}
                   onDblClick={() => {

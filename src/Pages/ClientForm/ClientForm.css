@@ -9,5 +9,36 @@
 }
 
 .formEditClient {
+    align-items: center;
     justify-content: center;
+}   
+
+.formEditClientCard {
+    height: 90vh
+}
+
+.formEdit {
+    display: flex;
+    align-items: center;
+}
+
+.formClientNameInput {
+    margin-right: 20px;
+    padding: 5px;
+}
+
+.formButton {
+    border: none;
+    border-radius: 20px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    font-size: 1.4rem;
+    padding: 5px 10px;
+}
+
+.formButton:hover {
+    animation: Light 0.2s;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    cursor: pointer;
 }
