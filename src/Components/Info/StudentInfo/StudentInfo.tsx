@@ -1,14 +1,18 @@
 import { Link } from "react-router-dom";
-import { Student } from "../../../Types/Types"
+import { StudentCard } from "../../../Types/Types"
 import './StudentInfo.css';
+import { AiFillDelete } from "react-icons/ai";
 
-const StudentInfo = (props: Student) => {
+const StudentInfo = (props: StudentCard) => {
 
-    const { client_id, student_id, student_name, messages } = props;
+    const { client_id, student_id, student_name, messages, deleteEnabled = false } = props;
 
   return (
     <div className="student">
-        <div className="studentTitle">Estudiante</div>
+        <div className="studentTitle">
+          Estudiante
+          {deleteEnabled && <button className="deleteStudentButton">Delete Student{" "}<AiFillDelete/></button>}
+        </div>
       <div className="studentInfoGroup">
         <div className="studentInfo">
             <span className="studentDataLabel"><span className="studentLabel">Nombre:</span>{student_name}</span>

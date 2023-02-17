@@ -5,8 +5,10 @@ import { Client, Student } from "../../Types/Types";
 import MessageCard from "../../Components/Cards/MessageCard/MessageCard";
 
 import "./StudentPage.css";
+import Map from "../../Components/Map/Map";
+import Loading from "../../Components/Loading/Loading";
 
-const StudentPage = () => {
+const StudentPage = ({ isLoaded }: { isLoaded: boolean }) => {
   const { id } = useParams();
   const [student, setStudent] = useState<Student>();
   const [studentClient, setStudentClient] = useState<Client>();
@@ -32,12 +34,19 @@ const StudentPage = () => {
         Nombre del estudiante: {student?.student_name}
         <span>
           <span>(Padre / Madre / Tutor) asociado:</span>{" "}
-          <Link to={`/clients/${studentClient?.client_id}`}>{studentClient?.client_name}</Link>
+          <Link to={`/editClient/${studentClient?.client_id}`}>
+            {studentClient?.client_name}
+          </Link>
         </span>
       </h1>
       <div className="routeSection">
-        <div></div>
+        {isLoaded ? (
+          <Map mapTopLefMenu={false} streetViewOption={false} />
+        ) : (
+          <Loading />
+        )}
       </div>
+      {student && student.messages?.length !== 0 && <h1 className="messgListTitle">Lista de mensajes</h1>}
       <div className="studentMessageList">
         {student &&
           student.messages &&

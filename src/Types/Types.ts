@@ -34,6 +34,7 @@ export type ClientCardType = {
   students?: Student[];
   editButton?: boolean;
   createStudentsButton?: boolean;
+  enableDeleteStudents?: boolean;
 };
 
 /**
@@ -52,6 +53,7 @@ export type MapParameters = {
   mapTopLefMenu?: boolean; // For removing the geographic relief and satelite menu (on the top left)
   streetViewOption?: boolean; // For the Street View on the right
   updatedStops?: number;
+  customCenter ?: LatLngLiteral;
   setUpdatedStops?: React.Dispatch<React.SetStateAction<number>>;
 };
 
@@ -116,3 +118,13 @@ export type Student = {
   messages?: Message[];
   route?: BusRoute;
 };
+
+export type StudentCard = {
+  student_id: number;
+  student_name: string;
+  client_id?: number;
+  messages?: Message[];
+  route?: BusRoute;
+  deleteEnabled?: boolean;
+};
+

@@ -28,7 +28,7 @@ function App() {
           <Route path="/clients" element={<ClientsPage />} />
           <Route path="/newClient" element={<ClientForm/>} />
           <Route path="/editClient/:id" element={<ClientForm/>} />
-          <Route path="/studentInfo/:id" element={<StudentPage />} />     
+          <Route path="/studentInfo/:id" element={<StudentPage isLoaded={isLoaded}/>} />     
           <Route path="/newStudent/:id" element={<p>CREAR ESTUDIANTE</p>} />     
           <Route path="/message/:id" element={<MessageForm />} />    
           <Route path="/routes" element={<RoutesPage isLoaded={isLoaded}/>} />

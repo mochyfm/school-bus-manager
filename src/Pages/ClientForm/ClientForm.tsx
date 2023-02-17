@@ -118,6 +118,7 @@ const ClientForm = () => {
             students={client.students}
             editButton={false}
             createStudentsButton={true}
+            enableDeleteStudents={true}
           />
         </div>
       )}

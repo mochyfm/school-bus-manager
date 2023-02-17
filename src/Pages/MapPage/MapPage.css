@@ -4,6 +4,9 @@
 }
 
 .mapZone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: var(--body-height);
     width: 100%;
 }

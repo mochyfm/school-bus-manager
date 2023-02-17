@@ -4,7 +4,7 @@ import "./ClientCard.css";
 import StudentInfo from "../../Info/StudentInfo";
 
 const ClientCard = (props: ClientCardType) => {
-  const { client_id, client_name, students, editButton = true, createStudentsButton = true } = props;
+  const { client_id, client_name, students, editButton = true, createStudentsButton = true, enableDeleteStudents = false } = props;
 
   return (
     <div className="clientCard">
@@ -25,6 +25,7 @@ const ClientCard = (props: ClientCardType) => {
                   student_name={student_name}
                   student_id={student_id}
                   messages={messages}
+                  deleteEnabled={enableDeleteStudents}
                 />
               );
             })}
