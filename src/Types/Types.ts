@@ -1,7 +1,5 @@
 // Types created for the Map insider //
 
-import { IconType } from "react-icons/lib";
-
 export type ModeOptions = "delete" | "add" | "none";
 export type LatLngLiteral = google.maps.LatLngLiteral;
 export type DirectionsResult = google.maps.DirectionsResult;
@@ -15,7 +13,12 @@ export type ButtonProps = {
   style?: React.CSSProperties;
 };
 
-export type MapLibraries = "drawing" | "geometry" | "localContext" | "places" | "visualization"
+export type MapLibraries =
+  | "drawing"
+  | "geometry"
+  | "localContext"
+  | "places"
+  | "visualization";
 
 export type Icons =
   | "Mapa"
@@ -29,9 +32,9 @@ export type ClientCardType = {
   client_id?: number;
   client_name: string;
   students?: Student[];
-  editButton ?: boolean;
-  createStudentsButton ?: boolean;
-}
+  editButton?: boolean;
+  createStudentsButton?: boolean;
+};
 
 /**
  * TYPES PREPARED FOR THE MAP COMPONENT
@@ -42,32 +45,34 @@ export type ClientCardType = {
 export type MapParameters = {
   mode?: ModeOptions; // For changing the mode between Add and Remove (For the markers)
   busStops?: BusStop[]; // For showing the Bus stops (in case there are not asigned stops)
-  appendStop ?: Function;
-  removeStop ?: any;
-  routes?: BusRoute;  // For showing the routes and their correspondent BusStop[]
+  appendStop?: Function;
+  removeStop?: any;
+  routes?: BusRoute; // For showing the routes and their correspondent BusStop[]
   mainMarker?: LatLngLiteral; // For selecting a custom center for the map
-  mapTopLefMenu?: boolean;  // For removing the geographic relief and satelite menu (on the top left) 
+  mapTopLefMenu?: boolean; // For removing the geographic relief and satelite menu (on the top left)
   streetViewOption?: boolean; // For the Street View on the right
-  updatedStops?: number
-  setUpdatedStops ?: React.Dispatch<React.SetStateAction<number>>
+  updatedStops?: number;
+  setUpdatedStops?: React.Dispatch<React.SetStateAction<number>>;
 };
 
 /**
  * TYPES PREPARED FOR THE ROUTESPANEL COMPONENT
  */
 
-export type SetMapCenterHook = React.Dispatch<React.SetStateAction<LatLngLiteral>>
+export type SetMapCenterHook = React.Dispatch<
+  React.SetStateAction<LatLngLiteral>
+>;
 
 /**
  * TYPES PREPARED FOR THE DATA BASE
  */
 
 export type BusStop = {
-  stop_id ?: number,
+  stop_id?: number;
   direction?: string;
-  label ?: string;
-  lat : number;
-  lng : number
+  label?: string;
+  lat: number;
+  lng: number;
 };
 
 export type BusRoute = {
@@ -78,25 +83,25 @@ export type BusRoute = {
 };
 
 export type Message = {
-  message_id?: number,
-  message: string,
-  message_type: MessageType,
-  student_id: number,
-  client_id: number,
-}
+  message_id?: number;
+  message?: string;
+  message_type: MessageType;
+  student_id: number;
+  client_id: number;
+};
 
 export type MessageOption = {
-  value: string,
-  label: string
-}
+  value: string;
+  label: string;
+};
 
-export type MessageType = "serious" | "warning" | "confirm" | "info";
+export type MessageType = "serious" | "warning" | "confirm" | "info" | "custom";
 
 export type PredefinedMessage = {
-  value: string
-  type: string,
-  label: string
-}
+  value: string;
+  type: string;
+  label: string;
+};
 
 export type Client = {
   client_id: number;
@@ -105,10 +110,9 @@ export type Client = {
 };
 
 export type Student = {
-  student_id: number,
+  student_id: number;
   student_name: string;
   client_id?: number;
   messages?: Message[];
   route?: BusRoute;
 };
-

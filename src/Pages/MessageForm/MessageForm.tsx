@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./MessageForm.css";
-import { Message, MessageType, PredefinedMessage, Student } from "../../Types/Types";
+import {
+  Message,
+  MessageType,
+  PredefinedMessage,
+  Student,
+} from "../../Types/Types";
 import { getStudentById, sendMessage } from "../../Services/main.services";
 
 import Select, { SingleValue } from "react-select";
@@ -34,6 +39,11 @@ const DEFAULT_MESSAGES: PredefinedMessage[] = [
     type: "confirm",
     label: "Ha llegado al centro correctamente",
   },
+  {
+    value: "custom_msg",
+    type: "custom",
+    label: "Personalizado...",
+  },
 ];
 
 const MessageForm = () => {
@@ -41,7 +51,7 @@ const MessageForm = () => {
   const navigate = useNavigate();
   const [student, setStudent] = useState<Student>();
 
-  const [message, setMessage] = useState<Message>();
+  const [messageToSend, setMessage] = useState<Message>();
 
   const [selectMessage, setSelectMessage] =
     useState<SingleValue<PredefinedMessage>>();
@@ -55,20 +65,26 @@ const MessageForm = () => {
     id && getStudent(parseInt(id));
   }, [id]);
 
+  const setMessageContent = (customMessage?: string) => {
+    console.log(customMessage);
+    setMessage({ ...(messageToSend as Message), message: customMessage });
+  };
+
   const handleInput = ({
     target,
   }: {
     target: EventTarget & HTMLInputElement;
   }) => {
-    console.log(target.value);
+    setMessageContent(target.value.trim() !== "" ? target.value : undefined);
   };
 
   const handleChange = (newValue: SingleValue<PredefinedMessage>) => {
+    console.log(newValue);
     newValue &&
       student &&
       setMessage({
         message_type: newValue.type as MessageType,
-        message: newValue.label,
+        message: newValue.type !== "custom" ? newValue.label : undefined,
         client_id: student?.client_id ? student?.client_id : 0,
         student_id: student?.student_id,
       });
@@ -97,27 +113,38 @@ const MessageForm = () => {
           },
         });
         setSelectMessage(null);
-        navigate(`/clients`)
+        navigate(`/clients`);
       } catch (error) {
         console.log(error);
       }
     };
-    message && message?.message && id && submitMessage(message);
-    if (message?.message === undefined) {
-        Store.addNotification({
-            title: "AVISO",
-            message:
-              'Debe seleccionar el mensaje que quiere enviar al alumno.',
-            type: "warning",
-            insert: "top",
-            container: "top-center",
-            animationIn: ["animate__animated", "animate__fadeIn"],
-            animationOut: ["animate__animated", "animate__fadeOut"],
-            dismiss: {
-              duration: 2500,
-              onScreen: true,
-            },
-          });
+    messageToSend &&
+      messageToSend?.message !== undefined &&
+      id &&
+      submitMessage(messageToSend);
+    console.log(messageToSend);
+    if (
+      messageToSend?.message_type === undefined ||
+      (messageToSend.message_type === "custom" &&
+        messageToSend.message === undefined)
+    ) {
+      Store.addNotification({
+        title: "AVISO",
+        message: `Debe ${
+          messageToSend && messageToSend.message_type === "custom"
+            ? " escribir el mensaje personalizado "
+            : " seleccionar el mensaje "
+        }  que quiere enviar al alumno.`,
+        type: "warning",
+        insert: "top",
+        container: "top-center",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 2500,
+          onScreen: true,
+        },
+      });
     }
   };
 
@@ -127,7 +154,8 @@ const MessageForm = () => {
         <div className="messageRow">
           <span>ID del estudiante: </span>
           <input
-            disabled={id ? true : false}
+            disabled={true}
+            name="student_id"
             value={
               student
                 ? student.student_id
@@ -140,6 +168,7 @@ const MessageForm = () => {
           <span>Nombre del estudiante: </span>
           <input
             disabled
+            name="student_name"
             value={
               student
                 ? student.student_name
@@ -157,9 +186,18 @@ const MessageForm = () => {
             options={DEFAULT_MESSAGES}
             name={selectMessage?.value}
           />
+          {messageToSend?.message_type === "custom" && <input onChange={handleInput} maxLength={100}/>}
         </div>
         <div className={`messageRow`}>
-          <button className={`${message?.message === undefined && 'disabled'}`}>Enviar</button>
+          <button
+            className={`${
+              selectMessage?.type === "custom" &&
+              messageToSend?.message === undefined &&
+              "disabled"
+            }`}
+          >
+            Enviar
+          </button>
         </div>
       </form>
     </div>

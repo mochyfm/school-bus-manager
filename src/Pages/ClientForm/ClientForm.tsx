@@ -57,7 +57,7 @@ const ClientForm = () => {
             onScreen: true,
           },
         });
-        setTimeout(() => navigate('/clients'), 3000);
+        navigate('/clients')
       } catch (err) {
         Store.addNotification({
           title: "ERROR",
@@ -136,6 +136,7 @@ const ClientForm = () => {
           </button>
         </form>
       </div>
+      <h1 className="infoHelp">{`${id ? 'Editar el nombre' : 'Crear un nuevo cliente'}`}: </h1>
     </div>
   );
 };

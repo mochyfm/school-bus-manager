@@ -1,5 +1,5 @@
 .sutdentProfile {
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -7,15 +7,33 @@
 }
 
 .studentNameTitle {
-    align-items: center;
-    color: black;
+    justify-items: center;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
     display: flex;
+    flex-direction: column;
     margin: 20px;
+    padding: 20px;
+}
+
+.studentNameTitle > span {
+    color: var(--secondary-color);
+    font-size: 20px;
+}
+
+.studentNameTitle > span span {
+    font-size: large;
+    color: #000;
+}
+
+.clientNameTitle {
+    margin: 20px;
+    margin-top: 0px;
 }
 
 .routeSection {
-    background-color: var(--secondary-color);
-    height: 320px;
+    background-color: var(--primary-color);
+    height: 20%;
     width: 100%;
 }
 

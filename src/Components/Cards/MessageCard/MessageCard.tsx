@@ -15,7 +15,9 @@ const MessageCard = (messages: Message) => {
         return "Nota Leve";
       case "info":
         return "Mensaje Informativo"
-    }
+      case "custom":
+        return "Mensaje Personalizado";    
+      }
   };
 
   return (

@@ -4,7 +4,7 @@
     color: #FFF;
     display: flex;
     flex-direction: column;
-    height: 245px;
+    height: 200px;
     margin: 20px;
     padding: 20px;
     width: 200px;
@@ -32,6 +32,12 @@
 .infoBody {
     background: linear-gradient(to bottom right, #0915b3 30%, rgb(20, 86, 185), rgb(49, 162, 255));
 }
+
+.customBody {
+    background: linear-gradient(to bottom right, #d400ff 30%, rgb(247, 172, 255), rgb(251, 219, 255));
+    text-align: center;
+}
+
 
 .messageBody {
     display: flex;
