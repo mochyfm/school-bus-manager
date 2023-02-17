@@ -1,0 +1,7 @@
+.emptyBlockBody {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    height: 90vh;
+}

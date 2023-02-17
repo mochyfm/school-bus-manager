@@ -9,11 +9,16 @@ const ClientCard = (props: ClientCardType) => {
     client_name,
     students,
     editButton = true,
+    deleteButton = false,
     createStudentsButton = true,
     enableDeleteStudents = false,
     deleteStudentFunction,
+    deleteClientFunction,
   } = props;
 
+const handleDelete = () => {
+  deleteClientFunction && deleteClientFunction(client_id, client_name)
+}
 
   return (
     <div className="clientCard">
@@ -67,6 +72,9 @@ const ClientCard = (props: ClientCardType) => {
             Editar Usuario
           </Link>
         )}
+        {deleteButton && <button className="link client button" onClick={handleDelete}>
+          Borrar Cliente
+        </button>}
         <Link to={`/newStudent/${client_id}`} className="link client button">
           Añadir Estudiante
         </Link>

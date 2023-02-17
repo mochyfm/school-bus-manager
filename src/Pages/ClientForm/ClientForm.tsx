@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
   createNewClient,
   deleteStudentById,
+  editExistingClient,
   getClientById,
 } from "../../Services/main.services";
 import ClientCard from "../../Components/Cards/ClientCard/ClientCard";
@@ -12,6 +13,7 @@ import { Store } from "react-notifications-component";
 import { confirmAlert } from "react-confirm-alert";
 
 const ClientForm = () => {
+
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -31,6 +33,21 @@ const ClientForm = () => {
   });
   const [oldClientName, setOldClientName] = useState<string>("");
 
+    
+  const handleRename = (client: Client) => {
+
+    const editClientById = async () => {
+      await editExistingClient(client);
+      
+    };
+
+    if (client) {
+      editClientById();
+      setClient(client)
+    }
+    
+  }
+
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { target } = e;
     setClient({
@@ -49,10 +66,14 @@ const ClientForm = () => {
         return (
           <div
             className="custom-ui"
-            style={{ display: "flex", flexDirection: "column", alignItems: 'center'}}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
           >
             <h1>Borrar a "{studentName}"</h1>
-            <h3 style={{ marginBottom: 10 , fontWeight: 'normal'}}>
+            <h3 style={{ marginBottom: 10, fontWeight: "normal" }}>
               ¿Quieres borrar a este estudiante?
             </h3>
             <div
@@ -74,6 +95,8 @@ const ClientForm = () => {
                         return student_id !== studentId;
                       }),
                   });
+                  
+                  onClose();
                 }}
               >
                 Confirmar
@@ -82,7 +105,7 @@ const ClientForm = () => {
                 style={{ paddingRight: 10, paddingLeft: 10, marginLeft: 10 }}
                 onClick={onClose}
               >
-                No
+                Cancelar
               </button>
             </div>
           </div>
@@ -134,29 +157,11 @@ const ClientForm = () => {
       }
     };
 
-    const editClient = (client: Client) => {
+    const editClient = () => {
+
       try {
-        // await editExistingClient(client);
-        console.log(client);
-        Store.addNotification({
-          title: "¡Hecho!",
-          message:
-            'Se ha modificado el nombre del cliente "' +
-            oldClientName +
-            '" ahora se llama "' +
-            client.client_name +
-            '"',
-          type: "success",
-          insert: "top",
-          container: "top-center",
-          animationIn: ["animate__animated", "animate__fadeIn"],
-          animationOut: ["animate__animated", "animate__fadeOut"],
-          dismiss: {
-            duration: 3000,
-            onScreen: true,
-          },
-        });
-        setTimeout(() => navigate("/clients"), 3000);
+        handleRename(client); 
+        window.location.reload();
       } catch (err) {
         console.log(err);
       }
@@ -166,8 +171,23 @@ const ClientForm = () => {
       client.client_name !== oldClientName &&
       client.client_name.trim().length !== 0
     ) {
-      id && editClient(client);
+      id && editClient();
       !id && createClient(client);
+    } else {
+      Store.addNotification({
+        title: "ERROR",
+        message:
+          `Debes escribir un nombre${id ? ' nuevo.' : '.'}`,
+        type: 'danger',
+        insert: "top",
+        container: "top-center",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 3000,
+          onScreen: true,
+        },
+      });
     }
   };
 
@@ -196,6 +216,7 @@ const ClientForm = () => {
             className="formClientNameInput"
             placeholder="Nombre del cliente"
             onChange={handleInput}
+            maxLength={30}
             name="client_name"
             value={client.client_name}
           />

@@ -34,6 +34,10 @@
     justify-content: center;
 }
 
+.mapSpliter {
+    background-color: var(--primary-color);
+    height: 5vh;
+}
 
 .messgListTitle {
     border-bottom: 1px solid #C2C2C2;

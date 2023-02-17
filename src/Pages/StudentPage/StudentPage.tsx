@@ -42,13 +42,6 @@ const StudentPage = ({ isLoaded }: { isLoaded: boolean }) => {
           </Link>
         </span>
       </h1>
-      <div className="routeSection">
-        {isLoaded ? (
-          <Map mapTopLefMenu={false} streetViewOption={false} />
-        ) : (
-          <Loading />
-        )}
-      </div>
       {student && student.messages?.length !== 0 && (
         <h1 className="messgListTitle">Lista de mensajes</h1>
       )}
@@ -56,7 +49,14 @@ const StudentPage = ({ isLoaded }: { isLoaded: boolean }) => {
         <div className="studentMessageList">
           {student.messages.map(
             (
-              { client_id, student_id, message_id, message, message_type, sended_at },
+              {
+                client_id,
+                student_id,
+                message_id,
+                message,
+                message_type,
+                sended_at,
+              },
               index
             ) => {
               return (
@@ -74,6 +74,16 @@ const StudentPage = ({ isLoaded }: { isLoaded: boolean }) => {
           )}
         </div>
       )}
+      {student && student.messages && student.messages?.length !== 0 && (
+        <div className="mapSpliter" />
+      )}
+      <div className="routeSection">
+        {isLoaded ? (
+          <Map mapTopLefMenu={false} streetViewOption={false} />
+        ) : (
+          <Loading />
+        )}
+      </div>
     </div>
   );
 };

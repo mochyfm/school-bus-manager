@@ -17,6 +17,14 @@ export const createNewClient = async (client : Client) : Promise<void> => {
   await axios.post(`${API_MAIN_URL}/client`, {...client});
 }
 
+export const editExistingClient = async (client : Client) : Promise<void> => {
+  await axios.put(`${API_MAIN_URL}/client?id=${client.client_id}&newName=${client.client_name}`);
+}
+
+export const deleteClientById = async (client_id : number) : Promise<void> => {
+  await axios.delete(`${API_MAIN_URL}/client?id=${client_id}`);
+}
+
 export const getClientById = async (client_id : number) : Promise<Client> => {
   return await axios.get(`${API_MAIN_URL}/client?id=${client_id}`)
   .then((response) => {

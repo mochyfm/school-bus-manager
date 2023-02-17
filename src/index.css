@@ -61,6 +61,7 @@ body::-webkit-scrollbar-thumb:hover {
 
 .link {
     color: var(--primary-color);
+    cursor: pointer;
     font-size: var(--main-font-size);
     text-decoration: none;
 }

@@ -33,9 +33,11 @@ export type ClientCardType = {
   client_name: string;
   students?: Student[];
   editButton?: boolean;
+  deleteButton ?: boolean;
   createStudentsButton?: boolean;
   enableDeleteStudents?: boolean;
   deleteStudentFunction ?: Function;
+  deleteClientFunction ?: Function;
 };
 
 /**
