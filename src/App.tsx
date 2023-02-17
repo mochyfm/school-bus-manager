@@ -11,6 +11,8 @@ import GuidePage from "./Pages/GuidePage";
 import { useLoadScript } from "@react-google-maps/api";
 import { mapLibraries } from "./Services/main.services";
 import StudentPage from "./Pages/StudentPage/StudentPage";
+import StudentForm from "./Pages/StudentForm/StudentForm";
+import MissingPage from "./Pages/MissingPage/MissingPage";
 
 function App() {
 
@@ -29,7 +31,7 @@ function App() {
           <Route path="/newClient" element={<ClientForm/>} />
           <Route path="/editClient/:id" element={<ClientForm/>} />
           <Route path="/studentInfo/:id" element={<StudentPage isLoaded={isLoaded}/>} />     
-          <Route path="/newStudent/:id" element={<p>CREAR ESTUDIANTE</p>} />     
+          <Route path="/newStudent/:id" element={<StudentForm />} />  
           <Route path="/message/:id" element={<MessageForm />} />    
           <Route path="/routes" element={<RoutesPage isLoaded={isLoaded}/>} />
           <Route path="/routes/:id" element={<RoutesPage isLoaded={isLoaded}/>} />
@@ -37,7 +39,7 @@ function App() {
           <Route path="/help" element={<GuidePage />} />
           <Route path="/admin" element={<p>RetroAlimentación</p>} />
         </Route>
-        <Route path="*" element={<p>NO EXISTE ESTA PÁGINA</p>} />
+        <Route path="*" element={<MissingPage />} />
       </Routes>
     </BrowserRouter>
   );

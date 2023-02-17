@@ -11,7 +11,7 @@
 
 .client.cardTitle {
     align-items: center;
-    align-self: flex-start;
+    justify-content: space-between;
     border-radius: 15px 15px 0px 0px;
     color: var(--primary-color);
     display: flex;
@@ -19,6 +19,10 @@
     flex-direction: row;
     font-weight: bold;
     padding: 1.2rem 4rem;
+}
+
+.clientName {
+    font-size: 32px
 }
 
 .clientInfoTag {

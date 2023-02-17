@@ -34,7 +34,10 @@ const StudentPage = ({ isLoaded }: { isLoaded: boolean }) => {
         Nombre del estudiante: {student?.student_name}
         <span>
           <span>(Padre / Madre / Tutor) asociado:</span>{" "}
-          <Link to={`/editClient/${studentClient?.client_id}`}>
+          <Link
+            className="darkLink"
+            to={`/editClient/${studentClient?.client_id}`}
+          >
             {studentClient?.client_name}
           </Link>
         </span>
@@ -46,13 +49,14 @@ const StudentPage = ({ isLoaded }: { isLoaded: boolean }) => {
           <Loading />
         )}
       </div>
-      {student && student.messages?.length !== 0 && <h1 className="messgListTitle">Lista de mensajes</h1>}
-      <div className="studentMessageList">
-        {student &&
-          student.messages &&
-          student.messages.map(
+      {student && student.messages?.length !== 0 && (
+        <h1 className="messgListTitle">Lista de mensajes</h1>
+      )}
+      {student && student.messages && student.messages?.length !== 0 && (
+        <div className="studentMessageList">
+          {student.messages.map(
             (
-              { client_id, student_id, message_id, message, message_type },
+              { client_id, student_id, message_id, message, message_type, sended_at },
               index
             ) => {
               return (
@@ -63,11 +67,13 @@ const StudentPage = ({ isLoaded }: { isLoaded: boolean }) => {
                   message_id={message_id}
                   message={message}
                   message_type={message_type}
+                  sended_at={sended_at}
                 />
               );
             }
           )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

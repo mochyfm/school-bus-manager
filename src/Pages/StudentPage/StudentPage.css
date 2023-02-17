@@ -12,7 +12,6 @@
     color: var(--secondary-color);
     display: flex;
     flex-direction: column;
-    margin-bottom: 5px;
     padding: 20px;
 }
 
@@ -28,26 +27,29 @@
 
 .routeSection {
     background-color: var(--primary-color);
-    margin-top: 0px;
-    margin-bottom: 5px;
-    height: 75vh;
+    height: 84vh;
 }
 
 .studentInfoData {
     justify-content: center;
 }
 
+
+.messgListTitle {
+    border-bottom: 1px solid #C2C2C2;
+    background-color: var(--primary-color);
+    color: #FFF;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    width: 100%;
+}
+
 .studentMessageList {   
-    border: 0.5px solid var(--border-color);
     border-radius: 20px;
     margin: 20px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
-}
-
-.messgListTitle {
-    text-align: center;
-    margin-top: 10px;
 }

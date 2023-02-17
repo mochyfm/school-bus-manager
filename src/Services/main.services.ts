@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BusStop, Client, LatLngLiteral, MapLibraries, Message, Student } from "../Types/Types";
+import { BusStop, Client, LatLngLiteral, MapLibraries, Message, Student, StudentSubmit } from "../Types/Types";
 
 const API_MAIN_URL = 'http://localhost:7500/tslc'
 
@@ -35,6 +35,14 @@ export const getStudentById = async (student_id : number) : Promise<Student> => 
   }).catch((error) => {
     console.log(error);
   });
+}
+
+export const createNewStudent = async (student : StudentSubmit) : Promise<void> => {
+  await axios.post(`${API_MAIN_URL}/student`, student);
+}
+
+export const deleteStudentById = async (studentId : number) : Promise<void> => {
+  await axios.delete(`${API_MAIN_URL}/student?id=${studentId}`);
 }
 
 export const sendMessage = async (message : Message) : Promise<void> => {

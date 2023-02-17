@@ -2,9 +2,14 @@ import { useEffect, useState } from "react";
 import { Client } from "../../Types/Types";
 import "./ClientForm.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { createNewClient, getClientById } from "../../Services/main.services";
+import {
+  createNewClient,
+  deleteStudentById,
+  getClientById,
+} from "../../Services/main.services";
 import ClientCard from "../../Components/Cards/ClientCard/ClientCard";
 import { Store } from "react-notifications-component";
+import { confirmAlert } from "react-confirm-alert";
 
 const ClientForm = () => {
   const { id } = useParams();
@@ -34,6 +39,58 @@ const ClientForm = () => {
     });
   };
 
+  const deleteStudent = (studentId: number, studentName: string) => {
+    const removeStudent = async (student_id: number) => {
+      await deleteStudentById(student_id);
+    };
+
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div
+            className="custom-ui"
+            style={{ display: "flex", flexDirection: "column", alignItems: 'center'}}
+          >
+            <h1>Borrar a "{studentName}"</h1>
+            <h3 style={{ marginBottom: 10 , fontWeight: 'normal'}}>
+              ¿Quieres borrar a este estudiante?
+            </h3>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-evenly",
+              }}
+            >
+              <button
+                style={{ paddingRight: 10, paddingLeft: 10 }}
+                onClick={() => {
+                  removeStudent(studentId);
+                  setClient({
+                    ...client,
+                    students:
+                      client.students &&
+                      client.students.filter(({ student_id }) => {
+                        return student_id !== studentId;
+                      }),
+                  });
+                }}
+              >
+                Confirmar
+              </button>
+              <button
+                style={{ paddingRight: 10, paddingLeft: 10, marginLeft: 10 }}
+                onClick={onClose}
+              >
+                No
+              </button>
+            </div>
+          </div>
+        );
+      },
+    });
+  };
+
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -46,7 +103,7 @@ const ClientForm = () => {
         });
         Store.addNotification({
           title: "¡Hecho!",
-          message: "Creado al cliente \"" + client.client_name + "\"",
+          message: 'Creado al cliente "' + client.client_name + '"',
           type: "success",
           insert: "top",
           container: "top-center",
@@ -57,11 +114,12 @@ const ClientForm = () => {
             onScreen: true,
           },
         });
-        navigate('/clients')
+        navigate("/clients");
       } catch (err) {
         Store.addNotification({
           title: "ERROR",
-          message: "No se ha podido crear al cliente \"" + client.client_name + "\"",
+          message:
+            'No se ha podido crear al cliente "' + client.client_name + '"',
           type: "danger",
           insert: "top",
           container: "top-center",
@@ -82,7 +140,12 @@ const ClientForm = () => {
         console.log(client);
         Store.addNotification({
           title: "¡Hecho!",
-          message: "Se ha modificado el nombre del cliente \"" + oldClientName + "\" ahora se llama \"" + client.client_name + "\"",
+          message:
+            'Se ha modificado el nombre del cliente "' +
+            oldClientName +
+            '" ahora se llama "' +
+            client.client_name +
+            '"',
           type: "success",
           insert: "top",
           container: "top-center",
@@ -93,7 +156,7 @@ const ClientForm = () => {
             onScreen: true,
           },
         });
-        setTimeout(() => navigate('/clients'), 3000);
+        setTimeout(() => navigate("/clients"), 3000);
       } catch (err) {
         console.log(err);
       }
@@ -119,25 +182,31 @@ const ClientForm = () => {
             editButton={false}
             createStudentsButton={true}
             enableDeleteStudents={true}
+            deleteStudentFunction={deleteStudent}
           />
         </div>
       )}
       <div className={`formClient`}>
-        <form className={`formEdit ${!id && "formCreateClient"}`} onSubmit={handleSubmit}>
+        <form
+          className={`formEdit ${!id && "formCreateClient"}`}
+          onSubmit={handleSubmit}
+        >
           <input
             required
-            className='formClientNameInput'
+            className="formClientNameInput"
             placeholder="Nombre del cliente"
             onChange={handleInput}
             name="client_name"
             value={client.client_name}
           />
-          <button type="submit" className='formButton'>
+          <button type="submit" className="formButton">
             {id ? "Editar" : "Crear"} Cliente
           </button>
         </form>
       </div>
-      <h1 className="infoHelp">{`${id ? 'Editar el nombre' : 'Crear un nuevo cliente'}`}: </h1>
+      <h1 className="infoHelp">
+        {`${id ? "Editar el nombre" : "Crear un nuevo cliente"}`}:{" "}
+      </h1>
     </div>
   );
 };

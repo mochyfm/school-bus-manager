@@ -3,7 +3,7 @@ import "./MessageCard.css";
 
 const MessageCard = (messages: Message) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { message_id, message, message_type, student_id, client_id } = messages;
+  const { message, message_type, sended_at } = messages;
 
   const getStringedType = (type: MessageType): string => {
     switch (type) {
@@ -27,6 +27,7 @@ const MessageCard = (messages: Message) => {
         <p>{message}</p>
       </div>
       {message_type === 'info' && <div></div>}
+      <div>{sended_at ? sended_at : ''}</div>
     </div>
   );
 };

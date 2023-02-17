@@ -1,0 +1,38 @@
+.newStudentForm {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 90vh;
+    width: 100%;
+}
+
+.newStudentForm > form {
+    display: flex;
+    flex-direction: column;
+}
+
+.formStudentNameInput {
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 2rem;
+    padding: 10px;
+}
+
+.formStudentNameButton {
+    align-self: center;
+    border: none;
+    border-radius: 20px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    font-size: 2.5rem;
+    padding: 5px 10px;
+    margin: 30px;
+}
+
+.formStudentNameButton:hover {
+    animation: Light 0.2s;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    cursor: pointer;
+}

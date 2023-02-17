@@ -17,8 +17,15 @@
     width: 80%;
 }
 
+.messageBody {
+    text-align: center; 
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
 .warningBody {
-    background: linear-gradient(to bottom right,  orange 35%, rgb(252, 227, 0), rgb(255, 252, 77) );
+    background: linear-gradient(to bottom,  rgb(218, 141, 0) 50%, rgb(255, 196, 86),rgb(202, 164, 92) );
 }
 
 .seriousBody {
@@ -26,21 +33,13 @@
 }
 
 .confirmBody {
-    background: linear-gradient(to bottom right, #148514 30%, rgb(35, 185, 48), rgb(49, 255, 49));
+    background: linear-gradient(to bottom, #148514 50%, rgb(35, 185, 48), rgb(49, 255, 49));
 }
 
 .infoBody {
-    background: linear-gradient(to bottom right, #0915b3 30%, rgb(20, 86, 185), rgb(49, 162, 255));
+    background: linear-gradient(to bottom, #0915b3 50%, rgb(20, 86, 185), rgb(49, 162, 255));
 }
 
 .customBody {
-    background: linear-gradient(to bottom right, #d400ff 30%, rgb(247, 172, 255), rgb(251, 219, 255));
-    text-align: center;
-}
-
-
-.messageBody {
-    display: flex;
-    align-items: center;
-    height: 100%;
+    background: linear-gradient(to bottom, #d400ff 60%, rgb(236, 65, 255), rgb(240, 124, 255));
 }

@@ -75,3 +75,13 @@
     color: #FFF;
     cursor: not-allowed;
 }
+
+.customMessage {
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color)
+}
+
+.customMessage:focus {
+    animation: Light_Input 0.3s;
+    border: 1px solid var(--primary-color)
+}

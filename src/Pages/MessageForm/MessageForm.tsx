@@ -20,10 +20,10 @@ const DEFAULT_MESSAGES: PredefinedMessage[] = [
   },
   {
     value: "msg_2",
-    type: "serious",
+    type: "warning",
     label: "No ha mantenido una actitud correcta en el vehículo",
   },
-  { value: "msg_3", type: "serious", label: "Ha llegado tarde" },
+  { value: "msg_3", type: "warning", label: "Ha llegado tarde" },
   {
     value: "msg_4",
     type: "serious",
@@ -58,8 +58,8 @@ const MessageForm = () => {
 
   useEffect(() => {
     const getStudent = async (studentId: number) => {
-      const student = await getStudentById(studentId);
-      student && setStudent(student);
+      const studentData = await getStudentById(studentId);
+      studentData && setStudent(studentData);
     };
 
     id && getStudent(parseInt(id));
@@ -186,7 +186,13 @@ const MessageForm = () => {
             options={DEFAULT_MESSAGES}
             name={selectMessage?.value}
           />
-          {messageToSend?.message_type === "custom" && <input onChange={handleInput} maxLength={100}/>}
+          {messageToSend?.message_type === "custom" && (
+            <input
+              className="customMessage"
+              onChange={handleInput}
+              maxLength={100}
+            />
+          )}
         </div>
         <div className={`messageRow`}>
           <button

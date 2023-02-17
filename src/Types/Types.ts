@@ -35,6 +35,7 @@ export type ClientCardType = {
   editButton?: boolean;
   createStudentsButton?: boolean;
   enableDeleteStudents?: boolean;
+  deleteStudentFunction ?: Function;
 };
 
 /**
@@ -90,6 +91,7 @@ export type Message = {
   message_type: MessageType;
   student_id: number;
   client_id: number;
+  sended_at?: string;
 };
 
 export type MessageOption = {
@@ -116,8 +118,13 @@ export type Student = {
   student_name: string;
   client_id?: number;
   messages?: Message[];
-  route?: BusRoute;
+  route?: BusRoute | BusRoute[];
 };
+
+export type StudentSubmit = {
+  client_id: number;
+  student_name: string;
+}
 
 export type StudentCard = {
   student_id: number;
@@ -126,5 +133,6 @@ export type StudentCard = {
   messages?: Message[];
   route?: BusRoute;
   deleteEnabled?: boolean;
+  deleteFunction ?: Function;
 };
 
