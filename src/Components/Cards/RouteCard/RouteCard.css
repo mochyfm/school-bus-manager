@@ -1,14 +1,26 @@
 .routeCardBody {
+    border: 1px solid red;
+    border-radius: 20px 20px 0px 0px;
     display: flex;
     flex-direction: column;
     margin: 30px 0px;
-    padding: 30px;
     width: 100%;
 }
 
+.routeIcon {
+    font-size: 80px;
+    
+}
+
 .routeCardBody h1 {
+    border-radius: 20px 20px 0px 0px;
     background-color: var(--primary-color);
-    border-radius: 20px 0px;
-    padding: 20px;
+    color: var(--secondary-color);
+    padding: 30px;
     margin-bottom: 20px;
+}
+
+.routeCardStopsBody {
+    padding: 50px;
+    padding-top: 0px;
 }

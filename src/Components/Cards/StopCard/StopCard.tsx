@@ -20,9 +20,9 @@ const StopCard = (props: StopCardProperties) => {
 
   return (
     <div>
-      <HiOutlineArrowSmDown className="routeIcon" />
+      <HiOutlineArrowSmDown className="stopIcon" />
       <div className="stopCardBody">
-        <GiBusStop className="routeIcon" />
+        <GiBusStop className="stopIcon" />
         <div>
           <div className="stopCardInfo">
             <span className="stopCardInfoTitle">Dirección:</span> {direction?.substring(0, 65)}

@@ -13,32 +13,33 @@ const RouteCard = (props: RouteCardProperties) => {
   return (
     <div className="routeCardBody">
       <h1>
-        Ruta: {route_id}
-        {label}{" "}
+        Ruta: {label}{" "}
         {route_type === "one_way_trip"
           ? " ( De Casa al Colegio )"
           : " ( Del Colegio a Casa )"}
       </h1>
-      <div>
-        {stops &&
-          stops.map(({ lat, lng, stop_id }, index) => {
-            return (
-              <StopCard
-                key={index}
-                latLng={{ lat: lat, lng: lng }}
-                label={label}
-                stop_id={stop_id}
-                stopNumber={index + 1}
-              />
-            );
-          })}
-        <HiOutlineArrowSmDown className="routeIcon" />
+      <div className="routeCardStopsBody">
+        <div>
+          {stops &&
+            stops.map(({ lat, lng, stop_id }, index) => {
+              return (
+                <StopCard
+                  key={index}
+                  latLng={{ lat: lat, lng: lng }}
+                  label={label}
+                  stop_id={stop_id}
+                  stopNumber={index + 1}
+                />
+              );
+            })}
+          <HiOutlineArrowSmDown className="routeIcon" />
+        </div>
+        {route_type === "one_way_trip" ? (
+          <FaSchool className="routeIcon" />
+        ) : (
+          <MdOutlineHomeWork className="routeIcon" />
+        )}
       </div>
-      {route_type === "one_way_trip" ? (
-        <FaSchool className="routeIcon" />
-      ) : (
-        <MdOutlineHomeWork className="routeIcon" />
-      )}
     </div>
   );
 };
