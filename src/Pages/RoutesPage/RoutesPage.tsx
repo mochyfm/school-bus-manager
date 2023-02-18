@@ -1,72 +1,69 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useParams } from "react-router-dom";
-import { useEffect } from 'react';
+import { useEffect } from "react";
 import Loading from "../../Components/Loading";
 import Map from "../../Components/Map";
 import { useState } from "react";
-import { BusRoute, BusStop } from "../../Types/Types";
+import { BusRoute } from "../../Types/Types";
 import "./RoutesPage.css";
-import RouteCard from "../../Components/Cards/RouteCard";
-import RoutesPanel from "../../Components/RoutesPanel";
-import { AiOutlineDelete } from "react-icons/ai";
-import { CgAdd } from "react-icons/cg";
+import RoutesPanel from "../../Components/RoutesPanel/RoutesPanel";
+import EmptyList from "../../Components/EmptyList/EmptyList";
+
+import { GoDiffAdded } from "react-icons/go";
+import { CgPlayListRemove } from "react-icons/cg";
+import { getAllRoutes } from "../../Services/main.services";
 
 const RoutesPage = (props: { isLoaded: Boolean }) => {
-  const { isLoaded } = props;
   const { id } = useParams();
+  const { isLoaded } = props;
 
-  const [routeToDisplay, setRouteToDisplay] = useState<BusRoute>();
+  const [routesToDisplay, setRoutesToDisplay] = useState<BusRoute[]>();
   const [deleteMode, setDeleteMode] = useState<boolean>(false);
 
+  useEffect(() => {
+    const fetchRoutes = async () => {
+      const fetchedRoutes = await getAllRoutes();
+      setRoutesToDisplay(fetchedRoutes);
+    };
+
+    fetchRoutes();
+  }, []);
+  console.log(routesToDisplay);
   return (
     <div className="routesContainer">
       <div className="routesBlock">
-        <div className="routesInfoDisplay">
-          {/* {id ? (
-            <>
-              <RouteCard
-                routeInfo={}
-                showRoute={setRouteToDisplay}
-                onDeleteClick={() => console.log("Borrar")}
-              />
-            </>
-          ) : (
-            <>
-              <RoutesPanel
-                routesList={}
-                showDelete={deleteMode}
-                showRoute={setRouteToDisplay}
-                onDelete={}
-              />
-            </>
-          )} */}
-        </div>
-        {!id && (
-          <div className="routesButtonPanel">
-            <button className="routesButton">
-              <CgAdd />
-            </button>
-            <button
-              className="routesButton"
-              onClick={() => setDeleteMode(!deleteMode)}
-            >
-              <AiOutlineDelete />
-            </button>
-          </div>
-        )}
-      </div>
-      <div className="mapBlock">
-        {isLoaded ? (
-          <Map
-            busStops={routeToDisplay && routeToDisplay.stops}
-            mapTopLefMenu={false}
-            streetViewOption={false}
-            mode={deleteMode ? `delete` : `none`}
-          />
+        {routesToDisplay ? (
+          <RoutesPanel routes={routesToDisplay} />
         ) : (
-          <Loading />
+          <EmptyList
+            title="¡Vaya que despiste!"
+            text="Parece que no hay rutas creadas todavía, empieza por añadir algunas con los paneles de abajo"
+          />
         )}
+        <div className="routesButtonPanel">
+          <button className="routePageButton">
+            <GoDiffAdded />
+          </button>
+          {routesToDisplay && (
+            <button className="routePageButton">
+              <CgPlayListRemove />
+            </button>
+          )}
+        </div>
       </div>
+      {id && (
+        <div className="mapBlock">
+          {isLoaded ? (
+            <Map
+              mapTopLefMenu={false}
+              streetViewOption={false}
+              mode={deleteMode ? `delete` : `none`}
+            />
+          ) : (
+            <Loading />
+          )}
+        </div>
+      )}
     </div>
   );
 };

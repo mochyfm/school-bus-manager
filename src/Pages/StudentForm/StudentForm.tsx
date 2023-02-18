@@ -41,7 +41,7 @@ const StudentForm = () => {
             onScreen: true,
           },
         });
-        navigate(`/editClient/${clientId}`);
+        navigate(`/clients`);
       } catch (error) {
         console.log(error);
       }

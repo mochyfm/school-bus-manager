@@ -10,7 +10,7 @@ const HomePage = () => {
         <OptionButton text="Clientes" icon="Usuarios" to="./clients"/>
         <OptionButton text="Rutas" icon="Rutas" to="./routes"/>
         <OptionButton text="Guía" icon="Guía" to="./help"/>
-        <OptionButton text="Admin" icon="Ajustes" to="./admin"/>
+        <OptionButton text="Información" icon="Ajustes" to="./admin"/>
       </div>
     </div>
   );

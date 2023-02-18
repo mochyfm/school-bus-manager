@@ -1,42 +1,25 @@
-import { BusRoute } from "../../Types/Types";
-import { useEffect, useState } from "react";
-import RouteCard from "../Cards/RouteCard";
+import React from "react";
 import "./RoutesPanel.css";
+import { RoutePanelOptions } from "../../Types/Types";
+import RouteCard from "../Cards/RouteCard/RouteCard";
 
-const RoutesPanel = ({
-  routesList,
-  showDelete,
-  onDelete,
-  showRoute,
-}: {
-  routesList: BusRoute[];
-  onDelete: Function;
-  showRoute: Function;
-  showDelete: boolean;
-}) => {
-  const [listOfRoutes, setListOfRoutes] = useState<BusRoute[]>([]);
-
-  useEffect(() => {
-    routesList && setListOfRoutes(routesList);
-  }, [routesList]);
+const RoutesPanel = (props: RoutePanelOptions) => {
+  const { routes } = props;
 
   return (
-    <div className="routesPanelBlock">
-      <div className="routesPanelList">
-        {listOfRoutes &&
-          listOfRoutes.map((element) => {
-            console.log(element);
-            return (
-              <RouteCard
-                key={element.id}
-                routeInfo={element}
-                onDeleteClick={onDelete}
-                showRoute={showRoute}
-                showDelete={showDelete}
-              />
-            );
-          })}
-      </div>
+    <div className="routesPanel">
+      {routes &&
+        routes.map(({ route_id, label, stops, route_type }, index) => {
+          return (
+            <RouteCard
+              key={index}
+              route_id={route_id}
+              route_type={route_type}
+              stops={stops}
+              label={label}
+            />
+          );
+        })}
     </div>
   );
 };

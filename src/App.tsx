@@ -35,7 +35,7 @@ function App() {
           <Route path="/message/:id" element={<MessageForm />} />    
           <Route path="/routes" element={<RoutesPage isLoaded={isLoaded}/>} />
           <Route path="/routes/:id" element={<RoutesPage isLoaded={isLoaded}/>} />
-          <Route path="/routes/newRoute" element={<RouteForm isLoaded={isLoaded}/>} />
+          <Route path="/routes/newRoute" element={<RouteForm isLoaded={isLoaded} />} />
           <Route path="/help" element={<GuidePage />} />
           <Route path="/admin" element={<p>RetroAlimentación</p>} />
         </Route>

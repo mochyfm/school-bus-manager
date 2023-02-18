@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BusStop, Client, LatLngLiteral, MapLibraries, Message, Student, StudentSubmit } from "../Types/Types";
+import { BusRoute, BusStop, Client, LatLngLiteral, MapLibraries, Message, Student, StudentSubmit } from "../Types/Types";
 
 const API_MAIN_URL = 'http://localhost:7500/tslc'
 
@@ -57,6 +57,16 @@ export const sendMessage = async (message : Message) : Promise<void> => {
   await axios.post(`${API_MAIN_URL}/msg`, {...message});
 }
 
+export const getAllRoutes = async () : Promise<BusRoute[]> => {
+return await axios.get(`${API_MAIN_URL}/routes`)
+    .then((response) => {
+      if (response.data.error_message) console.log(response.data.error_message)
+      else return response.data
+    }).catch((error) => {
+      console.log(error);
+    });
+}
+
 export const getAllStops = async () : Promise<BusStop[]> =>  {
     return await axios.get(`${API_MAIN_URL}/stops`)
     .then((response) => {
@@ -77,15 +87,13 @@ export const sendStops = async (stopsList : BusStop[]) : Promise<void> => {
 }
 
 export const getAddressFrom = async (position: LatLngLiteral) => {
-  console.log(position);
-    return await fetch(
+    return await axios.get(
       `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.lat},${position.lng}&key=AIzaSyDDv8vYP-lVOCw68b4SEqTGsJb7u0iQCFI`
     )
     .then((response) => {
-      const jsonPromise = response.json();
-      jsonPromise.then((data) => {
-        return data;
-      })
+      console.log(response.data);
+      if (response.data.error_message) console.log(response.data.error_message)
+      else return response.data.results[1].formatted_address
     }).catch((error) => {
       console.log(error);
     });

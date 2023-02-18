@@ -1,52 +1,44 @@
-import { TbFocus2 } from "react-icons/tb";
-import { BusRoute } from "../../../Types/Types";
+import React from "react";
+import { RouteCardProperties } from "../../../Types/Types";
 import "./RouteCard.css";
+import StopCard from "../StopCard/StopCard";
+import { HiOutlineArrowSmDown } from "react-icons/hi";
+import { MdOutlineHomeWork } from "react-icons/md";
+import { FaSchool } from "react-icons/fa";
 
-import { MdOutlineRemoveCircle } from "react-icons/md";
-
-const RouteCard = ({
-  routeInfo,
-  onDeleteClick,
-  showRoute,
-  showDelete = true,
-}: {
-  routeInfo: BusRoute;
-  onDeleteClick: Function;
-  showRoute?: Function;
-  showDelete?: boolean;
-}) => {
+const RouteCard = (props: RouteCardProperties) => {
+  const { route_id, route_type, label, stops } = props;
+  console.log([{ ...props }]);
 
   return (
-    <div className="routeCard">
-      <div className="routeInfoBlock">
-        <div className="routeInteractionPanel">
-          {!showDelete && (
-            <TbFocus2
-              className="focusRouteButton"
-              onClick={() => showRoute && showRoute(routeInfo.stops)}
-            />
-          )}
-          {showDelete && (
-            <MdOutlineRemoveCircle
-              className="routeRemoveButton"
-              onClick={() => onDeleteClick(routeInfo.id)}
-            />
-          )}
-        </div>
-        <div>
-          <div className="routeInfo">
-            <span>Etiqueta empleada:</span>
-            {routeInfo.stops && routeInfo.routeLabel}
-          </div>
-          <div className="routeInfo">
-            <span>Número de Paradas:</  span> {routeInfo.stops.length}
-          </div>
-        </div>
-        <div className="stopsList">
-          <div className="listButton">Lista de Paradas</div>
-        </div>
+    <div className="routeCardBody">
+      <h1>
+        Ruta: {route_id}
+        {label}{" "}
+        {route_type === "one_way_trip"
+          ? " ( De Casa al Colegio )"
+          : " ( Del Colegio a Casa )"}
+      </h1>
+      <div>
+        {stops &&
+          stops.map(({ lat, lng, stop_id }, index) => {
+            return (
+              <StopCard
+                key={index}
+                latLng={{ lat: lat, lng: lng }}
+                label={label}
+                stop_id={stop_id}
+                stopNumber={index + 1}
+              />
+            );
+          })}
+        <HiOutlineArrowSmDown className="routeIcon" />
       </div>
-      <div></div>
+      {route_type === "one_way_trip" ? (
+        <FaSchool className="routeIcon" />
+      ) : (
+        <MdOutlineHomeWork className="routeIcon" />
+      )}
     </div>
   );
 };

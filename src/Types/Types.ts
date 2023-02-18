@@ -28,6 +28,8 @@ export type Icons =
   | "Guía"
   | "Ajustes";
 
+type RouteType = 'one_way_trip' | 'return_trip'
+
 export type ClientCardType = {
   client_id?: number;
   client_name: string;
@@ -39,6 +41,24 @@ export type ClientCardType = {
   deleteStudentFunction ?: Function;
   deleteClientFunction ?: Function;
 };
+
+export type RoutePanelOptions = {
+  routes?: BusRoute[];
+}
+
+export type RouteCardProperties = {
+  route_id: number,
+  route_type: RouteType,
+  stops ?: BusStop[],
+  label : string,
+}
+
+export type StopCardProperties = {
+  stop_id?: number;
+  label?: string;
+  latLng: LatLngLiteral;
+  stopNumber: number;
+}
 
 /**
  * TYPES PREPARED FOR THE MAP COMPONENT
@@ -69,22 +89,21 @@ export type SetMapCenterHook = React.Dispatch<
 >;
 
 /**
- * TYPES PREPARED FOR THE DATA BASE
+ * TYPES PREPARED FOR THE DATABASE
  */
 
 export type BusStop = {
   stop_id?: number;
-  direction?: string;
   label?: string;
   lat: number;
   lng: number;
 };
 
 export type BusRoute = {
-  id: number;
+  route_id: number;
   stops: BusStop[];
-  totalUsers?: number;
-  routeLabel?: string;
+  label: string;
+  route_type: 'one_way_trip' | 'return_trip';
 };
 
 export type Message = {

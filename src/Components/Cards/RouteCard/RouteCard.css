@@ -1,45 +1,14 @@
-.routeCard {
-    border: 1px solid var(--primary-color);
+.routeCardBody {
     display: flex;
-    margin: 20px;
-    padding: 10px;
-    position: relative;
+    flex-direction: column;
+    margin: 30px 0px;
+    padding: 30px;
     width: 100%;
 }
 
-.routeInfoBlock {
-    display: flex;
-    flex-direction: row;
-    margin: 5px 0px;
-}
-
-.routeInfo {
+.routeCardBody h1 {
     background-color: var(--primary-color);
-    border-radius: 10px;
-    display: flex;
-    margin: 5px 0px;
-    margin-right: 10px;
-    padding: 5px;
-}
-
-.routeInfo:first-of-type {
-    margin-bottom: 5px;
-    margin-top: 0px;
-}
-
-.routeInfo > span {
-    color: var(--secondary-color);
-    font-weight: bold;
-    margin-right: 5px;
-}
-
-.routeInteractionPanel {
-    align-items: center;
-    background-color: var(--primary-color);
-    border-radius: 15px;
-    display: flex; 
-    font-size: 40px;
-    margin-left: -30px;
-    margin-right: 20px;
-    padding: 10px;
+    border-radius: 20px 0px;
+    padding: 20px;
+    margin-bottom: 20px;
 }

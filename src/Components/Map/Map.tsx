@@ -6,7 +6,6 @@ import {
 import headerLogo from "./icons/school.png";
 import "./Map.css";
 
-import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 
 import {
@@ -26,42 +25,6 @@ const Map = ({
   streetViewOption = true,
   customCenter,
 }: MapParameters) => {
-
-  const displayInfo = ({ stop_id, lat, lng }: BusStop): void => {
-    confirmAlert({
-      customUI: ({ onClose }) => {
-        return (
-          <div className="custom-ui">
-            <div style={{ borderColor: '#000', borderWidth: 1, borderRadius: 10 }}>
-              <h2 style={{ marginBottom: 10, marginTop: 10 }}>Info Parada</h2>
-              <p>
-                <span style={{ fontWeight: "bold" }}>stop_id:</span> {stop_id}
-              </p>
-              <p>
-                <span style={{ fontWeight: "bold" }}>lat:</span> {lat}
-              </p>
-              <p>
-                <span style={{ fontWeight: "bold" }}>lng:</span> {lng}
-              </p>
-              <button
-                style={{
-                  marginTop: 10,
-                  padding: 3,
-                  paddingLeft: 10,
-                  paddingRight: 10,
-                }}
-                onClick={() => {
-                  onClose();
-                }}
-              >
-                Ok
-              </button>
-            </div>
-          </div>
-        );
-      },
-    });
-  };
 
   const schoolLocation = useMemo<BusStop>(
     () => ({
@@ -143,9 +106,7 @@ const Map = ({
                   label={!label ? (stop_id === 0) ? "" : stop_id ? stop_id.toString() : "?" : label}
                   position={{ lat, lng }}
                   onClick={handleRemove}  
-                  onDblClick={() => {
-                    displayInfo({ stop_id, lat, lng });
-                  }}
+                  onDblClick={() => console.log('Hola')}
                 />
               );
             })}

@@ -1,9 +1,12 @@
-const RouteForm = (props: { isLoaded: Boolean }) => {
-  const { isLoaded } = props;
+const RouteForm = (props : { isLoaded : boolean }) => {
+  
 
   return (
-    <div>RouteForm</div>
+    <div>
+
+    </div>
   )
+
 }
 
 export default RouteForm
