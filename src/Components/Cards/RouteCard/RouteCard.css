@@ -13,6 +13,8 @@
 }
 
 .routeCardBody h1 {
+    display: block;
+    position: relative;
     border-radius: 20px 20px 0px 0px;
     background-color: var(--primary-color);
     color: var(--secondary-color);
@@ -23,4 +25,57 @@
 .routeCardStopsBody {
     padding: 50px;
     padding-top: 0px;
+}
+
+.deleteRouteButton {
+    align-items: center;
+    border: 1px solid var(--primary-color);
+    background-color: var(--secondary-color);
+    border-radius: 20px;
+    color: var(--primary-color);
+    display: flex; 
+    font-weight: bold;
+    font-size: 25px;
+    position: absolute;
+    top: 30%;
+    right: 2%;
+    bottom: 50%;
+    padding: 20px;
+}
+
+.deleteRouteButton:hover {
+    animation: Reverse-Light 0.3s;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.editRouteButton {
+    align-self: flex-end;
+    background-color: var(--primary-color);
+    display: block;
+    text-align: center;
+    font-size: 40px;
+    border: 1px solid var(--primary-color);
+    border-radius: 40px;    
+    color: var(--secondary-color);
+    margin-top: 60px;
+    padding: 10px;
+}
+
+.editRouteButton:hover {
+    animation: Light 0.3s;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+@media screen and (max-width: 705px) {
+    .deleteRouteButton {
+        align-items: center;
+        display: flex;
+        margin-top: 20px;
+        position: relative;
+        justify-content: center;
+        width: 100%;
+    }
 }

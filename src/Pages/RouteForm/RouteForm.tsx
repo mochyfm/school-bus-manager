@@ -1,12 +1,20 @@
-const RouteForm = (props : { isLoaded : boolean }) => {
-  
+import { useParams } from "react-router-dom";
+
+const RouteForm = (props: { isLoaded: boolean }) => {
+  const { id } = useParams();
 
   return (
-    <div>
+    <>
+      {id ? (
+        <div></div>
+      ) : (
+        <div>
+          <label htmlFor="">Identificador de la Ruta</label>
+          <input maxLength={3} size={3}/>
+        </div>
+      )}
+    </>
+  );
+};
 
-    </div>
-  )
-
-}
-
-export default RouteForm
+export default RouteForm;

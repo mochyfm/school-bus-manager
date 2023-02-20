@@ -1,7 +1,28 @@
+.homePage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: var(--body-height);
+    width: 100%;
+}
+
+.title {
+    justify-content: center;
+    display: flex;
+    font-size: 30px;
+    width: 100%;
+}
+
 .optionsPanel {
     align-content: space-between;
     display: flex;
     flex-wrap: wrap;
     justify-items: stretch;
     margin-top: 50px;
+}
+
+@media screen and (max-width: 600px) {
+    .title {
+        display: none;
+    }
 }

@@ -7,7 +7,6 @@ import ClientForm from "./Pages/ClientForm";
 import MessageForm from "./Pages/MessageForm/MessageForm";
 import RoutesPage from "./Pages/RoutesPage";
 import RouteForm from "./Pages/RouteForm";
-import GuidePage from "./Pages/GuidePage";
 import { useLoadScript } from "@react-google-maps/api";
 import { mapLibraries } from "./Services/main.services";
 import StudentPage from "./Pages/StudentPage/StudentPage";
@@ -36,8 +35,7 @@ function App() {
           <Route path="/routes" element={<RoutesPage isLoaded={isLoaded}/>} />
           <Route path="/routes/:id" element={<RoutesPage isLoaded={isLoaded}/>} />
           <Route path="/routes/newRoute" element={<RouteForm isLoaded={isLoaded} />} />
-          <Route path="/help" element={<GuidePage />} />
-          <Route path="/admin" element={<p>RetroAlimentación</p>} />
+          <Route path="/routes/editRoute/:id" element={<RouteForm isLoaded={isLoaded} />} />
         </Route>
         <Route path="*" element={<MissingPage />} />
       </Routes>

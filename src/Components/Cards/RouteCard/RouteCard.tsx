@@ -1,13 +1,13 @@
-import React from "react";
 import { RouteCardProperties } from "../../../Types/Types";
 import "./RouteCard.css";
 import StopCard from "../StopCard/StopCard";
 import { HiOutlineArrowSmDown } from "react-icons/hi";
 import { MdOutlineHomeWork } from "react-icons/md";
 import { FaSchool } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const RouteCard = (props: RouteCardProperties) => {
-  const { route_id, route_type, label, stops } = props;
+  const { route_id, route_type, label, stops, enableDelete = false, onDelete } = props;
   console.log([{ ...props }]);
 
   return (
@@ -17,11 +17,13 @@ const RouteCard = (props: RouteCardProperties) => {
         {route_type === "one_way_trip"
           ? " ( De Casa al Colegio )"
           : " ( Del Colegio a Casa )"}
+        {enableDelete && <button className="deleteRouteButton" onClick={() => onDelete && onDelete(route_id)}>Borrar Ruta</button>}
       </h1>
-      <div className="routeCardStopsBody">
-        <div>
-          {stops &&
-            stops.map(({ lat, lng, stop_id }, index) => {
+
+      {stops && (
+        <div className="routeCardStopsBody">
+          <div>
+            {stops.map(({ lat, lng, stop_id }, index) => {
               return (
                 <StopCard
                   key={index}
@@ -32,14 +34,19 @@ const RouteCard = (props: RouteCardProperties) => {
                 />
               );
             })}
-          <HiOutlineArrowSmDown className="routeIcon" />
+            <HiOutlineArrowSmDown className="routeIcon" />
+          </div>
+          {route_type === "one_way_trip" ? (
+            <FaSchool className="routeIcon" />
+          ) : (
+            <MdOutlineHomeWork className="routeIcon" />
+          )}
+          <Link className="link editRouteButton" to={`editRoute/${route_id}`}>
+            Editar Ruta
+          </Link>
         </div>
-        {route_type === "one_way_trip" ? (
-          <FaSchool className="routeIcon" />
-        ) : (
-          <MdOutlineHomeWork className="routeIcon" />
-        )}
-      </div>
+      )}
+      <div className="routeButtonPanel"></div>
     </div>
   );
 };

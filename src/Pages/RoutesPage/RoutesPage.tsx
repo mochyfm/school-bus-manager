@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import Loading from "../../Components/Loading";
 import Map from "../../Components/Map";
@@ -11,16 +11,34 @@ import EmptyList from "../../Components/EmptyList/EmptyList";
 
 import { GoDiffAdded } from "react-icons/go";
 import { CgPlayListRemove } from "react-icons/cg";
-import { getAllRoutes } from "../../Services/main.services";
+import { deleteRouteById, getAllRoutes } from "../../Services/main.services";
 
 const RoutesPage = (props: { isLoaded: Boolean }) => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const { isLoaded } = props;
 
   const [routesToDisplay, setRoutesToDisplay] = useState<BusRoute[]>();
   const [deleteMode, setDeleteMode] = useState<boolean>(false);
 
+  const handleDelete = (id: number) => {
+    
+    const deleteRoute = async () => {
+      await deleteRouteById(id);
+    };
+
+    if (id) {
+      deleteRoute();
+      setRoutesToDisplay(
+        routesToDisplay?.filter((element) => {
+          return element.route_id !== id;
+        })
+      );
+    }
+  };
+
   useEffect(() => {
+
     const fetchRoutes = async () => {
       const fetchedRoutes = await getAllRoutes();
       setRoutesToDisplay(fetchedRoutes);
@@ -28,12 +46,12 @@ const RoutesPage = (props: { isLoaded: Boolean }) => {
 
     fetchRoutes();
   }, []);
-  console.log(routesToDisplay);
+
   return (
     <div className="routesContainer">
       <div className="routesBlock">
         {routesToDisplay ? (
-          <RoutesPanel routes={routesToDisplay} />
+          <RoutesPanel routes={routesToDisplay} deleteMode={deleteMode} deleteFunction={handleDelete}/>
         ) : (
           <EmptyList
             title="¡Vaya que despiste!"
@@ -41,12 +59,12 @@ const RoutesPage = (props: { isLoaded: Boolean }) => {
           />
         )}
         <div className="routesButtonPanel">
-          <button className="routePageButton">
+          <button className="routePageButton" onClick={() => navigate('/routes/newRoute')}>
             <GoDiffAdded />
           </button>
           {routesToDisplay && (
-            <button className="routePageButton">
-              <CgPlayListRemove />
+            <button className="routePageButton" >
+              <CgPlayListRemove onClick={() => setDeleteMode(!deleteMode)}/>
             </button>
           )}
         </div>

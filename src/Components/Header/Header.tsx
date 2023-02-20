@@ -38,22 +38,6 @@ const Header = () => {
         >
           Rutas
         </Link>
-        <Link
-          to="./help"
-          className={`headerButton link ${
-            pathname === "/help" ? "current" : ""
-          }`}
-        >
-          Guía
-        </Link>
-        <Link
-          to="./admin"
-          className={`headerButton link ${
-            pathname === "/admin" ? "current" : ""
-          }`}
-        >
-          Información
-        </Link>
       </div>
       <div className="developerBlock">
         <span>Powered By</span>

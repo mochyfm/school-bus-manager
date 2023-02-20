@@ -1,10 +1,9 @@
-import React from "react";
 import "./RoutesPanel.css";
-import { RoutePanelOptions } from "../../Types/Types";
 import RouteCard from "../Cards/RouteCard/RouteCard";
+import { RoutePanelOptions } from "../../Types/Types";
 
 const RoutesPanel = (props: RoutePanelOptions) => {
-  const { routes } = props;
+  const { routes, deleteMode, deleteFunction } = props;
 
   return (
     <div className="routesPanel">
@@ -17,6 +16,8 @@ const RoutesPanel = (props: RoutePanelOptions) => {
               route_type={route_type}
               stops={stops}
               label={label}
+              enableDelete={deleteMode}
+              onDelete={deleteFunction}
             />
           );
         })}

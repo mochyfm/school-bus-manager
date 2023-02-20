@@ -44,6 +44,8 @@ export type ClientCardType = {
 
 export type RoutePanelOptions = {
   routes?: BusRoute[];
+  deleteMode ?: boolean;
+  deleteFunction ?: Function;
 }
 
 export type RouteCardProperties = {
@@ -51,6 +53,8 @@ export type RouteCardProperties = {
   route_type: RouteType,
   stops ?: BusStop[],
   label : string,
+  enableDelete?: boolean;
+  onDelete?: Function;
 }
 
 export type StopCardProperties = {
