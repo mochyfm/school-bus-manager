@@ -1,4 +1,4 @@
-import { RouteCardProperties } from "../../../Types/Types";
+import { RouteCardProperties, RouteTypeValue } from "../../../Types/Types";
 import "./RouteCard.css";
 import StopCard from "../StopCard/StopCard";
 import { HiOutlineArrowSmDown } from "react-icons/hi";
@@ -17,7 +17,7 @@ const RouteCard = (props: RouteCardProperties) => {
         {route_type === "one_way_trip"
           ? " ( De Casa al Colegio )"
           : " ( Del Colegio a Casa )"}
-        {enableDelete && <button className="deleteRouteButton" onClick={() => onDelete && onDelete(route_id)}>Borrar Ruta</button>}
+        {enableDelete && <button className="deleteRouteButton" onClick={() => onDelete && onDelete(route_id, label)}>Borrar Ruta</button>}
       </h1>
 
       {stops && (

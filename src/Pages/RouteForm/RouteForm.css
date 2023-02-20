@@ -1,0 +1,62 @@
+.formRouteBody {
+    align-items: center;  
+    display: flex;
+    justify-content: center;
+    height: 95vh;
+    width: 100%;
+}
+
+.createRouteBlock {
+    align-items: center;
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+}
+
+.createRouteBlock label {
+    font-size: 40px;
+}
+
+.createRouteBlock input {
+    align-self: center;
+    border: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 40px;
+    border-radius: 10px;
+    margin-left: 50px;
+    padding: 5px 10px;
+}
+
+.routeSelectBlock {
+    display: flex;
+    align-self: center;
+    width: 100%;
+}
+
+.routeLabelBlock {
+    display: flex;
+}
+
+.routeTypeSelect {
+    margin-top: 50px;
+    font-size: 30px;
+    text-align: center;
+    width: 100%;
+}
+
+.submitRouteButton {
+    border: none;
+    border-radius: 20px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    margin-top: 30px;
+    font-size: 30px;
+    padding: 5px 15px;
+}
+
+.submitRouteButton:hover {
+    animation: Light 0.2s;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    cursor: pointer;
+}

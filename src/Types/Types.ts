@@ -26,43 +26,51 @@ export type Icons =
   | "Servicios"
   | "Rutas"
   | "Guía"
-  | "Ajustes";
+  | "Ajustes"
+  | "Stop";
 
-type RouteType = 'one_way_trip' | 'return_trip'
+export type RouteTypeValue = "one_way_trip" | "return_trip" | "default";
 
 export type ClientCardType = {
   client_id?: number;
   client_name: string;
   students?: Student[];
   editButton?: boolean;
-  deleteButton ?: boolean;
+  deleteButton?: boolean;
   createStudentsButton?: boolean;
   enableDeleteStudents?: boolean;
-  deleteStudentFunction ?: Function;
-  deleteClientFunction ?: Function;
+  deleteStudentFunction?: Function;
+  deleteClientFunction?: Function;
 };
 
 export type RoutePanelOptions = {
   routes?: BusRoute[];
-  deleteMode ?: boolean;
-  deleteFunction ?: Function;
-}
+  deleteMode?: boolean;
+  deleteFunction?: Function;
+};
 
 export type RouteCardProperties = {
-  route_id: number,
-  route_type: RouteType,
-  stops ?: BusStop[],
-  label : string,
+  route_id?: number;
+  route_type?: RouteTypeValue;
+  stops?: BusStop[];
+  label: string;
   enableDelete?: boolean;
   onDelete?: Function;
-}
+};
 
 export type StopCardProperties = {
   stop_id?: number;
   label?: string;
   latLng: LatLngLiteral;
-  stopNumber: number;
-}
+  stopNumber?: number;
+  noArrows?: boolean;
+};
+
+export type RouteType = {
+  value: string;
+  type: RouteTypeValue;
+  label: string;
+};
 
 /**
  * TYPES PREPARED FOR THE MAP COMPONENT
@@ -76,11 +84,12 @@ export type MapParameters = {
   appendStop?: Function;
   removeStop?: any;
   routes?: BusRoute; // For showing the routes and their correspondent BusStop[]
+  label?: string;
   mainMarker?: LatLngLiteral; // For selecting a custom center for the map
   mapTopLefMenu?: boolean; // For removing the geographic relief and satelite menu (on the top left)
   streetViewOption?: boolean; // For the Street View on the right
   updatedStops?: number;
-  customCenter ?: LatLngLiteral;
+  stopId ?: string;
   setUpdatedStops?: React.Dispatch<React.SetStateAction<number>>;
 };
 
@@ -104,10 +113,10 @@ export type BusStop = {
 };
 
 export type BusRoute = {
-  route_id: number;
-  stops: BusStop[];
+  route_id?: number;
+  stops?: BusStop[];
   label: string;
-  route_type: 'one_way_trip' | 'return_trip';
+  route_type ?: RouteTypeValue;
 };
 
 export type Message = {
@@ -149,7 +158,7 @@ export type Student = {
 export type StudentSubmit = {
   client_id: number;
   student_name: string;
-}
+};
 
 export type StudentCard = {
   student_id: number;
@@ -158,6 +167,5 @@ export type StudentCard = {
   messages?: Message[];
   route?: BusRoute;
   deleteEnabled?: boolean;
-  deleteFunction ?: Function;
+  deleteFunction?: Function;
 };
-

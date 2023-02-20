@@ -1,4 +1,4 @@
-import { useMemo, useCallback, useRef } from "react";
+import { useEffect, useMemo, useCallback, useRef, useState } from "react";
 import {
   GoogleMap,
   MarkerF /* DirectionsRenderer */,
@@ -15,6 +15,7 @@ import {
   MapOptions,
   MapParameters,
 } from "../../Types/Types";
+import { getStopById } from "../../Services/main.services";
 
 const Map = ({
   busStops,
@@ -23,8 +24,23 @@ const Map = ({
   mode,
   mapTopLefMenu = true,
   streetViewOption = true,
-  customCenter,
+  stopId,
+  label
 }: MapParameters) => {
+
+  const [customStop, setCustomStop] = useState<LatLngLiteral>();
+
+  useEffect(() => {
+    
+    const getStopIdCoord = async (id: number) => {
+      const stopCoords = await getStopById(id);
+      stopCoords && setCustomStop({ lat: stopCoords.lat, lng: stopCoords.lng});
+    }
+
+    stopId && getStopIdCoord(parseInt(stopId));
+
+  }, [stopId])
+  
 
   const schoolLocation = useMemo<BusStop>(
     () => ({
@@ -36,8 +52,8 @@ const Map = ({
   );
 
   const centerCords = useMemo<LatLngLiteral>(
-    () => (customCenter ? customCenter : { lat: schoolLocation.lat, lng: schoolLocation.lng }),
-    [customCenter, schoolLocation]
+    () => (customStop ? customStop : { lat: schoolLocation.lat, lng: schoolLocation.lng }),
+    [customStop, schoolLocation]
   );
 
   const handleAdd = (e: MapMouseEvent) => {
@@ -47,11 +63,10 @@ const Map = ({
     }
   };
 
-  const handleRemove = (e: MapMouseEvent) => {
+  const handleRemove = (e: MapMouseEvent, stop : BusStop) => {
     const position = e.latLng?.toJSON();
     if (mode === "delete") {
-      console.log(position);
-      position && removeStop && removeStop(position);
+      position && removeStop && removeStop(stop);
     }
   };
 
@@ -99,13 +114,13 @@ const Map = ({
             onDblClick={() => console.log("Salesianos La Cuesta")}
           />
           {busStops &&
-            busStops.map(({ stop_id, lat, lng, label }, index) => {
+            busStops.map(({ stop_id, lat, lng }, index) => {
               return (
                 <MarkerF
                   key={index + 1}
-                  label={!label ? (stop_id === 0) ? "" : stop_id ? stop_id.toString() : "?" : label}
+                  label={!label ? (stop_id === 0) ? "" : stop_id ? (index + 1).toString() : "?" : label}
                   position={{ lat, lng }}
-                  onClick={handleRemove}  
+                  onClick={(e) => handleRemove(e, { stop_id, lat, lng } as BusStop)}  
                   onDblClick={() => console.log('Hola')}
                 />
               );

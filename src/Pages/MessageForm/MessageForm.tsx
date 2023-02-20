@@ -47,6 +47,7 @@ const DEFAULT_MESSAGES: PredefinedMessage[] = [
 ];
 
 const MessageForm = () => {
+  
   const { id } = useParams();
   const navigate = useNavigate();
   const [student, setStudent] = useState<Student>();

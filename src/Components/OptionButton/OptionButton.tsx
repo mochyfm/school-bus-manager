@@ -5,7 +5,7 @@ import { ReactElement } from "react";
 import { BsMap } from 'react-icons/bs';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { BsCoin } from 'react-icons/bs';
-import { GiPathDistance } from 'react-icons/gi';
+import { GiBusStop, GiPathDistance } from 'react-icons/gi';
 import { AiOutlinePaperClip } from 'react-icons/ai';
 import { IoSettingsSharp } from 'react-icons/io5';
 
@@ -32,6 +32,8 @@ const OptionButton = (props: ButtonProps) => {
             return <AiOutlinePaperClip size={ICON_SIZE}/>;
         case 'Ajustes':
             return <IoSettingsSharp size={ICON_SIZE}/>;
+        case 'Stop':
+            return <GiBusStop size={ICON_SIZE} />
         default:
             return <BsFillBugFill size={ICON_SIZE}/>;
     }

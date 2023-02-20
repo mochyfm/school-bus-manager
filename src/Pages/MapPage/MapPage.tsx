@@ -10,9 +10,11 @@ import Loading from "../../Components/Loading";
 import { BusStop, LatLngLiteral, ModeOptions } from "../../Types/Types";
 import { FaRegSave } from "react-icons/fa";
 import { getAllStops, sendStops } from "../../Services/main.services";
+import { useParams } from "react-router-dom";
 
 const MapPage = (props: { isLoaded: Boolean }) => {
   const { isLoaded } = props;
+  const { id } = useParams();
 
   const [busStops, setBusStops] = useState<BusStop[]>([]);
   const [mode, setMode] = useState<ModeOptions>("none");
@@ -113,6 +115,7 @@ const MapPage = (props: { isLoaded: Boolean }) => {
             busStops={busStops}
             appendStop={appendStop}
             removeStop={removeStop}
+            stopId={id && id}
           />
         ) : (
           <Loading />

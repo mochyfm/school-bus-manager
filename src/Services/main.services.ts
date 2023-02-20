@@ -6,6 +6,8 @@ import {
   LatLngLiteral,
   MapLibraries,
   Message,
+  RouteType,
+  RouteTypeValue,
   Student,
   StudentSubmit,
 } from "../Types/Types";
@@ -92,6 +94,37 @@ export const deleteRouteById = async (id: number): Promise<void> => {
   return await axios.delete(`${API_MAIN_URL}/route?id=${id}`);
 };
 
+export const getNotRelatedStops = async (): Promise<BusStop[]> => {
+  return await axios
+    .get(`${API_MAIN_URL}/stops/not-assigned`)
+    .then((response) => {
+      if (response.data.error_message) console.log(response.data.error_message);
+      else return response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const getRouteById = async (id: number): Promise<BusRoute> => {
+  return await axios
+    .get(`${API_MAIN_URL}/route?id=${id}`)
+    .then((response) => {
+      if (response.data.error_message) console.log(response.data.error_message);
+      else return response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const newRoute = async (route: {
+  label: string;
+  route_type: RouteTypeValue;
+}) => {
+  return await axios.post(`${API_MAIN_URL}/route/new`, route);
+};
+
 export const getAllStops = async (): Promise<BusStop[]> => {
   return await axios
     .get(`${API_MAIN_URL}/stops`)
@@ -104,11 +137,33 @@ export const getAllStops = async (): Promise<BusStop[]> => {
     });
 };
 
+export const submitRoute = async (route_id : number, stops: BusStop[]) => {
+  await axios
+    .put(`${API_MAIN_URL}/route?id=${route_id}`, stops)
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
 export const sendStops = async (stopsList: BusStop[]): Promise<void> => {
   await axios
     .post(`${API_MAIN_URL}/stops`, stopsList)
     .then((response) => {
       console.log(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const getStopById = async (id: number): Promise<BusStop> => {
+  return await axios.get(`${API_MAIN_URL}/stop?id=${id}`)
+    .then((response) => {
+      if (response.data.error_message) console.log(response.data.error_message);
+      else return response.data;
     })
     .catch((error) => {
       console.log(error);
@@ -121,7 +176,6 @@ export const getAddressFrom = async (position: LatLngLiteral) => {
       `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.lat},${position.lng}&key=AIzaSyDDv8vYP-lVOCw68b4SEqTGsJb7u0iQCFI`
     )
     .then((response) => {
-      console.log(response.data);
       if (response.data.error_message) console.log(response.data.error_message);
       else return response.data.results[1].formatted_address;
     })

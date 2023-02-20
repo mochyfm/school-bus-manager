@@ -12,6 +12,7 @@ import { mapLibraries } from "./Services/main.services";
 import StudentPage from "./Pages/StudentPage/StudentPage";
 import StudentForm from "./Pages/StudentForm/StudentForm";
 import MissingPage from "./Pages/MissingPage/MissingPage";
+import GlobalMessage from "./Pages/GlobalMessage/GlobalMessage";
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route element={<InnerLayout />}>
           <Route path="/map" element={<MapPage isLoaded={isLoaded}/>} />
+          <Route path="/map/:id" element={<MapPage isLoaded={isLoaded}/>} />
           <Route path="/clients" element={<ClientsPage />} />
           <Route path="/newClient" element={<ClientForm />} />
           <Route path="/editClient/:id" element={<ClientForm />} />
@@ -36,6 +38,7 @@ function App() {
           <Route path="/routes/:id" element={<RoutesPage isLoaded={isLoaded}/>} />
           <Route path="/routes/newRoute" element={<RouteForm isLoaded={isLoaded} />} />
           <Route path="/routes/editRoute/:id" element={<RouteForm isLoaded={isLoaded} />} />
+          <Route path="/route/send-message/:id" element={<GlobalMessage />}/>
         </Route>
         <Route path="*" element={<MissingPage />} />
       </Routes>

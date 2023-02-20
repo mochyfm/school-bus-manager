@@ -6,7 +6,7 @@ import "./StopCard.css";
 import { GiBusStop } from "react-icons/gi";
 
 const StopCard = (props: StopCardProperties) => {
-  const { latLng, label, stopNumber } = props;
+  const { latLng, label, stopNumber , noArrows = false} = props;
   const [direction, setDirection] = useState<String>();
 
   useEffect(() => {
@@ -20,17 +20,17 @@ const StopCard = (props: StopCardProperties) => {
 
   return (
     <div>
-      <HiOutlineArrowSmDown className="arrowStopIcon" />
+      {!noArrows && <HiOutlineArrowSmDown className="arrowStopIcon" />}
       <div className="stopCardBody">
           <GiBusStop className="stopIcon" />
         <div>
           <div className="stopCardInfo">
             <span className="stopCardInfoTitle">Dirección:</span>{" "}
-            {direction?.substring(0, 65)}
+            {direction}
           </div>
           <div className="stopCardInfo">
             <span className="stopCardInfoTitle"> Parada Número: </span>
-            {stopNumber}
+            {stopNumber}{" - "}
             {label}
           </div>
         </div>
