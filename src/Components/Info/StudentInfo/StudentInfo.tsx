@@ -21,10 +21,10 @@ const StudentInfo = (props: StudentCard) => {
         <div className="studentInfo">
             <span className="studentDataLabel"><span className="studentLabel">Nombre:</span>{student_name}</span>
             {(messages && messages.length !== 0) && <span className="studentDataLabel"><span className="studentLabel">Cantidad de mensajes</span> {messages.length} mensajes</span>}
-            <span className="studentDataLabel"><span className="studentLabel">Número de rutas asignadas</span> X </span>
         </div>
         <Link to={`/studentInfo/${student_id}`} className="link viewButton">Ver Información Estudiante</Link>
         <Link to={`/message/${student_id}`} className="link viewButton">Enviar mensaje</Link>
+        <Link to={`/assign-route/${student_id}`} className="link viewButton">Asignar ruta al estudiante</Link>
         <div className="studentFooter"/>
       </div>
     </div>

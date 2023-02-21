@@ -4,13 +4,16 @@ import "./RouteEdition.css";
 import {
   getNotRelatedStops,
   getRouteById,
+  sendMessageFromRoute,
   submitRoute,
 } from "../../Services/main.services";
 import Loading from "../Loading/Loading";
 import Map from "../Map/Map";
 import StopOption from "../StopOption";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Store } from "react-notifications-component";
+import QRMaker from "../QRMaker/QRMaker";
+import { confirmAlert } from "react-confirm-alert";
 
 const RouteEdition = (props: { id: number; isLoaded: boolean }) => {
   const { id, isLoaded } = props;
@@ -22,6 +25,12 @@ const RouteEdition = (props: { id: number; isLoaded: boolean }) => {
   const [stopsAssigned, setStopsAssigned] = useState<BusStop[]>([]);
 
   const [addMode, setAddMode] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
+  const [messageStatus, setMessageStatus] = useState<boolean>();
+
+  const handleInput = (e: any) => {
+    setMessage(e.target.value);
+  };
 
   const renderStops = (stops: BusStop[]) => {
     return (
@@ -32,7 +41,7 @@ const RouteEdition = (props: { id: number; isLoaded: boolean }) => {
         </h1>
         {stops && (
           <div className="listOfStops">
-            {stops.map(({ lat, lng, label }, index) => {
+            {stops.map(({ lat, lng }, index) => {
               return (
                 <div key={index}>
                   <span className="stopPositionOnRoute">{index + 1}º</span>
@@ -42,8 +51,42 @@ const RouteEdition = (props: { id: number; isLoaded: boolean }) => {
             })}
           </div>
         )}
+        {routeInfo && (
+          <QRMaker
+            label={routeInfo.label}
+            route_id={routeInfo?.route_id}
+            stops={routeInfo?.stops}
+          />
+        )}
       </div>
     );
+  };
+
+  const sendMessage = () => {
+    const submitMessage = async () => {
+      routeInfo?.route_id && await sendMessageFromRoute(routeInfo?.route_id, message);
+      Store.addNotification({
+        title: "Mensaje enviado correctamente.",
+        message: "El mensaje se ha enviado a todos los miembros de esta ruta.",
+        type: "info",
+        insert: "bottom",
+        container: "bottom-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 3000,
+          onScreen: true,
+        },
+      });
+      setMessage("");
+    };
+
+    if (message.trim() !== "") {
+      console.log(message);
+      routeInfo?.route_id && submitMessage();
+    }
+
+    setMessageStatus(!messageStatus);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -95,10 +138,6 @@ const RouteEdition = (props: { id: number; isLoaded: boolean }) => {
     );
   };
 
-  const generatePDF = () => {
-    
-  }
-
   useEffect(() => {
     const fetchRoute = async (id: number) => {
       const route = await getRouteById(id);
@@ -121,13 +160,38 @@ const RouteEdition = (props: { id: number; isLoaded: boolean }) => {
   return (
     <div className="editForm">
       <form className="routeEditForm" onSubmit={handleSubmit}>
-        <div>
-          <Link
-            to={`/route/send-message/${routeInfo?.route_id}`}
+        <div style={{ position: "relative" }}>
+          <button
+            type="button"
             className="link msgRouteButton"
+            onClick={() => routeInfo && setMessageStatus(!messageStatus)}
           >
             Enviar un mensaje a los estudiantes
-          </Link>
+          </button>
+          {messageStatus && (
+            <div
+              style={{ display: "flex", alignItems: "center", marginTop: 20 }}
+            >
+              <textarea
+                cols={50}
+                rows={2}
+                style={{
+                  display: "block",
+                  padding: 10,
+                  fontSize: 15,
+                  resize: "none",
+                }}
+                onChange={handleInput}
+              />
+              <button
+                onClick={() => sendMessage()}
+                type="button"
+                style={{ marginLeft: 10, padding: 10, fontSize: 16 }}
+              >
+                Enviar mensaje
+              </button>
+            </div>
+          )}
         </div>
         <div className="infoEditRouteMessage">
           <p>
@@ -146,7 +210,6 @@ const RouteEdition = (props: { id: number; isLoaded: boolean }) => {
           <div>{renderStops(stopsAssigned)}</div>
         )}
         <div>
-          <button className={`saveRouteButton ${addMode && "disabled"}`} type="button" onClick={generatePDF}>Generar QR en PDF</button>
           <button className={`saveRouteButton ${addMode && "disabled"}`}>
             Guardar Parada
           </button>

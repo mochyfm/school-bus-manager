@@ -1,22 +1,39 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getClientById, getStudentById } from "../../Services/main.services";
-import { Client, Student } from "../../Types/Types";
+import {
+  getClientById,
+  getRoutesFromStudent,
+  getStudentById,
+} from "../../Services/main.services";
+import { BusRoute, BusStop, Client, Student } from "../../Types/Types";
 import MessageCard from "../../Components/Cards/MessageCard/MessageCard";
 
 import "./StudentPage.css";
 import Map from "../../Components/Map/Map";
 import Loading from "../../Components/Loading/Loading";
+import StopOption from "../../Components/StopOption";
 
 const StudentPage = ({ isLoaded }: { isLoaded: boolean }) => {
   const { id } = useParams();
+
   const [student, setStudent] = useState<Student>();
+  const [studentRoutes, setStudentRoutes] = useState<BusRoute[]>();
   const [studentClient, setStudentClient] = useState<Client>();
+
+  const [busStops, setBusRoutes] = useState<any>([]);
 
   useEffect(() => {
     const getStudent = async (studentId: number) => {
       const studentData = await getStudentById(studentId);
       studentData && setStudent(studentData);
+      studentData && getStopsAssigned(studentId);
+    };
+
+    const getStopsAssigned = async (studentId: number) => {
+      const localRoutes = await getRoutesFromStudent(studentId);
+      localRoutes && setStudentRoutes(localRoutes);
+      console.log("PRUEBA PARA UN ARRAY:", );
+      setBusRoutes(localRoutes.flatMap((route) => route.stops && route.stops.map((stopData) => ({...stopData, label: route.label}))));
     };
 
     const getClient = async (clientId: number) => {
@@ -38,7 +55,7 @@ const StudentPage = ({ isLoaded }: { isLoaded: boolean }) => {
             className="darkLink"
             to={`/editClient/${studentClient?.client_id}`}
           >
-            {studentClient?.client_name}
+            {studentClient?.client_name} {studentRoutes && studentRoutes?.length !== 0 && `- Pertenece a ${studentRoutes?.length} rutas.`}
           </Link>
         </span>
       </h1>
@@ -79,7 +96,7 @@ const StudentPage = ({ isLoaded }: { isLoaded: boolean }) => {
       )}
       <div className="routeSection">
         {isLoaded ? (
-          <Map mapTopLefMenu={false} streetViewOption={false} />
+          <Map busStops={busStops} mapTopLefMenu={false} streetViewOption={false} />
         ) : (
           <Loading />
         )}

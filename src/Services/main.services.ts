@@ -6,7 +6,6 @@ import {
   LatLngLiteral,
   MapLibraries,
   Message,
-  RouteType,
   RouteTypeValue,
   Student,
   StudentSubmit,
@@ -137,7 +136,7 @@ export const getAllStops = async (): Promise<BusStop[]> => {
     });
 };
 
-export const submitRoute = async (route_id : number, stops: BusStop[]) => {
+export const submitRoute = async (route_id: number, stops: BusStop[]) => {
   await axios
     .put(`${API_MAIN_URL}/route?id=${route_id}`, stops)
     .then((response) => {
@@ -146,7 +145,7 @@ export const submitRoute = async (route_id : number, stops: BusStop[]) => {
     .catch((error) => {
       console.log(error);
     });
-}
+};
 
 export const sendStops = async (stopsList: BusStop[]): Promise<void> => {
   await axios
@@ -160,7 +159,8 @@ export const sendStops = async (stopsList: BusStop[]): Promise<void> => {
 };
 
 export const getStopById = async (id: number): Promise<BusStop> => {
-  return await axios.get(`${API_MAIN_URL}/stop?id=${id}`)
+  return await axios
+    .get(`${API_MAIN_URL}/stop?id=${id}`)
     .then((response) => {
       if (response.data.error_message) console.log(response.data.error_message);
       else return response.data;
@@ -168,6 +168,23 @@ export const getStopById = async (id: number): Promise<BusStop> => {
     .catch((error) => {
       console.log(error);
     });
+};
+
+export const getRoutesFromStudent = async (id: number) : Promise<BusRoute[]> => {
+  return await axios
+    .get(`${API_MAIN_URL}/student/${id}/routes`)
+    .then((response) => {
+      console.log('Lista de datos: ', response);
+      if (response.data.error_message) console.log(response.data.error_message);
+      else return response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+export const sendMessageFromRoute = async (id: number, message: string): Promise<void> => {
+  await axios.post(`${API_MAIN_URL}/route/msg?id=${id}`, { message: message, message_type: 'info'})
 };
 
 export const getAddressFrom = async (position: LatLngLiteral) => {

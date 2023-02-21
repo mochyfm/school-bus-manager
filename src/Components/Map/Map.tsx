@@ -25,7 +25,6 @@ const Map = ({
   mapTopLefMenu = true,
   streetViewOption = true,
   stopId,
-  label
 }: MapParameters) => {
 
   const [customStop, setCustomStop] = useState<LatLngLiteral>();
@@ -114,7 +113,7 @@ const Map = ({
             onDblClick={() => console.log("Salesianos La Cuesta")}
           />
           {busStops &&
-            busStops.map(({ stop_id, lat, lng }, index) => {
+            busStops.map(({ stop_id, lat, lng, label }, index) => {
               return (
                 <MarkerF
                   key={index + 1}

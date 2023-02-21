@@ -16,7 +16,7 @@ const StopOption = (props: { position: LatLngLiteral }) => {
     position && getAddress(position);
   }, [position]);
 
-  return <span>{stopDirection}</span>;
+  return <>{stopDirection}</>;
 };
 
 export default StopOption;

@@ -72,6 +72,13 @@ export type RouteType = {
   label: string;
 };
 
+export type BusRouteParams = {
+  route_id ?: number;
+  label?: string;
+  stops?: BusStop[];
+
+};
+
 /**
  * TYPES PREPARED FOR THE MAP COMPONENT
  */
@@ -84,12 +91,11 @@ export type MapParameters = {
   appendStop?: Function;
   removeStop?: any;
   routes?: BusRoute; // For showing the routes and their correspondent BusStop[]
-  label?: string;
   mainMarker?: LatLngLiteral; // For selecting a custom center for the map
   mapTopLefMenu?: boolean; // For removing the geographic relief and satelite menu (on the top left)
   streetViewOption?: boolean; // For the Street View on the right
   updatedStops?: number;
-  stopId ?: string;
+  stopId?: string;
   setUpdatedStops?: React.Dispatch<React.SetStateAction<number>>;
 };
 
@@ -116,7 +122,7 @@ export type BusRoute = {
   route_id?: number;
   stops?: BusStop[];
   label: string;
-  route_type ?: RouteTypeValue;
+  route_type?: RouteTypeValue;
 };
 
 export type Message = {
@@ -124,7 +130,7 @@ export type Message = {
   message?: string;
   message_type: MessageType;
   student_id: number;
-  client_id: number;
+  client_id?: number;
   sended_at?: string;
 };
 

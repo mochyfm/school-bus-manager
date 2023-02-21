@@ -13,6 +13,7 @@ import StudentPage from "./Pages/StudentPage/StudentPage";
 import StudentForm from "./Pages/StudentForm/StudentForm";
 import MissingPage from "./Pages/MissingPage/MissingPage";
 import GlobalMessage from "./Pages/GlobalMessage/GlobalMessage";
+import AssignRoute from "./Pages/AssignRoute/AssignRoute";
 
 function App() {
 
@@ -31,14 +32,14 @@ function App() {
           <Route path="/clients" element={<ClientsPage />} />
           <Route path="/newClient" element={<ClientForm />} />
           <Route path="/editClient/:id" element={<ClientForm />} />
-          <Route path="/studentInfo/:id" element={<StudentPage isLoaded={isLoaded}/>} />     
+          <Route path="/studentInfo/:id" element={<StudentPage isLoaded={isLoaded}/>} />  
+          <Route path="/assign-route/:id" element={<AssignRoute />} />     
           <Route path="/newStudent/:id" element={<StudentForm />} />  
           <Route path="/message/:id" element={<MessageForm />} />    
           <Route path="/routes" element={<RoutesPage isLoaded={isLoaded}/>} />
           <Route path="/routes/:id" element={<RoutesPage isLoaded={isLoaded}/>} />
           <Route path="/routes/newRoute" element={<RouteForm isLoaded={isLoaded} />} />
           <Route path="/routes/editRoute/:id" element={<RouteForm isLoaded={isLoaded} />} />
-          <Route path="/route/send-message/:id" element={<GlobalMessage />}/>
         </Route>
         <Route path="*" element={<MissingPage />} />
       </Routes>
