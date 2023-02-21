@@ -5,7 +5,7 @@ import {
   getRoutesFromStudent,
   getStudentById,
 } from "../../Services/main.services";
-import { BusRoute,Client, Student } from "../../Types/Types";
+import { BusRoute, Client, Student } from "../../Types/Types";
 import MessageCard from "../../Components/Cards/MessageCard/MessageCard";
 
 import "./StudentPage.css";
@@ -67,6 +67,17 @@ const StudentPage = ({ isLoaded }: { isLoaded: boolean }) => {
           </Link>
         </span>
       </h1>
+      <div className="routeSection">
+        {isLoaded ? (
+          <Map
+            busStops={busStops}
+            mapTopLefMenu={false}
+            streetViewOption={false}
+          />
+        ) : (
+          <Loading />
+        )}
+      </div>
       {student && student.messages?.length !== 0 && (
         <h1 className="messgListTitle">Lista de mensajes</h1>
       )}
@@ -99,20 +110,6 @@ const StudentPage = ({ isLoaded }: { isLoaded: boolean }) => {
           )}
         </div>
       )}
-      {student && student.messages && student.messages?.length !== 0 && (
-        <div className="mapSpliter" />
-      )}
-      <div className="routeSection">
-        {isLoaded ? (
-          <Map
-            busStops={busStops}
-            mapTopLefMenu={false}
-            streetViewOption={false}
-          />
-        ) : (
-          <Loading />
-        )}
-      </div>
     </div>
   );
 };

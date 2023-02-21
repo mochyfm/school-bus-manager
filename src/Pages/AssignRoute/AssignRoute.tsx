@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { BusRoute, Student } from "../../Types/Types";
-import { assignStopRouteToStudent, getAllRoutes, getStudentById } from "../../Services/main.services";
+import {
+  assignStopRouteToStudent,
+  getNonAssignedRoutes,
+  getStudentById,
+} from "../../Services/main.services";
 import "./AssignRoute.css";
 import StopOption from "../../Components/StopOption";
+import { Store } from "react-notifications-component";
+import EmptyList from "../../Components/EmptyList/EmptyList";
 
 const AssignRoute = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [student, setStudent] = useState<Student>();
   const [allRoutes, setAllRoutes] = useState<BusRoute[]>();
@@ -20,14 +27,32 @@ const AssignRoute = () => {
     }
   };
 
-  const submitRoute = (route_id:number, stop_id:number, student_id:number) =>{
-    
+  const submitRoute = (
+    route_id: number,
+    stop_id: number,
+    student_id: number,
+    label: string
+  ) => {
     const submitRouteAsigned = async () => {
-      await assignStopRouteToStudent(route_id, stop_id, student_id)
-    }
+      await assignStopRouteToStudent(route_id, stop_id, student_id);
+      Store.addNotification({
+        title: `Se ha asignado una ruta correctamente`,
+        message: `La ruta ${label} asignada correctamente`,
+        type: "info",
+        insert: "bottom",
+        container: "bottom-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 3000,
+          onScreen: true,
+        },
+      });
+      navigate(`/studentInfo/${id}`);
+    };
 
     route_id && stop_id && submitRouteAsigned();
-  }
+  };
 
   useEffect(() => {
     const getStudent = async (studentId: number) => {
@@ -35,14 +60,16 @@ const AssignRoute = () => {
       studentData && setStudent(studentData);
     };
 
-    const getRoutes = async () => {
-      const routes = await getAllRoutes();
+    const getRoutes = async (studentId: number) => {
+      const routes = await getNonAssignedRoutes(studentId);
       routes && setAllRoutes(routes);
     };
 
     id && getStudent(parseInt(id));
-    getRoutes();
+    id && getRoutes(parseInt(id));
   }, [id]);
+
+  console.log(allRoutes && allRoutes.length);
 
   return (
     <>
@@ -53,62 +80,81 @@ const AssignRoute = () => {
         </h1>
       </div>
       <div className="assignRouteBlock">
-        <div className="assignRoutesBlock">
-          {allRoutes &&
-            allRoutes.map(({ label, route_id, stops }) => {
-              return (
-                <div style={{ padding: 20 }}>
-                  <div className="routeToAssign">
-                    <h2>
-                      Ruta: {label} - (Nº de Paradas {stops?.length})
-                    </h2>
-                    <div className="buttonPanel">
-                      <Link
-                        className="link assignRouteButton"
-                        to={`/routes/editRoute/${route_id}`}
-                      >
-                        View Route
-                      </Link>
-                      {routeIdToAssing !== route_id ? (
-                        <button
-                          className="assignRouteButton"
-                          onClick={() => route_id && assignRoute(route_id)}
+        {allRoutes?.length === 0 || allRoutes === undefined ? (
+          <EmptyList
+            title="Vaya, tienes todas las rutas asignadas."
+            text="No hay ninguna ruta que te puedas asignar, las has escogido todas ya, o no hay ninguna disponible."
+          />
+        ) : (
+          <div className="assignRoutesBlock">
+            {allRoutes &&
+              allRoutes.map(({ label, route_id, stops }) => {
+                return (
+                  <div style={{ padding: 20 }}>
+                    <div className="routeToAssign">
+                      <h2>
+                        Ruta: {label} - (Nº de Paradas {stops?.length})
+                      </h2>
+                      <div className="buttonPanel">
+                        <Link
+                          className="link assignRouteButton"
+                          to={`/routes/editRoute/${route_id}`}
                         >
-                          Asignar Ruta
-                        </button>
-                      ) : (
-                        <button
-                          className="assignRouteButton"
-                          onClick={() => route_id && assignRoute(route_id)}
-                        >
-                          Deseleccionar Ruta
-                        </button>
-                      )}
+                          View Route
+                        </Link>
+                        {routeIdToAssing !== route_id ? (
+                          <button
+                            className="assignRouteButton"
+                            onClick={() => route_id && assignRoute(route_id)}
+                          >
+                            Asignar Ruta
+                          </button>
+                        ) : (
+                          <button
+                            className="assignRouteButton"
+                            onClick={() => route_id && assignRoute(route_id)}
+                          >
+                            Deseleccionar Ruta
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                    <div className="stopCardGroup">
+                      {stops &&
+                        stops.map(({ stop_id, lat, lng }, index) => {
+                          return (
+                            <div className="stopCardToAssign">
+                              {index + 1}º -{" "}
+                              <StopOption
+                                position={{ lat: lat, lng: lng }}
+                                key={index}
+                              />
+                              {routeIdToAssing === route_id && (
+                                <button
+                                  className="stopCardToAssignButton"
+                                  onClick={() =>
+                                    stop_id &&
+                                    id &&
+                                    submitRoute(
+                                      route_id,
+                                      stop_id,
+                                      parseInt(id),
+                                      label
+                                    )
+                                  }
+                                >
+                                  Asignar Parada
+                                </button>
+                              )}
+                            </div>
+                          );
+                        })}
                     </div>
                   </div>
-                  <div className="stopCardGroup">
-                    {stops &&
-                      stops.map(({ stop_id, lat, lng }, index) => {
-                        return (
-                          <div className="stopCardToAssign">
-                            {index + 1}º -{" "}
-                            <StopOption
-                              position={{ lat: lat, lng: lng }}
-                              key={index}
-                            />
-                            {routeIdToAssing === route_id && (
-                              <button className="stopCardToAssignButton" onClick={() => stop_id && id && submitRoute(route_id, stop_id, parseInt(id))}>
-                                Asignar Parada
-                              </button>
-                            )}
-                          </div>
-                        );
-                      })}
-                  </div>
-                </div>
-              );
-            })}
-        </div>
+                );
+              })}
+          </div>
+        )}
       </div>
     </>
   );

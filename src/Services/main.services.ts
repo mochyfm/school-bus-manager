@@ -89,6 +89,18 @@ export const getAllRoutes = async (): Promise<BusRoute[]> => {
     });
 };
 
+export const getNonAssignedRoutes = async (id : number) : Promise<BusRoute[]> => {
+  return await axios
+    .get(`${API_MAIN_URL}/routes/student?id=${id}`)
+    .then((response) => {
+      if (response.data.error_message) console.log(response.data.error_message);
+      else return response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
 export const deleteRouteById = async (id: number): Promise<void> => {
   return await axios.delete(`${API_MAIN_URL}/route?id=${id}`);
 };
