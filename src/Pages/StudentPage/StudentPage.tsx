@@ -32,8 +32,14 @@ const StudentPage = ({ isLoaded }: { isLoaded: boolean }) => {
     const getStopsAssigned = async (studentId: number) => {
       const localRoutes = await getRoutesFromStudent(studentId);
       localRoutes && setStudentRoutes(localRoutes);
-      console.log("PRUEBA PARA UN ARRAY:", );
-      setBusRoutes(localRoutes.flatMap((route) => route.stops && route.stops.map((stopData) => ({...stopData, label: route.label}))));
+      console.log("PRUEBA PARA UN ARRAY:");
+      setBusRoutes(
+        localRoutes.flatMap(
+          (route) =>
+            route.stops &&
+            route.stops.map((stopData) => ({ ...stopData, label: route.label }))
+        )
+      );
     };
 
     const getClient = async (clientId: number) => {
@@ -48,14 +54,17 @@ const StudentPage = ({ isLoaded }: { isLoaded: boolean }) => {
   return (
     <div className="sutdentProfile">
       <h1 className="studentNameTitle">
-        Nombre del estudiante: {student?.student_name}
+        Nombre del estudiante: {student?.student_name}{" "}
+        {studentRoutes &&
+          studentRoutes?.length !== 0 &&
+          `- Pertenece a ${studentRoutes?.length} rutas.`}
         <span>
           <span>(Padre / Madre / Tutor) asociado:</span>{" "}
           <Link
             className="darkLink"
             to={`/editClient/${studentClient?.client_id}`}
           >
-            {studentClient?.client_name} {studentRoutes && studentRoutes?.length !== 0 && `- Pertenece a ${studentRoutes?.length} rutas.`}
+            {studentClient?.client_name}
           </Link>
         </span>
       </h1>
@@ -96,7 +105,11 @@ const StudentPage = ({ isLoaded }: { isLoaded: boolean }) => {
       )}
       <div className="routeSection">
         {isLoaded ? (
-          <Map busStops={busStops} mapTopLefMenu={false} streetViewOption={false} />
+          <Map
+            busStops={busStops}
+            mapTopLefMenu={false}
+            streetViewOption={false}
+          />
         ) : (
           <Loading />
         )}

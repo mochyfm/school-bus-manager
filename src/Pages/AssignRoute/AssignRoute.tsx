@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { BusRoute, Student } from "../../Types/Types";
-import { getAllRoutes, getStudentById } from "../../Services/main.services";
+import { assignStopRouteToStudent, getAllRoutes, getStudentById } from "../../Services/main.services";
 import "./AssignRoute.css";
 import StopOption from "../../Components/StopOption";
 
@@ -20,10 +20,10 @@ const AssignRoute = () => {
     }
   };
 
-  const submitRoute = (route_id:number, stop_id:number) =>{
+  const submitRoute = (route_id:number, stop_id:number, student_id:number) =>{
     
     const submitRouteAsigned = async () => {
-
+      await assignStopRouteToStudent(route_id, stop_id, student_id)
     }
 
     route_id && stop_id && submitRouteAsigned();
@@ -97,7 +97,7 @@ const AssignRoute = () => {
                               key={index}
                             />
                             {routeIdToAssing === route_id && (
-                              <button className="stopCardToAssignButton" onClick={() => stop_id && submitRoute(route_id, stop_id)}>
+                              <button className="stopCardToAssignButton" onClick={() => stop_id && id && submitRoute(route_id, stop_id, parseInt(id))}>
                                 Asignar Parada
                               </button>
                             )}

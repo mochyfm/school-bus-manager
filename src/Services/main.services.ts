@@ -183,6 +183,10 @@ export const getRoutesFromStudent = async (id: number) : Promise<BusRoute[]> => 
     });
 }
 
+export const assignStopRouteToStudent = async (route_id: number, stop_id: number, student_id: number) : Promise<void> => {
+  await axios.post(`${API_MAIN_URL}/assign?routeId=${route_id}&stopId=${stop_id}&studentId=${student_id}`)
+}
+
 export const sendMessageFromRoute = async (id: number, message: string): Promise<void> => {
   await axios.post(`${API_MAIN_URL}/route/msg?id=${id}`, { message: message, message_type: 'info'})
 };

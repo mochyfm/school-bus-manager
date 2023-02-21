@@ -13,7 +13,6 @@ import StopOption from "../StopOption";
 import { useNavigate } from "react-router-dom";
 import { Store } from "react-notifications-component";
 import QRMaker from "../QRMaker/QRMaker";
-import { confirmAlert } from "react-confirm-alert";
 
 const RouteEdition = (props: { id: number; isLoaded: boolean }) => {
   const { id, isLoaded } = props;
