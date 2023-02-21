@@ -5,13 +5,12 @@ import {
   getRoutesFromStudent,
   getStudentById,
 } from "../../Services/main.services";
-import { BusRoute, BusStop, Client, Student } from "../../Types/Types";
+import { BusRoute,Client, Student } from "../../Types/Types";
 import MessageCard from "../../Components/Cards/MessageCard/MessageCard";
 
 import "./StudentPage.css";
 import Map from "../../Components/Map/Map";
 import Loading from "../../Components/Loading/Loading";
-import StopOption from "../../Components/StopOption";
 
 const StudentPage = ({ isLoaded }: { isLoaded: boolean }) => {
   const { id } = useParams();
