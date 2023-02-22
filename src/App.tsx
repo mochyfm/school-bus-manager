@@ -12,7 +12,6 @@ import { mapLibraries } from "./Services/main.services";
 import StudentPage from "./Pages/StudentPage/StudentPage";
 import StudentForm from "./Pages/StudentForm/StudentForm";
 import MissingPage from "./Pages/MissingPage/MissingPage";
-import GlobalMessage from "./Pages/GlobalMessage/GlobalMessage";
 import AssignRoute from "./Pages/AssignRoute/AssignRoute";
 
 function App() {
