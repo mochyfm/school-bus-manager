@@ -42,20 +42,17 @@ const RouteEdition = (props: { id: number; isLoaded: boolean }) => {
           <div className="listOfStops">
             {stops.map(({ lat, lng }, index) => {
               return (
-                <div key={index}>
-                  <span className="stopPositionOnRoute">{index + 1}º</span>
-                  <StopOption position={{ lat: lat, lng: lng }} />
+                <div style={{ display: 'flex', alignItems: 'center'}} key={index}>
+                  <div>
+                    <span className="stopPositionOnRoute">{index + 1}º</span>
+                  </div>
+                  <div>
+                    <StopOption position={{ lat: lat, lng: lng }} />
+                  </div>
                 </div>
               );
             })}
           </div>
-        )}
-        {routeInfo && (
-          <QRMaker
-            label={routeInfo.label}
-            route_id={routeInfo?.route_id}
-            stops={routeInfo?.stops}
-          />
         )}
       </div>
     );
@@ -63,7 +60,8 @@ const RouteEdition = (props: { id: number; isLoaded: boolean }) => {
 
   const sendMessage = () => {
     const submitMessage = async () => {
-      routeInfo?.route_id && await sendMessageFromRoute(routeInfo?.route_id, message);
+      routeInfo?.route_id &&
+        (await sendMessageFromRoute(routeInfo?.route_id, message));
       Store.addNotification({
         title: "Mensaje enviado correctamente.",
         message: "El mensaje se ha enviado a todos los miembros de esta ruta.",
@@ -205,10 +203,17 @@ const RouteEdition = (props: { id: number; isLoaded: boolean }) => {
               "\nAhora mismo no puedes quitar paradas, ya que esta ruta no tiene ninguna parada marcada."}
           </p>
         </div>
-        {stopsAssigned && routeInfo?.stops && (
+        {stopsAssigned && stopsAssigned.length !== 0 && routeInfo?.stops && (
           <div>{renderStops(stopsAssigned)}</div>
         )}
-        <div>
+        <div className="qrButtonPanel">
+          {routeInfo && (
+            <QRMaker
+              label={routeInfo.label}
+              route_id={routeInfo?.route_id}
+              stops={routeInfo?.stops}
+            />
+          )}
           <button className={`saveRouteButton ${addMode && "disabled"}`}>
             Guardar Parada
           </button>

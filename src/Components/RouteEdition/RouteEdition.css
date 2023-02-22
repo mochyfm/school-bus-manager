@@ -2,6 +2,7 @@
     display: flex;
     width: 100%;
     height: 100%;
+    overflow-y:scroll;
 }
 
 .routeTitleNameForm {
@@ -19,6 +20,7 @@
     background-color: var(--primary-color);
     color: var(--secondary-color);
     margin-right: 10px;
+    margin-bottom: 10px;
     padding: 10px;
 }
 
@@ -26,12 +28,8 @@
     overflow:hidden; 
     overflow-y:scroll;
     padding: 20px;
-    margin-bottom: 10px;
-    height: 300px;
-}
-
-.listOfStops div {
-    margin: 30px 0px;
+    margin-bottom: 20px;
+    height: 150px;
 }
 
 .saveRouteButton, .msgRouteButton {
@@ -48,6 +46,7 @@
 .routeEditForm {
     padding: 30px;
 }
+
 
 
 .infoEditRouteMessage {
@@ -70,6 +69,12 @@
 
 button:hover {
     cursor: pointer;
+}
+
+.qrButtonPanel {
+    display: flex; 
+    align-items: center;
+    justify-content: space-around;
 }
 
 .routeEditButton:hover, .saveRouteButton:hover, .msgRouteButton:hover {
