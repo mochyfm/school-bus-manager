@@ -34,16 +34,23 @@ const RouteEdition = (props: { id: number; isLoaded: boolean }) => {
   const renderStops = (stops: BusStop[]) => {
     return (
       <div>
-        <h1 className="routeTitleNameForm">
-          ID: {routeInfo?.route_id} - Lista de Paradas ruta: "{routeInfo?.label}
-          "
-        </h1>
+        <h2 className="listOfStopsTitle">
+          Lista de Paradas:
+        </h2>
         {stops && (
           <div className="listOfStops">
             {stops.map(({ lat, lng }, index) => {
               return (
-                <div style={{ display: 'flex', alignItems: 'center'}} key={index}>
-                  <div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginTop: 10,
+                    marginBottom: 10,
+                  }}
+                  key={index}
+                >
+                  <div style={{ marginTop: 10, marginBottom: 10 }}>
                     <span className="stopPositionOnRoute">{index + 1}º</span>
                   </div>
                   <div>
@@ -157,17 +164,18 @@ const RouteEdition = (props: { id: number; isLoaded: boolean }) => {
   return (
     <div className="editForm">
       <form className="routeEditForm" onSubmit={handleSubmit}>
+        <h1 className="routeTitleNameForm">Ruta {routeInfo?.label}</h1>
         <div style={{ position: "relative" }}>
           <button
             type="button"
             className="link msgRouteButton"
             onClick={() => routeInfo && setMessageStatus(!messageStatus)}
           >
-            Enviar un mensaje a los estudiantes
+            {messageStatus ? 'Cerrar gestor de mensaje' :'Enviar un mensaje a los estudiantes'}
           </button>
           {messageStatus && (
             <div
-              style={{ display: "flex", alignItems: "center", marginTop: 20 }}
+              style={{ display: "flex", alignItems: "center", marginTop: 20, marginBottom: 10 }}
             >
               <textarea
                 cols={50}
@@ -189,19 +197,6 @@ const RouteEdition = (props: { id: number; isLoaded: boolean }) => {
               </button>
             </div>
           )}
-        </div>
-        <div className="infoEditRouteMessage">
-          <p>
-            Nota: Si clickeas en el mapa puedes{" "}
-            {addMode
-              ? "añadir paradas a esta ruta"
-              : "borrar paradas que estén asignadas en esta ruta."}
-          </p>
-          <p>
-            {!addMode &&
-              stopsAssigned.length === 0 &&
-              "\nAhora mismo no puedes quitar paradas, ya que esta ruta no tiene ninguna parada marcada."}
-          </p>
         </div>
         {stopsAssigned && stopsAssigned.length !== 0 && routeInfo?.stops && (
           <div>{renderStops(stopsAssigned)}</div>

@@ -69,8 +69,6 @@ const AssignRoute = () => {
     id && getRoutes(parseInt(id));
   }, [id]);
 
-  console.log(allRoutes && allRoutes.length);
-
   return (
     <>
       <div className="assignRouteTitle">
@@ -129,6 +127,12 @@ const AssignRoute = () => {
                                 position={{ lat: lat, lng: lng }}
                                 key={index}
                               />
+                              <button
+                                className="stopCardToAssignButton"
+                                onClick={() => navigate(`/map/${stop_id}`)}
+                              >
+                                Ver Parada
+                              </button>
                               {routeIdToAssing === route_id && (
                                 <button
                                   className="stopCardToAssignButton"
