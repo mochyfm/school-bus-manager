@@ -17,7 +17,7 @@ const Header = () => {
         <Link
           to="./map"
           className={`headerButton link ${
-            pathname === "/map" ? "current" : ""
+            pathname.includes("/map") ? "current" : ""
           }`}
         >
           Mapa
